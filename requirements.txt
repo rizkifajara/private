@@ -1,9 +1,7 @@
-###### Requirements without Version Specifiers ######`
-Flask
-
-
-###### Requirements with Version Specifiers ######`
-# docopt == 0.6.1             # Version Matching. Must be version 0.6.1
-# keyring >= 4.1.1            # Minimum version 4.1.1
-# coverage != 3.5             # Version Exclusion. Anything except version 3.5
-# Mopidy-Dirble ~= 1.1        # Compatible release. Same as >= 1.1, == 1.*
+click==8.0.1
+Flask==2.0.1
+gunicorn==20.1.0
+itsdangerous==2.0.1
+Jinja2==3.0.1
+MarkupSafe==2.0.1
+Werkzeug==2.0.1
