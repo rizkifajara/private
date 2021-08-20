@@ -1,0 +1,1 @@
+Install the library with : pip install -r requirements.txt
