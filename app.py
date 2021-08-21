@@ -1,7 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_pymongo import pymongo
 import pandas as pd
-from flask import Flask, render_template, request
+# from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 from pymongo import MongoClient
@@ -35,7 +35,7 @@ def upload_form():
     lon = request.form.get('lon')
 
 
-    df = pd.read_csv(mf.get_download_stream(f.filename))
+    # df = pd.read_csv(mf.get_download_stream(f.filename))
     
     source = {
         # "filename":f.filename,
