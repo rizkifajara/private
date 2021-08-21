@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from flask_pymongo import pymongo
+from flask_pymongo import PyMongo
 import pandas as pd
 # from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
@@ -7,12 +7,15 @@ from werkzeug.datastructures import  FileStorage
 from pymongo import MongoClient
 import json
 import os
+import dnspython
 
 app = Flask(__name__)
 
 @app.route("/")
 def helloWorld():
     return render_template("layout.html")
+
+@app.route("/")
 
 @app.route("/form")
 def upload_form():
