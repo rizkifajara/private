@@ -1,3 +1,4 @@
+from threading import Thread
 from flask import Flask, render_template, request
 # from flask_pymongo import PyMongo
 import pandas as pd
@@ -8,6 +9,10 @@ from werkzeug.datastructures import FileStorage
 # import json
 import os
 # import dnspython
+from tornado.ioloop import IOLoop
+
+from bokeh.embed import server_document
+from bokeh.server.server import Server
 
 from py_viz.bkapp.vsh import eval_vsh
 from py_viz.bkapp.phie import eval_phie
@@ -15,6 +20,7 @@ from py_viz.bkapp.sw import eval_sw
 from py_viz.bkapp.perm import eval_perm
 from py_viz.bkapp.facies import eval_facies
 from py_viz.bkapp.hc import eval_hc
+from py_viz.bkapp.histplot import plot_histogram
 
 app = Flask(__name__)
 
@@ -30,6 +36,20 @@ def helloWorld():
 def viewForm():
     return render_template("form.html")
 
+
+@app.route('/well-log')
+def log():
+    # script = server_document("0.0.0.0:5006/bkapp")
+    return render_template("wellLog.html")
+
+
+@app.route('/hist')
+def hist():
+    script, div, cdn_js = plot_histogram(nameWell='15/9-F-5')
+    return render_template("hist.html",
+                           script=script,
+                           div=div,
+                           cdn_js=cdn_js)
 
 @app.route('/hc', methods=['GET'])
 def hc_page():

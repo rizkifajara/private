@@ -1,0 +1,14 @@
+{%extends "layout.html"%}
+{%block content%}
+<!-- <link rel="stylesheet" href=""> -->
+<!-- <script type="text/javascript" src={{cdn_js | safe}}></script> -->
+
+<div>
+  <a href="{{ url_for('hist')}}"><button class="btn btn-warning m-3">Histogram</button></a>
+  <a href="{{ url_for('log')}}"><button class="btn btn-warning m-3 active">Well Log</button></a>
+</div>
+
+<div>
+  <!-- {{script | safe}} -->
+</div>
+{%endblock%}
