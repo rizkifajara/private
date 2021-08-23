@@ -67,7 +67,7 @@ def upload_form():
 
     collection_name='user'
     collection=student_db[collection_name]
-    # # f = request.files.get('file')
+    f = request.files.get('file')
     # # mf = dataiku.Folder('O2B4wCQL') # name of the folder in the flow
     # # target_path = '/%s' % f.filename
     # # mf.upload_stream(target_path, f)
@@ -79,34 +79,34 @@ def upload_form():
 
     # # df = pd.read_csv(mf.get_download_stream(f.filename))
     
-    # source = {
-    #     # "filename":f.filename,
-    #     #   "coordinate ": {"BAND":None, "EASTING":None,
-    #     #                   "LATITUDE": lat, "LONGITUDE": lon,
-    #     #                   "NORTHING": None, "WELL":well,
-    #     #                   "ZONE": None},
-    #     #   "data":[]
-    #     "wellName": well,
-    #     "latitude": lat,
-    #     "longitude": lon
-    # }
+    source = {
+        "filename":f.filename,
+          "coordinate ": {"BAND":None, "EASTING":None,
+                          "LATITUDE": lat, "LONGITUDE": lon,
+                          "NORTHING": None, "WELL":well_name,
+                          "ZONE": None},
+          "data":[]
+        # "wellName": well_name,
+        # "latitude": lat,
+        # "longitude": lon
+    }
     
           
     
-    # # for i in range(len(df)):
-    # #     dict_df = {}
+    for i in range(len(df)):
+        dict_df = {}
         
-    # #     for col in df.columns:
-    # #         dict_df['WELL']=well
-    # #         dict_df[col]=df[col].iloc[i]
+        for col in df.columns:
+            dict_df['WELL']=well
+            dict_df[col]=df[col].iloc[i]
             
-    # #     source['data'].append(dict_df)
+        source['data'].append(dict_df)
     
     # print(source)
     
-    # collection.insert_one(source)
+    collection.insert_one(source)
     
-    # return json.dumps({1})
+    return json.dumps("Data berhasil di input")
 #     # df = pd.read_csv(mf.get_download_stream(f.filename))
 
 #     source = {
