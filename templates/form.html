@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+
+    <title>Delfi Hackathon</title>
+  </head>
+  
+  <body style="background-color:#F3F2F3">
+    <div class="row"></div>
+    <br><br>   
+       
+    <!-- Konten -->
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <div class="card">
+        
+        <!-- konten form -->
+        <div class="card-body">    
+          <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="sel1">Field Name</label>
+              <select class="form-control" id="sel1">
+                <option>VOLVE</option>
+                <option>Field 1</option>
+                <option>Field 2</option>
+                <option>Field 3</option>
+              </select>
+            </div>
+          </div>
+          <form action="https://hackuna-delfi.herokuapp.com/form" enctype="multipart/form-data">
+          <div class="col-md-12">
+            <label for="inputPassword4" class="form-label">WellName</label>
+            <input type="text" class="form-control" id="formWell" name="formWell">
+          </div>
+          <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">Latitude</label>
+            <input type="text" class="form-control" id="formLat" name="formLat">
+          </div>
+          <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Longitude</label>
+            <input type="text" class="form-control" id="formLon" name="formLon">
+          </div>
+            <div class="col-md-12">
+              <label for="formFile" class="form-label">Upload File</label>
+              <input class="form-control" type="file" id="formFile" name="fileName">
+            </div>
+          </div>
+          <br>
+          <div class="row">
+          <div class="col-md-12">
+            <button id="uploadButton" class="btn btn-warning">Submit</button>
+          </div>
+          </form>
+          </div>
+        
+        </div>
+      </div>
+
+
+
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <table class="table">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Field Name</th>
+                  <th scope="col">Well Name</th>
+                  <th scope="col">Data</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>VOLVE</td>
+                  <td>Schlumberger Otto</td>
+                  <td>
+                   <button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#exampleModal">Details</button>
+                   <a href = "welladmintable.html" class="btn btn-primary">Analyze</a>
+                   <button type="button" class="btn btn-secondary" disabled>Result</button>
+                  </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>VOLVE</td>
+                  <td>Schlumberger Thornton</td>
+                  <td>
+                   <button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#exampleModal">Details</button>
+                   <a href = "welladmintable.html" class="btn btn-primary">Analyze</a>
+                   <button type="button" class="btn btn-secondary" disabled>Result</button>
+                   </td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>VOLVE</td>
+                  <td>Schlumberger Michael</td>
+                  <td>
+                   <button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#exampleModal">Details</button>
+                   <a href = "welladmintable.html" class="btn btn-primary">Analyze</a>
+                   <button type="button" class="btn btn-secondary" disabled>Result</button>
+                   </td>
+                </tr>   
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+          <!-- modal konten -->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Well Data</h5>
+            </div>
+            <div class="modal-body">
+              <!-- tabel data sumur -->  
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th scope="col">GR</th>
+                    <th scope="col">ILD</th>
+                    <th scope="col">NPHI</th>
+                    <th scope="col">RHOB</th>
+                    <th scope="col">SW</th>
+                    <th scope="col">VSH</th>
+                    <th scope="col">PHIE</th>
+                    <th scope="col">PERM</th>
+                    <th scope="col">FACIES</th>
+                    <th scope="col">HC</th>
+                  </tr>
+                </thead>
+    
+                <tbody>
+                  
+                  <td>
+                    <button type="button" class="btn btn-success btn-sm">
+                      <span class="glyphicon glyphicon-ok"></span>       
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-success btn-sm">
+                      <span class="glyphicon glyphicon-ok"></span>       
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-success btn-sm">
+                      <span class="glyphicon glyphicon-ok"></span>       
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="alert('Data Undefined')">
+                      <span class="glyphicon glyphicon-question-sign"></span>       
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-remove"></span>       
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-remove"></span>       
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-remove"></span>       
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-remove"></span>       
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-remove"></span>       
+                    </button>
+                  </td>
+                  <td>
+                    <button type="button" class="btn btn-danger btn-sm">
+                      <span class="glyphicon glyphicon-remove"></span>       
+                    </button>
+                  </td>
+    
+    
+                </tbody>
+    
+                </table>
+              </div>
+              <!-- tabel data sumur -->  
+            </div>
+          </div>
+        </div>
+      </div>
+    
+
+
+    </div>
+
+    <div class="col-md-1"></div>
+    </div>
+
+
+   
+    
+
+
+
+
+
+
+
+
+
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<!--     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+     -->
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+<!--     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script> -->
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+
+  </body>
+
+
+
+</html>

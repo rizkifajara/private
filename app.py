@@ -15,9 +15,11 @@ app = Flask(__name__)
 def helloWorld():
     return render_template("layout.html")
 
-@app.route("/")
-
 @app.route("/form")
+def viewForm():
+    return render_template("form.html")
+
+@app.route("/post_form")
 def upload_form():
     
     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
