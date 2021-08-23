@@ -13,11 +13,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def helloWorld():
-    return render_template("layout.html")
+    return render_template("home.html")
 
-# @app.route("/form")
-# def viewForm():
-#     return render_template("form.html")
+@app.route("/form")
+def viewForm():
+    return render_template("form.html")
 
 # @app.route("/postform")
 # def upload_form():
@@ -76,5 +76,5 @@ def helloWorld():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)
 
