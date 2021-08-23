@@ -43,14 +43,14 @@ def upload_form():
     field_name = request.form.get("field_name")
     lat = request.form.get("form_lat")
     lon = request.form.get("form_lon")
-    f = request.files.get['form_file']
+    f = request.files['form_file']
 
     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client.test
 
     # return db
 
-    
+    open('tmp/' + f.filename, 'wb').write(f.read())
     
     database_name='hackuna_matata123'
     student_db=client[database_name]
@@ -67,7 +67,7 @@ def upload_form():
 
     collection_name='user'
     collection=student_db[collection_name]
-    f = request.files.get('file')
+    # f = request.files.get('file')
     # # mf = dataiku.Folder('O2B4wCQL') # name of the folder in the flow
     # # target_path = '/%s' % f.filename
     # # mf.upload_stream(target_path, f)
@@ -77,7 +77,7 @@ def upload_form():
     # lon = request.form.get('lon')
 
 
-    # # df = pd.read_csv(mf.get_download_stream(f.filename))
+    df = pd.read_csv("tmp/"+f.filename)
     
     source = {
         "filename":f.filename,
@@ -97,7 +97,7 @@ def upload_form():
         dict_df = {}
         
         for col in df.columns:
-            dict_df['WELL']=well
+            dict_df['WELL']=well_name
             dict_df[col]=df[col].iloc[i]
             
         source['data'].append(dict_df)
