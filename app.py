@@ -1,13 +1,13 @@
 from flask import Flask, render_template, request
-from flask_pymongo import PyMongo
+# from flask_pymongo import PyMongo
 import pandas as pd
 # from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
-from pymongo import MongoClient
-import json
+# from pymongo import MongoClient
+# import json
 import os
-import dnspython
+# import dnspython
 
 app = Flask(__name__)
 
