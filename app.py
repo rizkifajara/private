@@ -9,10 +9,8 @@ from werkzeug.datastructures import FileStorage
 # import json
 import os
 # import dnspython
-from tornado.ioloop import IOLoop
 
 from bokeh.embed import server_document
-from bokeh.server.server import Server
 
 from py_viz.bkapp.vsh import eval_vsh
 from py_viz.bkapp.phie import eval_phie
@@ -24,8 +22,7 @@ from py_viz.bkapp.histplot import plot_histogram
 
 app = Flask(__name__)
 
-num_data = 2000
-
+num_data = 1000
 
 @app.route("/")
 def helloWorld():
@@ -39,7 +36,6 @@ def viewForm():
 
 @app.route('/well-log')
 def log():
-    # script = server_document("0.0.0.0:5006/bkapp")
     return render_template("wellLog.html")
 
 
