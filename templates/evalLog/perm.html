@@ -1,0 +1,21 @@
+{%extends "layout.html"%}
+{%block content%}
+<!-- <link rel="stylesheet" href=""> -->
+<script type="text/javascript" src={{cdn_js | safe}}></script>
+
+<div style="text-align: center;">
+  <!-- <a href="{{ url_for('helloWorld')}}"><button class="btn btn-warning m-3">Home</button></a> -->
+  <a href="{{ url_for('vsh_page')}}"><button class="btn btn-warning m-3">VSH</button></a>
+  <a href="{{ url_for('phie_page')}}"><button class="btn btn-warning m-3">PHIE</button></a>
+  <a href="{{ url_for('sw_page')}}"><button class="btn btn-warning m-3">SW</button></a>
+  <a href="{{ url_for('perm_page')}}"><button class="btn btn-warning m-3 active">PERM</button></a>
+  <a href="{{ url_for('facies_page')}}"><button class="btn btn-warning m-3">FACIES</button></a>
+  <a href="{{ url_for('hc_page')}}"><button class="btn btn-warning m-3">HC</button></a>
+</div>
+
+<div class="col-xs-offset-2">
+  {{script | safe}}
+  {{div | safe}}
+</div>
+
+{%endblock%}
