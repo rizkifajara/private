@@ -1,67 +1,208 @@
 {%extends "layout.html"%}
 {%block content%}
 <div>
-  <a href="{{ url_for('helloWorld')}}"><button class="btn btn-warning m-3">Home</button></a>
-  <a href="{{ url_for('viewForm')}}"><button class="btn btn-warning m-3">Form</button></a>
-  <a href="{{ url_for('hist')}}"><button class="btn btn-warning m-3">Log Description</button></a>
-  <a href="{{ url_for('vsh_page')}}"><button class="btn btn-warning m-3">ModEv Plot</button></a>
-  <div align="center">
-    <h3>Page - Form</h3>
-  </div>
+
   <br><br>
   <div class="container">
     <div class="row">
-        <div class="col-md-4"></div>
+      <div class="col-md-4">
         <div class="card" style="width: 30rem;">
-            <div class="card-body">
-                <form enctype="multipart/form-data" action="{{ url_for('upload_form')}}" method="POST">
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Field Name</label>
-                        <input name="field_name"type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Well Name</label>
-                        <input name="well_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                    </div>
-                    <div class = "row">
-                        <div class = "col-md-6">
-                            <label for="exampleInputEmail1">Latitude</label>
-                            <input name="form_lat" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        </div>
-                        <div class = "col-md-6">
-                            <label for="exampleInputEmail1">Longitude</label>
-                            <input name="form_lon" ftype="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        </div>
-                    </div>
-                    <br>
-                    <!-- <div class="custom-file">
+          <div class="card-body">
+            <form enctype="multipart/form-data" action="{{ url_for('upload_form')}}" method="POST">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Field Name</label>
+                <input name="field_name" type="text" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Well Name</label>
+                <input name="well_name" type="text" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Enter email">
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <label for="exampleInputEmail1">Latitude</label>
+                  <input name="form_lat" type="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+                <div class="col-md-6">
+                  <label for="exampleInputEmail1">Longitude</label>
+                  <input name="form_lon" ftype="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter email">
+                </div>
+              </div>
+              <br>
+              <!-- <div class="custom-file">
                       <input name="form_file" type="file" class="custom-file-input" id="validatedCustomFile">
                       <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                       <div class="invalid-feedback">Example invalid custom file feedback</div>
                     </div> -->
-                    <div class="form-group">
-                      <label for="exampleFormControlFile1">Example file input</label>
-                      <input name="form_file" type="file" class="form-control-file" id="exampleFormControlFile1">
-                    </div>
-                    <br><br><br>
-                    <div class = "float-right">
-                        <input type="submit" class="btn btn-primary">
-                    </div>
-                </form>
-                
+              <div class="form-group">
+                <label for="exampleFormControlFile1">Example file input</label>
+                <input name="form_file" type="file" class="form-control-file" id="exampleFormControlFile1">
+              </div>
+              <br><br><br>
+              <div class="float-right">
+                <input type="submit" class="btn btn-primary">
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <table class="table">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Field Name</th>
+                  <th scope="col">Well Name</th>
+                  <th scope="col">Data</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>VOLVE</td>
+                  <td>Schlumberger Otto</td>
+                  <td>
+                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                      data-target="#exampleModal">Details</button>
+                    <a href="{{ url_for('analyze_page')}}" class="btn btn-primary">Analyze</a>
+                    <button type="button" class="btn btn-secondary" disabled>Result</button>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>VOLVE</td>
+                  <td>Schlumberger Thornton</td>
+                  <td>
+                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                      data-target="#exampleModal">Details</button>
+                    <a href="{{ url_for('analyze_page')}}" class="btn btn-primary">Analyze</a>
+                    <button type="button" class="btn btn-secondary" disabled>Result</button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>VOLVE</td>
+                  <td>Schlumberger Michael</td>
+                  <td>
+                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                      data-target="#exampleModal">Details</button>
+                    <a href="{{ url_for('analyze_page')}}" class="btn btn-primary">Analyze</a>
+                    <button type="button" class="btn btn-secondary" disabled>Result</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <!-- modal konten -->
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Well Data</h5>
+              </div>
+              <div class="modal-body">
+                <!-- tabel data sumur -->
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">GR</th>
+                        <th scope="col">ILD</th>
+                        <th scope="col">NPHI</th>
+                        <th scope="col">RHOB</th>
+                        <th scope="col">SW</th>
+                        <th scope="col">VSH</th>
+                        <th scope="col">PHIE</th>
+                        <th scope="col">PERM</th>
+                        <th scope="col">FACIES</th>
+                        <th scope="col">HC</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+
+                      <td>
+                        <button type="button" class="btn btn-success btn-sm">
+                          <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-success btn-sm">
+                          <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-success btn-sm">
+                          <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-secondary btn-sm" onclick="alert('Data Undefined')">
+                          <span class="glyphicon glyphicon-question-sign"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-danger btn-sm">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-danger btn-sm">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-danger btn-sm">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-danger btn-sm">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-danger btn-sm">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                      </td>
+                      <td>
+                        <button type="button" class="btn btn-danger btn-sm">
+                          <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                      </td>
+
+
+                    </tbody>
+
+                  </table>
+                </div>
+                <!-- tabel data sumur -->
+              </div>
             </div>
           </div>
-        <div class="col-md-4">
-            
         </div>
-        <div class="col-md-4"></div>
-    
-      </div>
-  </div>
-  
-  
-  
-</div>
 
+
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+</div>
 
 {%endblock%}

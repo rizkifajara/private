@@ -1,0 +1,193 @@
+{%extends "layout.html"%}
+{%block content%}
+
+<div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-5">
+      <!--Google map-->
+      <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+        <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+          style="border:0" allowfullscreen></iframe>
+      </div>
+      <!--Google Maps-->
+    </div>
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+          <!--table-->
+          <table class="table">
+            <thead class="table-dark">
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Field Name</th>
+                <th scope="col">Nearest Well</th>
+                <th scope="col">Well Distance</th>
+                <th scope="col">Condition</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>VOLVE</td>
+                <td>15/9-F-1</td>
+                <td>undefined</td>
+                <td>
+                  <div class="small-4 medium-4 large-4 columns text-center">
+                    <a href="{{ url_for('log')}}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
+                        viewBox="0 0 16 16">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                        <path
+                          d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                      </svg>
+                    </a>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>VOLVE</td>
+                <td>15/9-F-4</td>
+                <td>undefined</td>
+                <td>
+                  <div class="small-4 medium-4 large-4 columns text-center">
+                    <a href="{{ url_for('log')}}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
+                        viewBox="0 0 16 16">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                        <path
+                          d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                      </svg>
+                    </a>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>VOLVE</td>
+                <td>15/9-F-5</td>
+                <td>undefined</td>
+                <td>
+                  <div class="small-4 medium-4 large-4 columns text-center">
+                    <a href="{{ url_for('log')}}">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
+                        viewBox="0 0 16 16">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                        <path
+                          d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                      </svg>
+                    </a>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <!--run button-->
+
+          <button type="button" class="btn btn-warning btn pull-right" data-toggle="modal"
+            data-target="#ModalEvaluation">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill"
+              viewBox="0 0 16 16">
+              <path
+                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+            </svg>Evaluate</button>
+
+        </div>
+      </div>
+    </div>
+    <!-- batas makmum -->
+
+    <div class="modal fade" id="ModalEvaluation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <!-- modal konten -->
+        <div class="modal-content">
+          <!-- charts -->
+          <div class="modal-body">
+
+            <div id="chart"></div>
+
+            <script>
+              // VSH    : 98 %
+              // PHIE   : 98 %
+              // SW     : 97 %
+              // PERM   : 92 %
+              // FACIES : 83 %
+              // HC     : 97 %
+
+              // VSH : 0,5  
+              // PHIE : 0,6
+              // SW : 0,6
+              // PERM : 0,7
+              // FACIES : 1,5
+              // HC : 0,2 
+
+              var options = {
+                series: [{
+                  name: 'score (%)',
+                  data: [98, 98, 97, 92, 83, 97]
+                }, {
+                  name: 'time (s)',
+                  data: [0.5, 0.6, 0.6, 0.7, 1.5, 0.2]
+                }],
+                chart: {
+                  type: 'bar',
+                  height: 350
+                },
+                plotOptions: {
+                  bar: {
+                    horizontal: true,
+                    dataLabels: {
+                      position: 'top',
+                    },
+                  }
+                },
+                dataLabels: {
+                  enabled: true,
+                  offsetX: -6,
+                  style: {
+                    fontSize: '12px',
+                    colors: ['#fff']
+                  }
+                },
+                stroke: {
+                  show: true,
+                  width: 0.2,
+                  colors: ['#fff']
+                },
+                tooltip: {
+                  shared: true,
+                  intersect: false
+                },
+                xaxis: {
+                  categories: ["VSH", "PHIE", "SW", "PERM", "FACIES", "HC",],
+                },
+              };
+
+              var chart = new ApexCharts(document.querySelector("#chart"), options);
+              chart.render();
+
+            </script>
+            <div class="row">
+
+              <div class="col-md-3"></div>
+              <div class="col-md-6">
+                <a href="{{ url_for('vsh_page')}}" type="button" class="btn btn-warning btn-lg btn-block">Detail Evaluation</a>
+              </div>
+              <div class="col-md-3"></div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}

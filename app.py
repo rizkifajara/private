@@ -22,16 +22,15 @@ from py_viz.bkapp.histplot import plot_histogram
 
 app = Flask(__name__)
 
-num_data = 1000
+num_data = 1500
 
 @app.route("/")
-def helloWorld():
-    return render_template("home.html")
-
-
-@app.route("/form")
 def viewForm():
     return render_template("form.html")
+
+@app.route("/page-2")
+def analyze_page():
+    return render_template("analyze.html")
 
 @app.route("/postform", methods = ["POST"])
 def upload_form():
