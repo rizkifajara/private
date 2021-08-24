@@ -37,12 +37,12 @@ def plot_histogram(nameWell):
     for i in range(len(list_facies)):
         source[list_facies[i]]=list(hist_df_pivot.iloc[:,i])
         
-    p = figure(x_range=list_form, height=500, width=len(list_form)*150+200, title=f"WELL: {well}",
+    p = figure(x_range=list_form, height=400, width=len(list_form)*100+200, title=f"WELL: {well}",
             toolbar_location=None, tools='hover', tooltips="$name - @FORMATION:<br> <b>@$name{0.0f%}<b>",
             y_axis_label='Total Percentage', x_axis_label='Formation')
 
     v = p.vbar_stack(list_facies, x='FORMATION', width=0.5, color=colors, source=source)
-    legend = Legend(items=[(x, [v[i]]) for i, x in enumerate(list_facies)], location=(10, 200))
+    legend = Legend(items=[(x, [v[i]]) for i, x in enumerate(list_facies)], location=(10, 100))
 
     p.add_layout(legend, 'right')
     p.y_range.start = 0

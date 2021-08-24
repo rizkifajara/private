@@ -33,6 +33,25 @@
       max-width: 650px;
       margin: 35px auto;
     }
+
+    .map-container {
+      overflow: hidden;
+      padding-bottom: 56.25%;
+      position: relative;
+      height: 0;
+    }
+
+    .map-container iframe {
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
   </style>
 
   <script>
@@ -48,9 +67,7 @@
       document.write(
         '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
       )
-  </script>
 
-  <script>
     // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
     // Based on https://gist.github.com/blixt/f17b47c62508be59987b
     var _seed = 42;
@@ -60,22 +77,6 @@
     };
   </script>
 
-  <style>
-    .map-container {
-      overflow: hidden;
-      padding-bottom: 56.25%;
-      position: relative;
-      height: 0;
-    }
-
-    .map-container iframe {
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-    }
-  </style>
 </head>
 
 <body>
