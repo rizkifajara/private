@@ -201,7 +201,7 @@ def well_table():
     for document in collection.find({},{ "_id": 0, "data": 0 }):
         print(document)
 
-    return "ok"
+    return render_template("table_well.html", data=nearest)
     # return("ok")
     # return render_template('table_well.html', data = dataaa)
 
