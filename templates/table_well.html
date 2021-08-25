@@ -3,37 +3,317 @@
   <head>
     <title>Add Map</title>
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    
     <style type="text/css">
       /* Set the size of the div element that contains the map */
       #map {
-        height: 400px;
+        height: 500px;
         /* The height is 400 pixels */
-        width: 100%;
+        width: 80%;
         /* The width is the width of the web page */
       }
     </style>
+   
     <script>
       // Initialize and add the map
       function initMap() {
+        let lat_user = "{{user_data['coordinate ']['LATITUDE']}}"
+        let lon_user = "{{user_data['coordinate ']['LONGITUDE']}}"
+
+        // myvar = '{{user_data|tojson}}';
+        // let parsed = JSON.parse(myvar);
+        // console.log(parsed)
+
+        console.log("{{data[0]['label']}}")
+
         // The location of Uluru
-        const uluru = { lat: data['lat'], lng: data['lon'] };
+        const uluru = { lat: +lat_user, lng: +lon_user };
+        const uluru2 = { lat: +"{{data[0]['lat']}}", lng: +"{{data[0]['lon']}}" };
+        const uluru3 = { lat: +"{{data[1]['lat']}}", lng: +"{{data[1]['lon']}}" };
+        const uluru4 = { lat: +"{{data[2]['lat']}}", lng: +"{{data[2]['lon']}}" };
+        const uluru5 = { lat: +"{{data[3]['lat']}}", lng: +"{{data[3]['lon']}}" };
+        const uluru6 = { lat: +"{{data[4]['lat']}}", lng: +"{{data[4]['lon']}}" };
         // The map, centered at Uluru
         const map = new google.maps.Map(document.getElementById("map"), {
-          zoom: 4,
+
+          zoom: 20,
           center: uluru,
         });
+
+        const contentString = "{{user_data['coordinate ']['WELL']}}"
         // The marker, positioned at Uluru
+        const infowindow = new google.maps.InfoWindow({
+            content: contentString,
+        });
         const marker = new google.maps.Marker({
           position: uluru,
+          title: "F19",
           map: map,
+        });
+
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+
+        
+
+        marker.addListener("click", () => {
+            infowindow.open({
+                anchor: marker,
+                map,
+                shouldFocus: false,
+            });
+        });
+
+        /////////////2/////////////
+        const infowindow2 = new google.maps.InfoWindow({
+            content: "{{data[0]['label']}}",
+        });
+
+        const marker2 = new google.maps.Marker({
+          position: uluru2,
+          title: "F7",
+          map: map,
+        });
+
+        marker2.addListener("click", () => {
+            infowindow2.open({
+                anchor: marker2,
+                map,
+                shouldFocus: false,
+            });
+        });
+
+
+        //////////////////3////////
+        const infowindow3 = new google.maps.InfoWindow({
+            content: "{{data[1]['label']}}",
+        });
+
+        const marker3 = new google.maps.Marker({
+          position: uluru3,
+          title: "F7",
+          map: map,
+        });
+
+        marker3.addListener("click", () => {
+            infowindow3.open({
+                anchor: marker3,
+                map,
+                shouldFocus: false,
+            });
+        });
+
+
+        ///////////////4///////////
+        const infowindow4 = new google.maps.InfoWindow({
+            content: "{{data[2]['label']}}",
+        });
+
+        const marker4 = new google.maps.Marker({
+          position: uluru4,
+          title: "F7",
+          map: map,
+        });
+
+        marker4.addListener("click", () => {
+            infowindow4.open({
+                anchor: marker4,
+                map,
+                shouldFocus: false,
+            });
+        });
+
+
+
+        ///////////5////////////
+        const infowindow5 = new google.maps.InfoWindow({
+            content: "{{data[3]['label']}}",
+        });
+
+        const marker5 = new google.maps.Marker({
+          position: uluru5,
+          title: "F7",
+          map: map,
+        });
+
+        marker5.addListener("click", () => {
+            infowindow5.open({
+                anchor: marker5,
+                map,
+                shouldFocus: false,
+            });
+        });
+
+
+        ////////////////6/////////////
+        const infowindow6 = new google.maps.InfoWindow({
+            content: "{{data[4]['label']}}",
+        });
+
+        const marker6 = new google.maps.Marker({
+          position: uluru6,
+          title: "F7",
+          map: map,
+        });
+
+        marker6.addListener("click", () => {
+            infowindow6.open({
+                anchor: marker6,
+                map,
+                shouldFocus: false,
+            });
         });
       }
     </script>
   </head>
   <body>
-    <h3>My Google Maps Demo</h3>
+    <!-- <h3>My Google Maps Demo</h3> -->
     <!--The div element for the map -->
-    <div id="map"></div>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- aaaaaaaaaaaaaaa -->
+                <div id="map"></div>
+                
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                      <!--table-->
+                      <table class="table">
+                        <thead class="table-dark">
+                          <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Field Name</th>
+                            <th scope="col">Nearest Well</th>
+                            <th scope="col">Well Distance</th>
+                            <th scope="col">Condition</th>
+                            <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">1</th>
+                            <td>VOLVE</td>
+                            <td>{{data[0]['label']}}</td>
+                            <td>{{"{:,.5f}".format(data[0]['dist'])}}</td>
+                            <td>
+                              <div class="small-4 medium-4 large-4 columns text-center">
+                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
+                                    viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                    <path
+                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                  </svg>
+                                </a>
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">2</th>
+                            <td>VOLVE</td>
+                            <td>{{data[1]['label']}}</td>
+                            <td>{{"{:,.5f}".format(data[1]['dist'])}}</td>
+                            <td>
+                              <div class="small-4 medium-4 large-4 columns text-center">
+                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
+                                    viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                    <path
+                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                  </svg>
+                                </a>
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">3</th>
+                            <td>VOLVE</td>
+                            <td>{{data[2]['label']}}</td>
+                            <td>{{"{:,.5f}".format(data[2]['dist'])}}</td>
+                            <td>
+                              <div class="small-4 medium-4 large-4 columns text-center">
+                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
+                                    viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                    <path
+                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                  </svg>
+                                </a>
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">4</th>
+                            <td>VOLVE</td>
+                            <td>{{data[3]['label']}}</td>
+                            <td>{{"{:,.5f}".format(data[3]['dist'])}}</td>
+                            <td>
+                              <div class="small-4 medium-4 large-4 columns text-center">
+                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
+                                    viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                    <path
+                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                  </svg>
+                                </a>
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                              </div>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th scope="row">5</th>
+                            <td>VOLVE</td>
+                            <td>{{data[4]['label']}}</td>
+                            <td>{{"{:,.5f}".format(data[4]['dist'])}}</td>
+                            <td>
+                              <div class="small-4 medium-4 large-4 columns text-center">
+                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
+                                    viewBox="0 0 16 16">
+                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                    <path
+                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                                  </svg>
+                                </a>
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                              </div>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+            
+            
+                      <!--run button-->
+                      <div align="right">
+                        <button type="button" class="btn btn-warning btn pull-right" data-toggle="modal"
+                        data-target="#ModalEvaluation">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+                        </svg>Evaluate</button>
+                      </div>
+                      
+            
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    
+    
+
+  
 
     <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
     <script

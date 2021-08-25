@@ -184,7 +184,7 @@ def well_table():
     v = {'lat': 56, 'lon': 10}
     nearest = closest(list_coord, v)
 
-    print(nearest)
+    # print(nearest)
 
     # return nearest
 
@@ -195,13 +195,17 @@ def well_table():
     collection_name='user'
     collection=student_db[collection_name]
 
-    
-    # print(dataaa.get("coordinate"))
-    # return "ok"
-    for document in collection.find({},{ "_id": 0, "data": 0 }):
-        print(document)
+    user_data_dict = collection.find_one({},{ "_id": 0, "data": 0 })
 
-    return render_template("table_well.html", data=nearest)
+    # for document in collection.find({},{ "_id": 0, "data": 0 }):
+    #     user_data_list.append(document)
+    #     print(document)
+
+    print(user_data_dict['coordinate ']['LATITUDE'])
+
+    print(list_coord[0]['label'])
+
+    return render_template("table_well.html", data=list_coord, user_data=user_data_dict)
     # return("ok")
     # return render_template('table_well.html', data = dataaa)
 
