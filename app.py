@@ -22,6 +22,8 @@ from py_viz.bkapp.facies import eval_facies
 from py_viz.bkapp.hc import eval_hc
 from py_viz.bkapp.histplot import plot_histogram
 
+from math import cos, asin, sqrt
+
 app = Flask(__name__)
 
 num_data = 2000
@@ -136,6 +138,77 @@ def upload_form():
 #     collection.insert_one(source)
 
 #     return json.dumps({1})
+
+def distance(lat1, lon1, lat2, lon2):
+    p = 0.017453292519943295
+    hav = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p)*cos(lat2*p) * (1-cos((lon2-lon1)*p)) / 2
+
+    return 12742 * asin(sqrt(hav))
+
+def closest(data, v):
+    for dd in data:
+      dd['dist'] = distance(v['lat'],v['lon'],dd['lat'],dd['lon'])
+      print(dd)
+        #wow.jarak = distance(v['lat'],v['lon'],wow.get('lat'),wow.get('lon'))
+    
+    return min(data, key=lambda p: distance(v['lat'],v['lon'],p['lat'],p['lon']))
+
+@app.route('/table')
+def well_table():
+    
+
+    # for line in df1:
+    #     row = line.split(",")
+    #     well = row[0]
+    #     easting = row [1]
+    #     northing = row[2]
+    #     zone = row[3]
+    #     band = row[4]
+    #     latitude = row[5]
+    #     longitude = row[6]
+    # arr = df.to_dict()
+
+
+    df = pd.read_csv("tmp/volve_coordinate.csv")
+    
+    list_coord = list()
+    
+
+    for i in range(len(df)):
+        dict_coord = dict()
+        dict_coord['lat'] = df['LATITUDE'][i]
+        dict_coord['lon'] = df['LONGITUDE'][i]
+        dict_coord['label'] = df['WELL'][i]
+        dict_coord['dist'] = None
+        list_coord.append(dict_coord)
+        print(i)
+
+    print(list_coord)
+
+    v = {'lat': 56, 'lon': 10}
+    nearest = closest(list_coord, v)
+
+    print(nearest)
+
+    # return nearest
+
+    client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client.test
+    database_name='hackuna_matata123'
+    student_db=client[database_name]
+    collection_name='user'
+    collection=student_db[collection_name]
+
+    
+    # print(dataaa.get("coordinate"))
+    # return "ok"
+    for document in collection.find({},{ "_id": 0, "data": 0 }):
+        print(document)
+
+    return "ok"
+    # return("ok")
+    # return render_template('table_well.html', data = dataaa)
+
 @app.route('/well-log')
 def log():
     # script = server_document("0.0.0.0:5006/bkapp")
