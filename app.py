@@ -9,10 +9,8 @@ from pymongo import MongoClient
 import json
 import os
 # import dnspython
-from tornado.ioloop import IOLoop
 
 from bokeh.embed import server_document
-from bokeh.server.server import Server
 
 from py_viz.bkapp.vsh import eval_vsh
 from py_viz.bkapp.phie import eval_phie
@@ -26,17 +24,15 @@ from math import cos, asin, sqrt
 
 app = Flask(__name__)
 
-num_data = 2000
-
+num_data = 1500
 
 @app.route("/")
-def helloWorld():
-    return render_template("home.html")
-
-
-@app.route("/form")
 def viewForm():
     return render_template("form.html")
+
+@app.route("/page-2")
+def analyze_page():
+    return render_template("analyze.html")
 
 @app.route("/postform", methods = ["POST"])
 def upload_form():
@@ -211,7 +207,6 @@ def well_table():
 
 @app.route('/well-log')
 def log():
-    # script = server_document("0.0.0.0:5006/bkapp")
     return render_template("wellLog.html")
 
 
