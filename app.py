@@ -28,7 +28,18 @@ num_data = 1500
 
 @app.route("/")
 def viewForm():
-    return render_template("form.html")
+    client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client.test
+    database_name='hackuna_matata123'
+    student_db=client[database_name]
+    collection_name='user'
+    collection=student_db[collection_name]
+    user_data_list = []
+    for document in collection.find({},{ "_id": 0, "data": 0 }):
+        user_data_list.append(document)
+        print(document)
+    print(user_data_list)
+    return render_template("form.html", user_data=user_data_list)
 
 @app.route("/page-2")
 def analyze_page():
