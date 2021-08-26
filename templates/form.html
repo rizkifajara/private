@@ -65,6 +65,21 @@
                 </tr>
               </thead>
               <tbody>
+
+                {% for data in user_data %}
+
+                  <tr>
+                  <th scope="row">{{loop.index}}</th>
+                  <td>VOLVE</td>
+                  <td>{{data['coordinate ']['WELL']}}</td>
+                  <td>
+                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                      data-target="#exampleModal">Details</button>
+                    <a href="{{ url_for('well_table', id_well=data['_id'])}}" class="btn btn-primary">Analyze</a>
+                    <button type="button" class="btn btn-secondary" disabled>Result</button>
+                  </tr>
+
+                {% endfor %}
                 <!-- <tr>
                   <th scope="row">1</th>
                   <td>VOLVE</td>

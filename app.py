@@ -8,6 +8,7 @@ from werkzeug.datastructures import  FileStorage
 from pymongo import MongoClient
 import json
 import os
+from bson.objectid import ObjectId
 # import dnspython
 
 from bokeh.embed import server_document
@@ -35,7 +36,7 @@ def viewForm():
     collection_name='user'
     collection=student_db[collection_name]
     user_data_list = []
-    for document in collection.find({},{ "_id": 0, "data": 0 }):
+    for document in collection.find({},{ "data": 0 }):
         user_data_list.append(document)
         print(document)
     print(user_data_list)
@@ -164,8 +165,8 @@ def closest(data, v):
     
     return min(data, key=lambda p: distance(v['lat'],v['lon'],p['lat'],p['lon']))
 
-@app.route('/table')
-def well_table():
+@app.route('/table/<id_well>/', methods=['GET'])
+def well_table(id_well):
     
 
     # for line in df1:
@@ -210,7 +211,7 @@ def well_table():
     collection_name='user'
     collection=student_db[collection_name]
 
-    user_data_dict = collection.find_one({},{ "_id": 0, "data": 0 })
+    user_data_dict = collection.find_one({"_id": ObjectId(id_well)},{ "_id": 0, "data": 0 })
 
     # for document in collection.find({},{ "_id": 0, "data": 0 }):
     #     user_data_list.append(document)
