@@ -5,7 +5,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
     <style type="text/css">
       /* Set the size of the div element that contains the map */
       #map {
@@ -53,7 +54,7 @@
           map: map,
         });
 
-        // marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
 
         
 
@@ -65,16 +66,12 @@
             });
         });
 
+
+
         /////////////2/////////////
         const infowindow2 = new google.maps.InfoWindow({
             content: "{{data[0]['label']}}",
         });
-
-        // const marker2 = new google.maps.Marker({
-        //   position: uluru2,
-        //   title: "F7",
-        //   map: map,
-        // });
 
         const cityCircle = new google.maps.Circle({
             strokeColor: "#FF0000",
@@ -83,97 +80,102 @@
             fillColor: "#FF0000",
             fillOpacity: 0.35,
             map,
-            center: {lat: "{{data[0]['lat']}}", lon: "{{data[0]['lon']}}"},
-            radius: 4,
+            center: {lat: parseFloat("{{data[0]['lat']}}"), lng: parseFloat("{{data[0]['lon']}}")},
+            radius: 1,
         });
 
-        cityCircle.addListener("click", () => {
-            infowindow2.open({
-                anchor: cityCircle,
-                map,
-                shouldFocus: false,
-            });
+        google.maps.event.addListener(cityCircle, 'click', function(ev) {
+            infowindow2.setPosition(ev.latLng);
+            infowindow2.open(map);
         });
 
 
-        //////////////////3////////
+        ////////////3//////////
         const infowindow3 = new google.maps.InfoWindow({
             content: "{{data[1]['label']}}",
         });
 
-        const marker3 = new google.maps.Marker({
-          position: uluru3,
-          title: "F7",
-          map: map,
+        const cityCircle2 = new google.maps.Circle({
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            map,
+            center: {lat: parseFloat("{{data[1]['lat']}}"), lng: parseFloat("{{data[1]['lon']}}")},
+            radius: 1,
         });
 
-        marker3.addListener("click", () => {
-            infowindow3.open({
-                anchor: marker3,
-                map,
-                shouldFocus: false,
-            });
+        google.maps.event.addListener(cityCircle2, 'click', function(ev) {
+            infowindow3.setPosition(ev.latLng);
+            infowindow3.open(map);
         });
 
 
-        ///////////////4///////////
+
+        ///////////////4////////////
         const infowindow4 = new google.maps.InfoWindow({
             content: "{{data[2]['label']}}",
         });
 
-        const marker4 = new google.maps.Marker({
-          position: uluru4,
-          title: "F7",
-          map: map,
+        const cityCircle3 = new google.maps.Circle({
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            map,
+            center: {lat: parseFloat("{{data[2]['lat']}}"), lng: parseFloat("{{data[2]['lon']}}")},
+            radius: 1,
         });
 
-        marker4.addListener("click", () => {
-            infowindow4.open({
-                anchor: marker4,
-                map,
-                shouldFocus: false,
-            });
+        google.maps.event.addListener(cityCircle3, 'click', function(ev) {
+            infowindow4.setPosition(ev.latLng);
+            infowindow4.open(map);
         });
 
 
-
-        ///////////5////////////
+        //////////////5/////////
         const infowindow5 = new google.maps.InfoWindow({
             content: "{{data[3]['label']}}",
         });
 
-        const marker5 = new google.maps.Marker({
-          position: uluru5,
-          title: "F7",
-          map: map,
+        const cityCircle4 = new google.maps.Circle({
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            map,
+            center: {lat: parseFloat("{{data[3]['lat']}}"), lng: parseFloat("{{data[3]['lon']}}")},
+            radius: 1,
         });
 
-        marker5.addListener("click", () => {
-            infowindow5.open({
-                anchor: marker5,
-                map,
-                shouldFocus: false,
-            });
+        google.maps.event.addListener(cityCircle4, 'click', function(ev) {
+            infowindow5.setPosition(ev.latLng);
+            infowindow5.open(map);
         });
 
 
-        ////////////////6/////////////
+        //////////6////////////
         const infowindow6 = new google.maps.InfoWindow({
             content: "{{data[4]['label']}}",
         });
 
-        const marker6 = new google.maps.Marker({
-          position: uluru6,
-          title: "F7",
-          map: map,
+        const cityCircle5 = new google.maps.Circle({
+            strokeColor: "#FF0000",
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: "#FF0000",
+            fillOpacity: 0.35,
+            map,
+            center: {lat: parseFloat("{{data[4]['lat']}}"), lng: parseFloat("{{data[4]['lon']}}")},
+            radius: 1,
         });
 
-        marker6.addListener("click", () => {
-            infowindow6.open({
-                anchor: marker6,
-                map,
-                shouldFocus: false,
-            });
+        google.maps.event.addListener(cityCircle5, 'click', function(ev) {
+            infowindow6.setPosition(ev.latLng);
+            infowindow6.open(map);
         });
       }
     </script>
@@ -332,6 +334,5 @@
       async
     ></script>
 
-    {{data|tojson}}
   </body>
 </html>

@@ -45,6 +45,10 @@ def viewForm():
 def analyze_page():
     return render_template("analyze.html")
 
+@app.route("/circles")
+def circle_page():
+    return render_template("circle.html")
+
 @app.route("/postform", methods = ["POST"])
 def upload_form():
     
