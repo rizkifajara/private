@@ -25,7 +25,7 @@ def eval_facies(num_data):
     # Set categorical color map
     colors_facies = list(all_palettes['Spectral'][len(df.FACIES.unique())])
 
-    colors_cor = ['green', 'red']
+    colors_cor = df.color.unique()
 
     mapper_facies = CategoricalColorMapper(palette=colors_facies, factors=df.FACIES.unique().tolist())
     mapper_cor = CategoricalColorMapper(palette=colors_cor, factors=df.prediction_correct.unique().tolist())
