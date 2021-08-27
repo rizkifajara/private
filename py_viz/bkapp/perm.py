@@ -52,7 +52,7 @@ def eval_perm(num_data):
     p1.xaxis[1].axis_label_text_color = "red"
     p1.yaxis[0].axis_label_text_font_size = "10px"
     p1.yaxis[0].major_label_text_font_size = "8px"
-    p1.xaxis[0].formatter = PrintfTickFormatter(format="%5f")
+    # p1.xaxis[0].formatter = PrintfTickFormatter(format="%5f")
     p1.add_tools(HoverTool(tooltips="""
     <div>
         <span style="font-size: 8px;"><b>WELL:</b> @WELL</span><br> 

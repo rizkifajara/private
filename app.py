@@ -19,7 +19,7 @@ from py_viz.bkapp.sw import eval_sw
 from py_viz.bkapp.perm import eval_perm
 from py_viz.bkapp.facies import eval_facies
 from py_viz.bkapp.hc import eval_hc
-from py_viz.bkapp.histplot import plot_histogram
+from py_viz.bkapp.histplot import plot_histogram, get_form
 
 from math import cos, asin, sqrt
 
@@ -233,11 +233,13 @@ def log():
 
 @app.route('/hist')
 def hist():
-    script, div, cdn_js = plot_histogram(nameWell='15/9-F-5')
+    data, list_formation = get_form(nameWell='15/9-F-5')
+    script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm='Hugin Fm')
     return render_template("hist.html",
-                           script=script,
-                           div=div,
-                           cdn_js=cdn_js)
+                            list_formation = list_formation,
+                            script=script,
+                            div=div,
+                            cdn_js=cdn_js)
 
 @app.route('/hc', methods=['GET'])
 def hc_page():

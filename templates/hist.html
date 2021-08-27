@@ -8,7 +8,13 @@
   <a href="{{ url_for('log')}}"><button class="btn btn-warning m-3">Well Log</button></a>
 </div>
 
-<div class="col-xs-offset-2">
+<select name="formation" class="form-select" method="GET" action="/">
+  {% for formation in list_formation %}
+  <option value="{{formation}}" SELECTED>{{formation}}</option>"
+  {% endfor %}
+</select>
+
+<div class="col-xs-offset-1 mt-3">
   {{script | safe}}
   {{div | safe}}
 </div>

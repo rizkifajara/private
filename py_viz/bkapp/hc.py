@@ -121,6 +121,7 @@ def eval_hc(num_data):
     df_cm = pd.DataFrame(cm, columns=data[f'{log}'].unique(), index=data[f'{log}'].unique())
     df_cm.index.name = 'Actual'
     df_cm.columns.name = 'Prediction'
+    df_cm = df_cm.apply(lambda x:x/x.sum())
     df_cm = df_cm.stack().rename('value').reset_index()
     colors = all_palettes['Blues'][256][::-1]
     mapper_cm = LinearColorMapper(palette=colors, low=df_cm.value.min(), high=df_cm.value.max())
@@ -141,7 +142,7 @@ def eval_hc(num_data):
         div.bk-tooltip.bk-right>div.bk>div:not(:first-child) {display:none !important;} 
         div.bk-tooltip.bk-left>div.bk>div:not(:first-child) {display:none !important;}
         </style>
-        <span style="font-size: 8px; color: #007acc;"><b>value:</b> @value</span><br>
+        <span style="font-size: 8px; color: #007acc;"><b>value:</b> @value{0.0f%}</span><br>
     </div>
     """))
 
