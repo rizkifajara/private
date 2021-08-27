@@ -8,6 +8,7 @@ from werkzeug.datastructures import  FileStorage
 from pymongo import MongoClient
 import json
 import os
+from bson.objectid import ObjectId
 # import dnspython
 
 from bokeh.embed import server_document
@@ -20,17 +21,35 @@ from py_viz.bkapp.facies import eval_facies
 from py_viz.bkapp.hc import eval_hc
 from py_viz.bkapp.histplot import plot_histogram
 
+from math import cos, asin, sqrt
+
 app = Flask(__name__)
 
 num_data = 1500
 
 @app.route("/")
 def viewForm():
-    return render_template("form.html")
+    client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client.test
+    database_name='hackuna_matata123'
+    student_db=client[database_name]
+    collection_name='user'
+    collection=student_db[collection_name]
+    user_data_list = []
+    for document in collection.find():
+        user_data_list.append(document)
+        # print(document)
+    #print(user_data_list[0]["data"])
+
+    return render_template("form.html", user_data=user_data_list)
 
 @app.route("/page-2")
 def analyze_page():
     return render_template("analyze.html")
+
+@app.route("/circles")
+def circle_page():
+    return render_template("circle.html")
 
 @app.route("/postform", methods = ["POST"])
 def upload_form():
@@ -132,6 +151,81 @@ def upload_form():
 #     collection.insert_one(source)
 
 #     return json.dumps({1})
+
+def distance(lat1, lon1, lat2, lon2):
+    p = 0.017453292519943295
+    hav = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p)*cos(lat2*p) * (1-cos((lon2-lon1)*p)) / 2
+
+    return 12742 * asin(sqrt(hav))
+
+def closest(data, v):
+    for dd in data:
+      dd['dist'] = distance(v['lat'],v['lon'],dd['lat'],dd['lon'])
+      print(dd)
+        #wow.jarak = distance(v['lat'],v['lon'],wow.get('lat'),wow.get('lon'))
+    
+    return min(data, key=lambda p: distance(v['lat'],v['lon'],p['lat'],p['lon']))
+
+@app.route('/table/<id_well>/', methods=['GET'])
+def well_table(id_well):
+    
+
+    # for line in df1:
+    #     row = line.split(",")
+    #     well = row[0]
+    #     easting = row [1]
+    #     northing = row[2]
+    #     zone = row[3]
+    #     band = row[4]
+    #     latitude = row[5]
+    #     longitude = row[6]
+    # arr = df.to_dict()
+
+
+    df = pd.read_csv("tmp/volve_coordinate.csv")
+    
+    list_coord = list()
+    
+
+    for i in range(len(df)):
+        dict_coord = dict()
+        dict_coord['lat'] = df['LATITUDE'][i]
+        dict_coord['lon'] = df['LONGITUDE'][i]
+        dict_coord['label'] = df['WELL'][i]
+        dict_coord['dist'] = None
+        list_coord.append(dict_coord)
+        print(i)
+
+    print(list_coord)
+
+    v = {'lat': 56, 'lon': 10}
+    nearest = closest(list_coord, v)
+
+    # print(nearest)
+
+    # return nearest
+
+    client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client.test
+    database_name='hackuna_matata123'
+    student_db=client[database_name]
+    collection_name='user'
+    collection=student_db[collection_name]
+
+    user_data_dict = collection.find_one({"_id": ObjectId(id_well)},{ "_id": 0, "data": 0 })
+
+    # for document in collection.find({},{ "_id": 0, "data": 0 }):
+    #     user_data_list.append(document)
+    #     print(document)
+
+    print(user_data_dict['coordinate ']['LATITUDE'])
+
+    print(list_coord[0]['label'])
+
+    return render_template("table_well.html", data=list_coord, user_data=user_data_dict)
+    # return("ok")
+    # return render_template('table_well.html', data = dataaa)
+
 @app.route('/well-log')
 def log():
     return render_template("wellLog.html")

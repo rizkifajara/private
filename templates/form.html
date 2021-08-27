@@ -65,7 +65,22 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
+
+                {% for data in user_data %}
+
+                  <tr>
+                  <th scope="row">{{loop.index}}</th>
+                  <td>VOLVE</td>
+                  <td>{{data['coordinate ']['WELL']}}</td>
+                  <td>
+                    <button type="button" class="btn btn-warning" data-toggle="modal"
+                      data-target="#exampleModal{{data['_id']}}">Details</button>
+                    <a href="{{ url_for('well_table', id_well=data['_id'])}}" class="btn btn-primary">Analyze</a>
+                    <button type="button" class="btn btn-secondary" disabled>Result</button>
+                  </tr>
+
+                {% endfor %}
+                <!-- <tr>
                   <th scope="row">1</th>
                   <td>VOLVE</td>
                   <td>Schlumberger Otto</td>
@@ -96,104 +111,192 @@
                     <a href="{{ url_for('analyze_page')}}" class="btn btn-primary">Analyze</a>
                     <button type="button" class="btn btn-secondary" disabled>Result</button>
                   </td>
-                </tr>
+                </tr> -->
               </tbody>
             </table>
           </div>
         </div>
 
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <!-- modal konten -->
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Well Data</h5>
-              </div>
-              <div class="modal-body">
-                <!-- tabel data sumur -->
-                <div class="table-responsive">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th scope="col">GR</th>
-                        <th scope="col">ILD</th>
-                        <th scope="col">NPHI</th>
-                        <th scope="col">RHOB</th>
-                        <th scope="col">SW</th>
-                        <th scope="col">VSH</th>
-                        <th scope="col">PHIE</th>
-                        <th scope="col">PERM</th>
-                        <th scope="col">FACIES</th>
-                        <th scope="col">HC</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-
-                      <td>
-                        <button type="button" class="btn btn-success btn-sm">
-                          <span class="glyphicon glyphicon-ok"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-success btn-sm">
-                          <span class="glyphicon glyphicon-ok"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-success btn-sm">
-                          <span class="glyphicon glyphicon-ok"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-secondary btn-sm" onclick="alert('Data Undefined')">
-                          <span class="glyphicon glyphicon-question-sign"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger btn-sm">
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger btn-sm">
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger btn-sm">
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger btn-sm">
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger btn-sm">
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger btn-sm">
-                          <span class="glyphicon glyphicon-remove"></span>
-                        </button>
-                      </td>
-
-
-                    </tbody>
-
-                  </table>
+        {% for dataa in user_data %}
+          <div class="modal fade" id="exampleModal{{dataa['_id']}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <!-- modal konten -->
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Well Data</h5>
                 </div>
-                <!-- tabel data sumur -->
+                <div class="modal-body">
+                  <!-- tabel data sumur -->
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">GR</th>
+                          <th scope="col">ILD</th>
+                          <th scope="col">NPHI</th>
+                          <th scope="col">RHOB</th>
+                          <th scope="col">SW</th>
+                          <th scope="col">VSH</th>
+                          <th scope="col">PHIE</th>
+                          <th scope="col">PERM</th>
+                          <th scope="col">FACIES</th>
+                          <th scope="col">HC</th>
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                        {% if dataa['data'][0]['GR'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                        {% endif %}
+
+                        {% if dataa['data'][0]['ILD'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                        {% endif %}
+
+                        {% if dataa['data'][0]['NPHI'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                        {% endif %}
+
+                        {% if dataa['data'][0]['RHOB'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                        {% endif %}
+
+                        {% if dataa['data'][0]['SW'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </td>
+                        {% endif %}
+
+                        {% if dataa['data'][0]['VSH'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                        {% endif %}
+
+                        {% if dataa['data'][0]['PHIE'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                        {% endif %}
+
+                        {% if dataa['data'][0]['PERM'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                        {% endif %}
+
+                        {% if dataa['data'][0]['FACIES'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                        {% endif %}
+
+                        {% if dataa['data'][0]['HC'] is defined %}
+                          <td>
+                            <button type="button" class="btn btn-success btn-sm">
+                              <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                          </td>
+                        {% else %}
+                          <td>
+                            <button type="button" class="btn btn-danger btn-sm">
+                              <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                          </td>
+                        {% endif %}
+
+
+                      </tbody>
+
+                    </table>
+                  </div>
+                  <!-- tabel data sumur -->
+                </div>
               </div>
             </div>
           </div>
-        </div>
-
+        {% endfor %}
 
 
       </div>
