@@ -234,7 +234,8 @@ def log():
 @app.route('/hist')
 def hist():
     data, list_formation = get_form(nameWell='15/9-F-5')
-    script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm='Hugin Fm')
+    formation = list_formation[1]
+    script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=formation)
     return render_template("hist.html",
                             list_formation = list_formation,
                             script=script,
