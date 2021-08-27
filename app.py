@@ -36,10 +36,11 @@ def viewForm():
     collection_name='user'
     collection=student_db[collection_name]
     user_data_list = []
-    for document in collection.find({},{ "data": 0 }):
+    for document in collection.find():
         user_data_list.append(document)
-        print(document)
-    print(user_data_list)
+        # print(document)
+    #print(user_data_list[0]["data"])
+
     return render_template("form.html", user_data=user_data_list)
 
 @app.route("/page-2")
