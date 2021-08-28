@@ -8,14 +8,40 @@
   <a href="{{ url_for('log')}}"><button class="btn btn-warning m-3">Well Log</button></a>
 </div>
 
-<select name="formation" class="form-select" method="GET" action="/">
-  {% for formation in list_formation %}
-  <option value="{{formation}}" SELECTED>{{formation}}</option>"
-  {% endfor %}
-</select>
+<form method="POST" action="{{ url_for('hist_select')}}">
+  <select name="formation_form" class="form-select">
+    {% for formation in list_formation %}
+      <option value="{{formation}}" selected="selected"> {{formation}}</option>
+    {% endfor %}
+  </select>
+  <input type="submit">
+</form>
+
 
 <div class="col-xs-offset-1 mt-3">
   {{script | safe}}
   {{div | safe}}
 </div>
 {%endblock%}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('.form-select').change(function() {
+    var id = $(this).val(); //get the current value's option
+    $.ajax({
+        type:'POST',
+        url:'/hist_select',
+        data:{'id':id},
+        success:function(data){
+            //in here, for simplicity, you can substitue the HTML for a brand new select box for countries
+            //1.
+            $(".countries_container").html(data);
+
+           //2.
+           // iterate through objects and build HTML here
+        }
+    });
+});
+  });
+  </script>
