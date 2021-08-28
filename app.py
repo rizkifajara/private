@@ -241,6 +241,10 @@ def well_table(id_well):
     v = {'lat': 56, 'lon': 10}
     nearest = closest(list_coord, v)
 
+    sorted_list_coord = sorted(list_coord, key = lambda i: i['dist'])
+
+    print(sorted_list_coord)
+
     # print(nearest)
 
     # return nearest
@@ -262,7 +266,7 @@ def well_table(id_well):
 
     print(list_coord[0]['label'])
 
-    return render_template("table_well.html", data=list_coord, user_data=user_data_dict)
+    return render_template("table_well.html", data=sorted_list_coord, user_data=user_data_dict)
     # return("ok")
     # return render_template('table_well.html', data = dataaa)
 

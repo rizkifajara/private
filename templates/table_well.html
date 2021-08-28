@@ -25,6 +25,67 @@
       }
     </style>
    
+   <script>
+    window.Promise ||
+      document.write(
+        '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+      )
+    window.Promise ||
+      document.write(
+        '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+      )
+    window.Promise ||
+      document.write(
+        '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+      )
+
+    // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
+    // Based on https://gist.github.com/blixt/f17b47c62508be59987b
+    var _seed = 42;
+    Math.random = function () {
+      _seed = _seed * 16807 % 2147483647;
+      return (_seed - 1) / 2147483646;
+    };
+  </script>
+
+<style>
+
+  #chart {
+    max-width: 650px;
+    margin: 35px auto;
+  }
+
+  .map-container {
+    overflow: hidden;
+    padding-bottom: 56.25%;
+    position: relative;
+    height: 0;
+  }
+
+  .map-container iframe {
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+</style>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+  crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+  crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <script>
       // Initialize and add the map
       function initMap() {
@@ -332,7 +393,104 @@
         </div>
     </div>
     
-    
+    <div class="modal fade" id="DescLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <!-- modal konten -->
+        <div class="modal-content">
+          <div class="modal-body">
+            <iframe width="100%" height="500" src="{{ url_for('log')}}"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="ModalEvaluation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <!-- modal konten -->
+        <div class="modal-content">
+          <!-- charts -->
+          <div class="modal-body">
+
+            <div id="chart"></div>
+
+            <script>
+              // VSH    : 98 %
+              // PHIE   : 98 %
+              // SW     : 97 %
+              // PERM   : 92 %
+              // FACIES : 83 %
+              // HC     : 97 %
+
+              // VSH : 0,5  
+              // PHIE : 0,6
+              // SW : 0,6
+              // PERM : 0,7
+              // FACIES : 1,5
+              // HC : 0,2 
+
+              var options = {
+                series: [{
+                  name: 'score (%)',
+                  data: [98, 98, 97, 92, 83, 97]
+                }, {
+                  name: 'time (s)',
+                  data: [0.5, 0.6, 0.6, 0.7, 1.5, 0.2]
+                }],
+                chart: {
+                  type: 'bar',
+                  height: 350
+                },
+                plotOptions: {
+                  bar: {
+                    horizontal: true,
+                    dataLabels: {
+                      position: 'top',
+                    },
+                  }
+                },
+                dataLabels: {
+                  enabled: true,
+                  offsetX: -6,
+                  style: {
+                    fontSize: '12px',
+                    colors: ['#fff']
+                  }
+                },
+                stroke: {
+                  show: true,
+                  width: 0.2,
+                  colors: ['#fff']
+                },
+                tooltip: {
+                  shared: true,
+                  intersect: false
+                },
+                xaxis: {
+                  categories: ["VSH", "PHIE", "SW", "PERM", "FACIES", "HC",],
+                },
+              };
+
+              var chart = new ApexCharts(document.querySelector("#chart"), options);
+              chart.render();
+
+            </script>
+            <div class="row">
+              <div class="col-md-4 col-xs-offset-4" style="margin-top: -40px;">
+                <a>Amount of data:
+                  <input type="text" class="form-control mb-3" id="InputNumData" placeholder="min: 1500"></a>
+                <a href="{{ url_for('vsh_page')}}" type="button" class="btn btn-warning btn-lg btn-block">Click for
+                  details</a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
   
 
