@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from getData import get_data_from_dataiku
+
 from bokeh.io import curdoc
 from bokeh.layouts import row
 from bokeh.models import (ColumnDataSource, Range1d, LinearAxis, LinearColorMapper,
@@ -13,7 +15,8 @@ from sklearn.metrics import confusion_matrix
 
 def eval_hc(num_data):
     log = 'HC'
-    df = pd.read_csv(f'py_viz/data/evaluate_{log}.csv').dropna(subset=['WELL'])
+    df = get_data_from_dataiku(f'evaluate_{log}').dropna(subset=['WELL'])
+    # df = pd.read_csv(f'py_viz/data/evaluate_{log}.csv').dropna(subset=['WELL'])
     df = df[['WELL',f'{log}','DEPTH','prediction', 'prediction_correct']][df['prediction'].notnull()].reset_index(drop=True)
 
     # Convert label

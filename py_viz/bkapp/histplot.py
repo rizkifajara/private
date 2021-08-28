@@ -1,5 +1,7 @@
 import pandas as pd
 
+from getData import get_data_from_dataiku
+
 # from bokeh.io import curdoc
 from bokeh.models import Legend, NumeralTickFormatter, ColumnDataSource
 from bokeh.plotting import figure
@@ -8,10 +10,11 @@ from bokeh.embed import components
 from bokeh.resources import CDN
 
 def get_form(nameWell):
+    # df = get_data_from_dataiku('database_volve').dropna(subset=['WELL'])
     df = pd.read_csv('py_viz/data/database_volve.csv').dropna(subset=['WELL'])
     obj_df = df[['FACIES','FORMATION','WELL']][df['FACIES'].notnull()]
 
-    well = nameWell # custom select well
+    well = nameWell 
     obj_df_well = obj_df[obj_df['WELL'].isin([well])] 
 
     hist_df = obj_df_well.groupby('FORMATION').FACIES.value_counts().reset_index(name='COUNTS')
