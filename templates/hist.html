@@ -8,13 +8,18 @@
   <a href="{{ url_for('log')}}"><button class="btn btn-warning m-3">Well Log</button></a>
 </div>
 
-<form method="POST" action="{{ url_for('hist_select')}}">
-  <select name="formation_form" class="form-select">
+<form method="POST" action="{{ url_for('hist')}}">
+  <select id="dropdown" name="formation_form" class="form-select" onchange="this.form.submit()">
     {% for formation in list_formation %}
-      <option value="{{formation}}" selected="selected"> {{formation}}</option>
+      {% if formation == selected %} 
+        <option value="{{formation}}" selected="selected"> {{formation}}</option>
+      {% else %}
+        <option value="{{formation}}"> {{formation}}</option>
+      {% endif %}
+      
     {% endfor %}
   </select>
-  <input type="submit">
+  <!-- <input type="submit"> -->
 </form>
 
 
@@ -24,24 +29,26 @@
 </div>
 {%endblock%}
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
   $(document).ready(function(){
-    $('.form-select').change(function() {
-    var id = $(this).val(); //get the current value's option
-    $.ajax({
-        type:'POST',
-        url:'/hist_select',
-        data:{'id':id},
-        success:function(data){
-            //in here, for simplicity, you can substitue the HTML for a brand new select box for countries
-            //1.
-            $(".countries_container").html(data);
+    $('#dropdown').change(function() {
+      var id = $(this).val(); //get the current value's option
+      $.ajax({
+          type:'POST',
+          url:'/hist',
+          data:{'id':id},
+          success:function(data){
+              //in here, for simplicity, you can substitue the HTML for a brand new select box for countries
+              //1.
+              $(".col-xs-offset-1").html(data);
 
-           //2.
-           // iterate through objects and build HTML here
-        }
+            //2.
+            // iterate through objects and build HTML here
+          }
+        });
+      // $('.mt-3').load('/hist',{dropdown: $(this).val()});
     });
-});
   });
-  </script>
+
+  </script> -->

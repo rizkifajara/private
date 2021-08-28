@@ -271,31 +271,36 @@ def log():
     return render_template("wellLog.html")
 
 
-@app.route('/hist', methods = ["get"])
+@app.route('/hist', methods = ["get", "post"])
 def hist():
     
     data, list_formation = get_form(nameWell='15/9-F-5')
-    # target = request.form.get[formation_form]
+    formation = list_formation[2]
+    if request.form.get("formation_form") != None:
+        formation = request.form.get("formation_form")
+        print(formation)
+    # target = request.form.get(formation_form)
     print(list_formation)
-    formation = list_formation[0]
+    
     script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=formation)
     return render_template("hist.html",
                             list_formation = list_formation,
                             script=script,
                             div=div,
-                            cdn_js=cdn_js)
+                            cdn_js=cdn_js,
+                            selected = formation)
 
-@app.route('/hist_select', methods=['GET', 'POST'])
-def hist_select():
-    data, list_formation = get_form(nameWell='15/9-F-5')
-    option_form = request.form.get('formation_form')
-    script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=option_form)
-    print(option_form)
-    return render_template("hist_select.html",
-                            list_formation = list_formation,
-                            script=script,
-                            div=div,
-                            cdn_js=cdn_js)
+# @app.route('/hist_select', methods=['GET', 'POST'])
+# def hist_select():
+#     data, list_formation = get_form(nameWell='15/9-F-5')
+#     option_form = request.form.get('formation_form')
+#     script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=option_form)
+#     print(option_form)
+#     return render_template("hist_select.html",
+#                             list_formation = list_formation,
+#                             script=script,
+#                             div=div,
+#                             cdn_js=cdn_js)
 
 @app.route('/hc', methods=['GET'])
 def hc_page():
