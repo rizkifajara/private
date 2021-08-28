@@ -186,16 +186,18 @@ def hist():
     global well_name_global
     well_name = request.args.get("value_well")
     if well_name == None:
-        well_name_global = "15/9-F-12"
+        well_name_global = "15/9-F-1"
     else:
         well_name_global = str(well_name)
 
-    print(well_name)
-
     data, list_formation = get_form(nameWell=well_name_global)
+    print(list_formation)
     form = request.args.get('param')
     if form==None:
-        form=list_formation[0]
+        try:
+            form=list_formation[0]
+        except:
+            form=None
     script, div, cdn_js = plot_histogram(data=data, nameWell=well_name_global, nameForm=form)
     return render_template("hist.html",
                             list_formation = list_formation,

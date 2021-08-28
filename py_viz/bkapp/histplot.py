@@ -1,3 +1,4 @@
+from os import name
 import pandas as pd
 
 from getData import get_data_from_dataiku
@@ -12,7 +13,7 @@ from bokeh.resources import CDN
 def get_form(nameWell):
     # df = get_data_from_dataiku('database_volve').dropna(subset=['WELL'])
     df = pd.read_csv('py_viz/data/database_volve.csv').dropna(subset=['WELL'])
-    obj_df = df[['FACIES','FORMATION','WELL']][df['FACIES'].notnull()]
+    obj_df = df[['FACIES','FORMATION','WELL']]
 
     well = nameWell 
     obj_df_well = obj_df[obj_df['WELL'].isin([well])] 
@@ -28,31 +29,41 @@ def get_form(nameWell):
 
 def plot_histogram(data, nameWell, nameForm):
     well = nameWell
-    default_form = nameForm
-    source = data[default_form]
-    value = source.values.tolist()
-    facies = source.index.tolist()
-    source = ColumnDataSource(data=dict(facies=facies,
-                                        value=value,
-                                        color=all_palettes['Spectral'][len(facies)]))
-        
-    p = figure(x_range=facies, y_range=(0,1), height=300, width=600, title=f"{well} || {default_form}",
+    if nameForm!=None:
+        default_form = nameForm
+        source = data[default_form]
+        value = source.values.tolist()
+        facies = source.index.tolist()
+        source = ColumnDataSource(data=dict(facies=facies,
+                                            value=value,
+                                            color=all_palettes['Spectral'][len(facies)]))
+
+        p = figure(x_range=facies, y_range=(0,1), height=300, width=600, title=f"{well} || {default_form}",
                 toolbar_location=None, tools='hover', 
                 tooltips="@facies:<br> <b>@value{0.0f%}<b>",
                 y_axis_label='Total Percentage', x_axis_label='Facies')
 
-    v = p.vbar(x='facies', top='value', width=0.4, color='color',legend_field='facies', source=source)
+        p.vbar(x='facies', top='value', width=0.4, color='color',legend_field='facies', source=source)
 
-    p.xgrid.grid_line_color = None
-    p.ygrid.minor_grid_line_color = '#f7f7f7'
-    p.xaxis.major_label_text_color = None
-    p.yaxis.formatter = NumeralTickFormatter(format="0f%")
-    p.add_layout(p.legend[0],'right')
-    p.legend.label_text_font_size = '8pt'
-    p.legend.border_line_color = None
+        p.xgrid.grid_line_color = None
+        p.ygrid.minor_grid_line_color = '#f7f7f7'
+        p.xaxis.major_label_text_color = None
+        p.yaxis.formatter = NumeralTickFormatter(format="0f%")
+        p.add_layout(p.legend[0],'right')
+        p.legend.label_text_font_size = '8pt'
+        p.legend.border_line_color = None
 
 
-    script, div = components(p)
-    cdn_js = CDN.js_files[0]
+        script, div = components(p)
+        cdn_js = CDN.js_files[0]
+
+    else:
+        script = '<script></script>'
+        div = '''
+        <div style="text-align: center;">
+        <h1 style="font-family:courier; font-size:80px;">404</h1>
+        <p>error: no facies in this data</p>
+        </div>'''
+        cdn_js = ''
 
     return script, div, cdn_js
