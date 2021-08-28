@@ -3,7 +3,15 @@
   <head>
     <title>Add Map</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
@@ -39,7 +47,7 @@
         // The map, centered at Uluru
         const map = new google.maps.Map(document.getElementById("map"), {
 
-          zoom: 20,
+          zoom: 21,
           center: uluru,
         });
 
@@ -54,7 +62,7 @@
           map: map,
         });
 
-        marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+        // marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
 
         
 
@@ -74,14 +82,14 @@
         });
 
         const cityCircle = new google.maps.Circle({
-            strokeColor: "#FF0000",
+            strokeColor: "#0000FF",
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: "#FF0000",
+            fillColor: "#0000FF",
             fillOpacity: 0.35,
             map,
             center: {lat: parseFloat("{{data[0]['lat']}}"), lng: parseFloat("{{data[0]['lon']}}")},
-            radius: 1,
+            radius: 0.5,
         });
 
         google.maps.event.addListener(cityCircle, 'click', function(ev) {
@@ -96,14 +104,14 @@
         });
 
         const cityCircle2 = new google.maps.Circle({
-            strokeColor: "#FF0000",
+            strokeColor: "#0000FF",
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: "#FF0000",
+            fillColor: "#0000FF",
             fillOpacity: 0.35,
             map,
             center: {lat: parseFloat("{{data[1]['lat']}}"), lng: parseFloat("{{data[1]['lon']}}")},
-            radius: 1,
+            radius: 0.5,
         });
 
         google.maps.event.addListener(cityCircle2, 'click', function(ev) {
@@ -119,14 +127,14 @@
         });
 
         const cityCircle3 = new google.maps.Circle({
-            strokeColor: "#FF0000",
+            strokeColor: "#0000FF",
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: "#FF0000",
+            fillColor: "#0000FF",
             fillOpacity: 0.35,
             map,
             center: {lat: parseFloat("{{data[2]['lat']}}"), lng: parseFloat("{{data[2]['lon']}}")},
-            radius: 1,
+            radius: 0.5,
         });
 
         google.maps.event.addListener(cityCircle3, 'click', function(ev) {
@@ -141,14 +149,14 @@
         });
 
         const cityCircle4 = new google.maps.Circle({
-            strokeColor: "#FF0000",
+            strokeColor: "#0000FF",
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: "#FF0000",
+            fillColor: "#0000FF",
             fillOpacity: 0.35,
             map,
             center: {lat: parseFloat("{{data[3]['lat']}}"), lng: parseFloat("{{data[3]['lon']}}")},
-            radius: 1,
+            radius: 0.5,
         });
 
         google.maps.event.addListener(cityCircle4, 'click', function(ev) {
@@ -163,14 +171,14 @@
         });
 
         const cityCircle5 = new google.maps.Circle({
-            strokeColor: "#FF0000",
+            strokeColor: "#0000FF",
             strokeOpacity: 0.8,
             strokeWeight: 2,
-            fillColor: "#FF0000",
+            fillColor: "#0000FF",
             fillOpacity: 0.35,
             map,
             center: {lat: parseFloat("{{data[4]['lat']}}"), lng: parseFloat("{{data[4]['lon']}}")},
-            radius: 1,
+            radius: 0.5,
         });
 
         google.maps.event.addListener(cityCircle5, 'click', function(ev) {
@@ -183,7 +191,7 @@
   <body>
     <!-- <h3>My Google Maps Demo</h3> -->
     <!--The div element for the map -->
-    <br>
+    <br><br>
     <div class="container">
         <div class="row">
             <div class="col-md-6">
