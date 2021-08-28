@@ -12,23 +12,23 @@
               <div class="form-group">
                 <label for="exampleInputEmail1">Field Name</label>
                 <input name="field_name" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Enter email">
+                  aria-describedby="emailHelp" placeholder="Enter Field Name">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Well Name</label>
                 <input name="well_name" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Enter email">
+                  aria-describedby="emailHelp" placeholder="Enter Well Name">
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <label for="exampleInputEmail1">Latitude</label>
                   <input name="form_lat" type="text" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Enter email">
+                    aria-describedby="emailHelp" placeholder="Enter Latitude">
                 </div>
                 <div class="col-md-6">
                   <label for="exampleInputEmail1">Longitude</label>
                   <input name="form_lon" ftype="text" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Enter email">
+                    aria-describedby="emailHelp" placeholder="Enter Longitude">
                 </div>
               </div>
               <br>
@@ -77,41 +77,11 @@
                       data-target="#exampleModal{{data['_id']}}">Details</button>
                     <a href="{{ url_for('well_table', id_well=data['_id'])}}" class="btn btn-primary">Analyze</a>
                     <button type="button" class="btn btn-secondary" disabled>Result</button>
+                    <a href="{{ url_for('delete_well', id=data['_id'])}}" class="btn btn-danger">Delete</a>
                   </tr>
 
                 {% endfor %}
-                <!-- <tr>
-                  <th scope="row">1</th>
-                  <td>VOLVE</td>
-                  <td>Schlumberger Otto</td>
-                  <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal"
-                      data-target="#exampleModal">Details</button>
-                    <a href="{{ url_for('analyze_page')}}" class="btn btn-primary">Analyze</a>
-                    <button type="button" class="btn btn-secondary" disabled>Result</button>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>VOLVE</td>
-                  <td>Schlumberger Thornton</td>
-                  <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal"
-                      data-target="#exampleModal">Details</button>
-                    <a href="{{ url_for('analyze_page')}}" class="btn btn-primary">Analyze</a>
-                    <button type="button" class="btn btn-secondary" disabled>Result</button>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>VOLVE</td>
-                  <td>Schlumberger Michael</td>
-                  <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal"
-                      data-target="#exampleModal">Details</button>
-                    <a href="{{ url_for('analyze_page')}}" class="btn btn-primary">Analyze</a>
-                    <button type="button" class="btn btn-secondary" disabled>Result</button>
-                  </td>
-                </tr> -->
+                
               </tbody>
             </table>
           </div>

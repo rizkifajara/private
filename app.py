@@ -56,6 +56,8 @@ def delete_well(id):
     collection_name='user'
     collection=student_db[collection_name]
 
+    collection.delete_one({'_id': ObjectId(id)})
+
     return None
 
 @app.route("/page-2")
@@ -74,6 +76,8 @@ def upload_form():
     lat = request.form.get("form_lat")
     lon = request.form.get("form_lon")
     f = request.files['form_file']
+
+    
 
     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client.test
