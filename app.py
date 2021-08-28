@@ -23,9 +23,13 @@ from py_viz.bkapp.histplot import plot_histogram, get_form
 
 from math import cos, asin, sqrt
 
+from getData import get_data_from_dataiku
+
 app = Flask(__name__)
 
 num_data_global=1500
+
+well_name_global = "15/9-F-5"
 
 @app.route("/")
 def viewForm():
@@ -42,6 +46,17 @@ def viewForm():
     #print(user_data_list[0]["data"])
 
     return render_template("form.html", user_data=user_data_list)
+
+@app.route("/delete/<id>/")
+def delete_well(id):
+    client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client.test
+    database_name='hackuna_matata123'
+    student_db=client[database_name]
+    collection_name='user'
+    collection=student_db[collection_name]
+
+    return None
 
 @app.route("/page-2")
 def analyze_page():
@@ -71,25 +86,8 @@ def upload_form():
     student_db=client[database_name]
 
 
-# @app.route("/postform")
-# def upload_form():
-
-#     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-#     db = client.test
-
-#     database_name='hackuna_matata123'
-#     student_db=client[database_name]
-
     collection_name='user'
     collection=student_db[collection_name]
-    # f = request.files.get('file')
-    # # mf = dataiku.Folder('O2B4wCQL') # name of the folder in the flow
-    # # target_path = '/%s' % f.filename
-    # # mf.upload_stream(target_path, f)
-
-    # well = request.form.get('well')
-    # lat = request.form.get('lat')
-    # lon = request.form.get('lon')
 
 
     df = pd.read_csv("tmp/"+f.filename)
@@ -101,9 +99,7 @@ def upload_form():
                           "NORTHING": None, "WELL":well_name,
                           "ZONE": None},
           "data":[]
-        # "wellName": well_name,
-        # "latitude": lat,
-        # "longitude": lon
+
     }
     
           
@@ -122,41 +118,13 @@ def upload_form():
     collection.insert_one(source)
     
     return json.dumps("Data berhasil di input")
-#     # df = pd.read_csv(mf.get_download_stream(f.filename))
 
-#     source = {
-#         # "filename":f.filename,
-#         #   "coordinate ": {"BAND":None, "EASTING":None,
-#         #                   "LATITUDE": lat, "LONGITUDE": lon,
-#         #                   "NORTHING": None, "WELL":well,
-#         #                   "ZONE": None},
-#         #   "data":[]
-#         "wellName": well,
-#         "latitude": lat,
-#         "longitude": lon
-#     }
-
-
-#     # for i in range(len(df)):
-#     #     dict_df = {}
-
-#     #     for col in df.columns:
-#     #         dict_df['WELL']=well
-#     #         dict_df[col]=df[col].iloc[i]
-
-#     #     source['data'].append(dict_df)
-
-#     print(source)
-
-#     collection.insert_one(source)
-
-#     return json.dumps({1})
 
 def distance(lat1, lon1, lat2, lon2):
     p = 0.017453292519943295
     hav = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p)*cos(lat2*p) * (1-cos((lon2-lon1)*p)) / 2
 
-    return 12742 * asin(sqrt(hav))
+    return 12742000 * asin(sqrt(hav))
 
 def closest(data, v):
     for dd in data:
@@ -169,20 +137,9 @@ def closest(data, v):
 @app.route('/table/<id_well>/', methods=['GET'])
 def well_table(id_well):
     
+    df = get_data_from_dataiku("database_coordinate")
 
-    # for line in df1:
-    #     row = line.split(",")
-    #     well = row[0]
-    #     easting = row [1]
-    #     northing = row[2]
-    #     zone = row[3]
-    #     band = row[4]
-    #     latitude = row[5]
-    #     longitude = row[6]
-    # arr = df.to_dict()
-
-
-    df = pd.read_csv("tmp/volve_coordinate.csv")
+    # df = pd.read_csv("tmp/volve_coordinate.csv")
     
     list_coord = list()
     
@@ -194,16 +151,6 @@ def well_table(id_well):
         dict_coord['label'] = df['WELL'][i]
         dict_coord['dist'] = None
         list_coord.append(dict_coord)
-        print(i)
-
-    print(list_coord)
-
-    v = {'lat': 56, 'lon': 10}
-    nearest = closest(list_coord, v)
-
-    # print(nearest)
-
-    # return nearest
 
     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client.test
@@ -213,31 +160,43 @@ def well_table(id_well):
     collection=student_db[collection_name]
 
     user_data_dict = collection.find_one({"_id": ObjectId(id_well)},{ "_id": 0, "data": 0 })
+    v = {"lat": float(user_data_dict['coordinate ']['LATITUDE']), "lon": float(user_data_dict['coordinate ']['LONGITUDE'])}
+    print(v)
 
-    # for document in collection.find({},{ "_id": 0, "data": 0 }):
-    #     user_data_list.append(document)
-    #     print(document)
+    nearest = closest(list_coord, v)
 
-    print(user_data_dict['coordinate ']['LATITUDE'])
+    
 
-    print(list_coord[0]['label'])
+    
 
-    return render_template("table_well.html", data=list_coord, user_data=user_data_dict)
-    # return("ok")
-    # return render_template('table_well.html', data = dataaa)
+    sorted_list_coord = sorted(list_coord, key = lambda i: i['dist'])
+
+
+    return render_template("analyze.html", data=sorted_list_coord, user_data=user_data_dict)
+
 
 @app.route('/well-log')
 def log():
+    
     return render_template("wellLog.html")
 
 
 @app.route('/hist')
 def hist():
-    data, list_formation = get_form(nameWell='15/9-F-5')
+    global well_name_global
+    well_name = request.args.get("value_well")
+    if well_name == None:
+        well_name_global = "15/9-F-12"
+    else:
+        well_name_global = str(well_name)
+
+    print(well_name)
+
+    data, list_formation = get_form(nameWell=well_name_global)
     form = request.args.get('param')
     if form==None:
         form=list_formation[0]
-    script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=form)
+    script, div, cdn_js = plot_histogram(data=data, nameWell=well_name_global, nameForm=form)
     return render_template("hist.html",
                             list_formation = list_formation,
                             form=form,
