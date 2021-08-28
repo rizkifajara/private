@@ -8,7 +8,6 @@
   <a href="{{ url_for('log')}}"><button class="btn btn-warning m-3">Well Log</button></a>
 </div>
 
-<<<<<<< HEAD
 <select name="formation" id="formation" class="form-select" method="GET" action="/">
   {% for formation in list_formation %}
   {% if form == formation %}
@@ -18,28 +17,11 @@
   {% endif %}
   {% endfor %}
 </select>
-=======
-<form method="POST" action="{{ url_for('hist')}}">
-  <select id="dropdown" name="formation_form" class="form-select" onchange="this.form.submit()">
-    {% for formation in list_formation %}
-      {% if formation == selected %} 
-        <option value="{{formation}}" selected="selected"> {{formation}}</option>
-      {% else %}
-        <option value="{{formation}}"> {{formation}}</option>
-      {% endif %}
-      
-    {% endfor %}
-  </select>
-  <!-- <input type="submit"> -->
-</form>
-
->>>>>>> 59537a80aa1e44d4cef3dab0d2bc632b00ace094
 
 <div class="col-xs-offset-1 mt-3">
   {{script | safe}}
   {{div | safe}}
 </div>
-<<<<<<< HEAD
 
 <script>
 
@@ -53,30 +35,3 @@
   });
 </script>
 {%endblock%}
-=======
-{%endblock%}
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-  $(document).ready(function(){
-    $('#dropdown').change(function() {
-      var id = $(this).val(); //get the current value's option
-      $.ajax({
-          type:'POST',
-          url:'/hist',
-          data:{'id':id},
-          success:function(data){
-              //in here, for simplicity, you can substitue the HTML for a brand new select box for countries
-              //1.
-              $(".col-xs-offset-1").html(data);
-
-            //2.
-            // iterate through objects and build HTML here
-          }
-        });
-      // $('.mt-3').load('/hist',{dropdown: $(this).val()});
-    });
-  });
-
-  </script> -->
->>>>>>> 59537a80aa1e44d4cef3dab0d2bc632b00ace094

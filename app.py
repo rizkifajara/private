@@ -10,19 +10,6 @@ import json
 import os
 from bson.objectid import ObjectId
 # import dnspython
-# import dataiku
-import dataikuapi
-import dataiku
-
-
-# print(dataiku.Dataset("data_select_by_well").get_dataFrame().head())
-
-
-
-
-# client is now a DSSClient and can perform all authorized actions.
-# For example, list the project keys for which the API key has access
-# client.list_project_keys()
 
 from bokeh.embed import server_document
 
@@ -39,21 +26,6 @@ from math import cos, asin, sqrt
 app = Flask(__name__)
 
 num_data_global=1500
-
-@app.route("/getDataset")
-def getDataset():
-    dataiku.set_remote_dss("https://ai-delfi-ing-hackathon.datascience.delfi.slb.com/", "KQzhMgvVpsIF3ojSjeg12L9rdp9zdFAP")
-
-    # host = "https://ai-delfi-ing-hackathon.datascience.delfi.slb.com/"
-    # apiKey = "KQzhMgvVpsIF3ojSjeg12L9rdp9zdFAP"
-    # client = dataikuapi.DSSClient(host, apiKey)
-
-    project = client.get_project('DEMO_HACKUNAMATATA')
-    # data = project.get_dataset("data_select_by_well")
-
-    list_data
-    for row in data.iter_rows():
-        return json.dumps(row)
 
 @app.route("/")
 def viewForm():
@@ -81,12 +53,6 @@ def circle_page():
 
 @app.route("/postform", methods = ["POST"])
 def upload_form():
-
-    host = "https://ai-delfi-ing-hackathon.datascience.delfi.slb.com/"
-    apiKey = "KQzhMgvVpsIF3ojSjeg12L9rdp9zdFAP"
-    projectKey = "DEMO_HACKUNAMATATA"
-
-    dataiku.set_remote_dss(host, apiKey, no_check_certificate=True)
     
     well_name = request.form.get("well_name")
     field_name = request.form.get("field_name")
@@ -98,12 +64,8 @@ def upload_form():
     db = client.test
 
     # return db
-    target_path = '/%s' % f.filename
-    mf = dataiku.Folder('lYYI4uPp', project_key=projectKey)
 
-    mf.upload_stream(target_path, f)
-
-    # open('tmp/' + f.filename, 'wb').write(f.read())
+    open('tmp/' + f.filename, 'wb').write(f.read())
     
     database_name='hackuna_matata123'
     student_db=client[database_name]
@@ -130,8 +92,7 @@ def upload_form():
     # lon = request.form.get('lon')
 
 
-    # df = pd.read_csv("tmp/"+f.filename)
-    df = pd.read_csv(mf.get_download_stream(f.filename))
+    df = pd.read_csv("tmp/"+f.filename)
     
     source = {
         "filename":f.filename,
@@ -160,8 +121,7 @@ def upload_form():
     
     collection.insert_one(source)
     
-    # return json.dumps("Data berhasil di input")
-    return render_template("redirect_form.html")
+    return json.dumps("Data berhasil di input")
 #     # df = pd.read_csv(mf.get_download_stream(f.filename))
 
 #     source = {
@@ -271,44 +231,19 @@ def log():
     return render_template("wellLog.html")
 
 
-@app.route('/hist', methods = ["get", "post"])
+@app.route('/hist')
 def hist():
-    
     data, list_formation = get_form(nameWell='15/9-F-5')
-<<<<<<< HEAD
     form = request.args.get('param')
     if form==None:
         form=list_formation[0]
     script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=form)
-=======
-    formation = list_formation[2]
-    if request.form.get("formation_form") != None:
-        formation = request.form.get("formation_form")
-        print(formation)
-    # target = request.form.get(formation_form)
-    print(list_formation)
-    
-    script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=formation)
->>>>>>> 59537a80aa1e44d4cef3dab0d2bc632b00ace094
     return render_template("hist.html",
                             list_formation = list_formation,
                             form=form,
                             script=script,
                             div=div,
-                            cdn_js=cdn_js,
-                            selected = formation)
-
-# @app.route('/hist_select', methods=['GET', 'POST'])
-# def hist_select():
-#     data, list_formation = get_form(nameWell='15/9-F-5')
-#     option_form = request.form.get('formation_form')
-#     script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=option_form)
-#     print(option_form)
-#     return render_template("hist_select.html",
-#                             list_formation = list_formation,
-#                             script=script,
-#                             div=div,
-#                             cdn_js=cdn_js)
+                            cdn_js=cdn_js)
 
 @app.route('/hc', methods=['GET'])
 def hc_page():
