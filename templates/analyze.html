@@ -188,13 +188,28 @@
               var chart = new ApexCharts(document.querySelector("#chart"), options);
               chart.render();
 
+
+              $(document).ready(function () {
+                $('#buttonDetails').click(function () {
+                  var ndata = document.getElementById("getNumData");
+                  var value_ndata = ndata.value;
+                  console.log(value_ndata)
+                  location.href = URL_add_parameter("{{ url_for('vsh_page')}}", 'num', value_ndata);
+                });
+              });
+
             </script>
+
             <div class="row">
               <div class="col-md-4 col-xs-offset-4" style="margin-top: -40px;">
-                <a>Amount of data:
-                  <input type="text" class="form-control mb-3" id="InputNumData" placeholder="min: 1500"></a>
-                <a href="{{ url_for('vsh_page')}}" type="button" class="btn btn-warning btn-lg btn-block">Click for
-                  details</a>
+
+                <form>
+                  <label>Amount of data:</label>
+                  <input type="text" class="form-control mb-3" id="getNumData" placeholder="min: 1500">
+                  <a id="buttonDetails" class="btn btn-warning btn-lg btn-block">
+                    Click for details</a>
+                </form>
+
               </div>
 
             </div>

@@ -29,7 +29,6 @@
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
   <style>
-
     #chart {
       max-width: 650px;
       margin: 35px auto;
@@ -75,6 +74,34 @@
     Math.random = function () {
       _seed = _seed * 16807 % 2147483647;
       return (_seed - 1) / 2147483646;
+    };
+
+
+    function URL_add_parameter(url, param, value) {
+      var hash = {};
+      var parser = document.createElement('a');
+
+      parser.href = url;
+
+      var parameters = parser.search.split(/\?|&/);
+
+      for (var i = 0; i < parameters.length; i++) {
+        if (!parameters[i])
+          continue;
+
+        var ary = parameters[i].split('=');
+        hash[ary[0]] = ary[1];
+      }
+
+      hash[param] = value;
+
+      var list = [];
+      Object.keys(hash).forEach(function (key) {
+        list.push(key + '=' + hash[key]);
+      });
+
+      parser.search = '?' + list.join('&');
+      return parser.href;
     };
   </script>
 

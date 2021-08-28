@@ -38,7 +38,7 @@ def plot_histogram(data, nameWell, nameForm):
                 tooltips="@facies:<br> <b>@value{0.0f%}<b>",
                 y_axis_label='Total Percentage', x_axis_label='Facies')
 
-    v = p.vbar(x='facies', top='value', width=0.4, color='color',legend='facies', source=source)
+    v = p.vbar(x='facies', top='value', width=0.4, color='color',legend_field='facies', source=source)
 
     p.xgrid.grid_line_color = None
     p.ygrid.minor_grid_line_color = '#f7f7f7'
