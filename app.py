@@ -25,7 +25,7 @@ from math import cos, asin, sqrt
 
 app = Flask(__name__)
 
-num_data = 1500
+num_data_global=1500
 
 @app.route("/")
 def viewForm():
@@ -234,17 +234,20 @@ def log():
 @app.route('/hist')
 def hist():
     data, list_formation = get_form(nameWell='15/9-F-5')
-    formation = list_formation[1]
-    script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=formation)
+    form = request.args.get('param')
+    if form==None:
+        form=list_formation[0]
+    script, div, cdn_js = plot_histogram(data=data, nameWell='15/9-F-5', nameForm=form)
     return render_template("hist.html",
                             list_formation = list_formation,
+                            form=form,
                             script=script,
                             div=div,
                             cdn_js=cdn_js)
 
 @app.route('/hc', methods=['GET'])
 def hc_page():
-    script, div, cdn_js = eval_hc(num_data=num_data)
+    script, div, cdn_js = eval_hc(num_data=num_data_global)
     return render_template("evalLog/hc.html",
                            script=script,
                            div=div,
@@ -253,7 +256,7 @@ def hc_page():
 
 @app.route('/facies', methods=['GET'])
 def facies_page():
-    script, div, cdn_js = eval_facies(num_data=num_data)
+    script, div, cdn_js = eval_facies(num_data=num_data_global)
     return render_template("evalLog/facies.html",
                            script=script,
                            div=div,
@@ -262,7 +265,7 @@ def facies_page():
 
 @app.route('/perm', methods=['GET'])
 def perm_page():
-    script, div, cdn_js = eval_perm(num_data=num_data)
+    script, div, cdn_js = eval_perm(num_data=num_data_global)
     return render_template("evalLog/perm.html",
                            script=script,
                            div=div,
@@ -271,7 +274,7 @@ def perm_page():
 
 @app.route('/sw', methods=['GET'])
 def sw_page():
-    script, div, cdn_js = eval_sw(num_data=num_data)
+    script, div, cdn_js = eval_sw(num_data=num_data_global)
     return render_template("evalLog/sw.html",
                            script=script,
                            div=div,
@@ -280,7 +283,7 @@ def sw_page():
 
 @app.route('/phie', methods=['GET'])
 def phie_page():
-    script, div, cdn_js = eval_phie(num_data=num_data)
+    script, div, cdn_js = eval_phie(num_data=num_data_global)
     return render_template("evalLog/phie.html",
                            script=script,
                            div=div,
@@ -289,7 +292,13 @@ def phie_page():
 
 @app.route('/vsh', methods=['GET'])
 def vsh_page():
-    script, div, cdn_js = eval_vsh(num_data=num_data)
+    global num_data_global
+    num_data = request.args.get('num')
+    if num_data==None:
+        num_data_global = 1500
+    else:
+        num_data_global = int(num_data)
+    script, div, cdn_js = eval_vsh(num_data=num_data_global)
     return render_template("evalLog/vsh.html",
                            script=script,
                            div=div,

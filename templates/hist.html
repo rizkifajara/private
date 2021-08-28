@@ -8,9 +8,13 @@
   <a href="{{ url_for('log')}}"><button class="btn btn-warning m-3">Well Log</button></a>
 </div>
 
-<select name="formation" class="form-select" method="GET" action="/">
+<select name="formation" id="formation" class="form-select" method="GET" action="/">
   {% for formation in list_formation %}
-  <option value="{{formation}}" SELECTED>{{formation}}</option>"
+  {% if form == formation %}
+  <option value="{{formation}}" selected>{{formation}}</option>
+  {% else %}
+  <option value="{{formation}}">{{formation}}</option>
+  {% endif %}
   {% endfor %}
 </select>
 
@@ -18,4 +22,16 @@
   {{script | safe}}
   {{div | safe}}
 </div>
+
+<script>
+
+  $(document).ready(function () {
+    $('#formation').change(function () {
+      var form = document.getElementById("formation");
+      var value_form = form.value;
+      console.log(value_form)
+      location.href = URL_add_parameter(location.href, 'param', value_form);
+    });
+  });
+</script>
 {%endblock%}
