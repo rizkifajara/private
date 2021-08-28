@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from getData import get_data_from_dataiku
+
 from bokeh.io import curdoc
 from bokeh.layouts import row
 from bokeh.models import (ColumnDataSource, Range1d, LinearAxis, LogAxis,
@@ -14,7 +16,8 @@ from bokeh.resources import CDN
 
 def eval_sw(num_data):
     log, color = 'SW', 'purple'
-    df = pd.read_csv(f'py_viz/data/evaluate_{log}.csv').dropna(subset=['WELL'])
+    df = get_data_from_dataiku(f'evaluate_{log}').dropna(subset=['WELL'])
+    # df = pd.read_csv(f'py_viz/data/evaluate_{log}.csv').dropna(subset=['WELL'])
     df['abs_error'] = df['error'].abs()
     df = df[['WELL',f'{log}','DEPTH','prediction','abs_error']][df['prediction'].notnull()].reset_index(drop=True)
 
