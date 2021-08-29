@@ -25,8 +25,6 @@ from math import cos, asin, sqrt
 
 from getData import get_data_from_dataiku
 
-import dataiku
-
 app = Flask(__name__)
 
 num_data_global=1500

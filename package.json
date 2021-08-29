@@ -1,0 +1,10 @@
+{
+  "dss_instances": {
+    "default": {
+      "url": "https://ai-delfi-ing-hackathon.datascience.delfi.slb.com",
+      "api_key": "KQzhMgvVpsIF3ojSjeg12L9rdp9zdFAP",
+      "no_check_certificate": true
+    }
+  },
+  "default_instance": "default"
+}
