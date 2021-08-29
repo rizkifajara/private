@@ -68,11 +68,11 @@ def analyze_page():
 def get_well_name():
     return json.dumps(well_name)
 
-@app.route("/send-well-list", methods=["POST"])
+@app.route("/send-well-list", methods=["POST", "GET"])
 def send_well_list():
     global well_name_list
     well_name_list = request.form.get("list_well_name")
-    return None
+    return render_template('metrics.html')
 
 @app.route("/get-well-list", methods=["POST", "GET"])
 def get_well_list():

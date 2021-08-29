@@ -1,0 +1,55 @@
+{%extends "layout.html"%}
+{%block content%}
+
+<div id="chart"></div>
+
+<script>
+
+  var options = {
+    series: [{
+      name: 'score (%)',
+      data: [98, 98, 97, 92, 83, 97]
+    }, {
+      name: 'time (s)',
+      data: [0.5, 0.6, 0.6, 0.7, 1.5, 0.2]
+    }],
+    chart: {
+      type: 'bar',
+      height: 350
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        dataLabels: {
+          position: 'top',
+        },
+      }
+    },
+    dataLabels: {
+      enabled: true,
+      offsetX: -6,
+      style: {
+        fontSize: '12px',
+        colors: ['#fff']
+      }
+    },
+    stroke: {
+      show: true,
+      width: 0.2,
+      colors: ['#fff']
+    },
+    tooltip: {
+      shared: true,
+      intersect: false
+    },
+    xaxis: {
+      categories: ["VSH", "PHIE", "SW", "PERM", "FACIES", "HC",],
+    },
+  };
+
+  var chart = new ApexCharts(document.querySelector("#chart"), options);
+  chart.render();
+
+</script>
+
+{%end bloc%}

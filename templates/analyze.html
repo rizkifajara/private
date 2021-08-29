@@ -56,7 +56,8 @@
 
                     </button>
 
-                    <input style="width: 16px; height: 16px;" class="form-check-input" type="checkbox" id="flexSwitchCheck{{loop.index}}" checked>
+                    <input style="width: 16px; height: 16px;" class="form-check-input" type="checkbox"
+                      id="flexSwitchCheck{{loop.index}}" checked>
                   </div>
                 </td>
               </tr>
@@ -99,130 +100,8 @@
         <!-- modal konten -->
         <div class="modal-content">
           <!-- charts -->
-          <div class="modal-body">
-
-            <div id="chart"></div>
-
-            <script>
-
-              var options = {
-                series: [{
-                  name: 'score (%)',
-                  data: [98, 98, 97, 92, 83, 97]
-                }, {
-                  name: 'time (s)',
-                  data: [0.5, 0.6, 0.6, 0.7, 1.5, 0.2]
-                }],
-                chart: {
-                  type: 'bar',
-                  height: 350
-                },
-                plotOptions: {
-                  bar: {
-                    horizontal: true,
-                    dataLabels: {
-                      position: 'top',
-                    },
-                  }
-                },
-                dataLabels: {
-                  enabled: true,
-                  offsetX: -6,
-                  style: {
-                    fontSize: '12px',
-                    colors: ['#fff']
-                  }
-                },
-                stroke: {
-                  show: true,
-                  width: 0.2,
-                  colors: ['#fff']
-                },
-                tooltip: {
-                  shared: true,
-                  intersect: false
-                },
-                xaxis: {
-                  categories: ["VSH", "PHIE", "SW", "PERM", "FACIES", "HC",],
-                },
-              };
-
-              var chart = new ApexCharts(document.querySelector("#chart"), options);
-              chart.render();
-
-
-
-              $(document).ready(function () {
-
-                $('#buttonDetails').click(function () {
-                  var ndata = document.getElementById("getNumData");
-                  var value_ndata = ndata.value;
-                  console.log(value_ndata)
-                  location.href = URL_add_parameter("{{ url_for('vsh_page')}}", 'num', value_ndata);
-                });
-
-                // let data_js = "{{data|tojson}}"
-                // for (let i = 0; i < data_js.length; i++) {
-                // console.log(data_js)
-                // }
-
-                for (let i = 1; i <= 5; i++) {
-
-                  $('#inputWellName' + i).click(function () {
-                    var value_well = $("#well_name_id" + i).html();
-                    $.ajax({
-                      url: '/hist',
-                      type: "post",
-                      data: { value_well: value_well },
-                      success: function (data) {
-                        $(".modal-body").html(data);
-                        $("#DescLog").modal("show");
-                      }
-                    })
-                  });
-                }
-
-
-
-                $('#btn_evaluate').click(function () {
-                  console.log($("#well_name_id1").html())
-                  let list_well_name = []
-                  // $('#mytable').find('tr').each(function () {
-                  //     var row = $(this);
-                  //       if (row.find('input[type="checkbox"]').is(':checked') {
-                  //         list_well_name.push($())
-                  //       }
-                  //           row.find('.well_column').val().length <= 0) {
-                  //           alert('You must fill the text area!');
-                  //       }
-                  // });
-                  for (let i = 1; i <= 5; i++) {
-                    if ($('input.flexSwitchCheck' + i).prop('checked', true)) {
-                      list_well_name.push($('#well_name_id' + i).html())
-                    }
-                  }
-
-                  console.log(list_well_name)
-                  $.ajax({
-                    url: '/send-well-list',
-                    type: "post",
-                    data: list_well_name,
-                    success: function (data) {
-                        $(".modal-body").html(data);
-                        $("#ModalEvaluation").modal("show");
-                    }
-                  })
-                });
-
-
-
-
-
-
-              });
-
-            </script>
-
+          <div class="modal-body"></div>
+          <div class="modal-footer">
             <div class="row">
               <div class="col-md-4 col-xs-offset-4" style="margin-top: -40px;">
 
@@ -398,6 +277,70 @@
       infowindow6.open(map);
     });
   }
+
+  $(document).ready(function () {
+
+    $('#buttonDetails').click(function () {
+      var ndata = document.getElementById("getNumData");
+      var value_ndata = ndata.value;
+      console.log(value_ndata)
+      location.href = URL_add_parameter("{{ url_for('vsh_page')}}", 'num', value_ndata);
+    });
+
+    // let data_js = "{{data|tojson}}"
+    // for (let i = 0; i < data_js.length; i++) {
+    // console.log(data_js)
+    // }
+
+    for (let i = 1; i <= 5; i++) {
+
+      $('#inputWellName' + i).click(function () {
+        var value_well = $("#well_name_id" + i).html();
+        $.ajax({
+          url: '/hist',
+          type: "post",
+          data: { value_well: value_well },
+          success: function (data) {
+            $(".modal-body").html(data);
+            $("#DescLog").modal("show");
+          }
+        })
+      });
+    }
+
+
+
+    $('#btn_evaluate').click(function () {
+      console.log($("#well_name_id1").html())
+      let list_well_name = []
+      // $('#mytable').find('tr').each(function () {
+      //     var row = $(this);
+      //       if (row.find('input[type="checkbox"]').is(':checked') {
+      //         list_well_name.push($())
+      //       }
+      //           row.find('.well_column').val().length <= 0) {
+      //           alert('You must fill the text area!');
+      //       }
+      // });
+      for (let i = 1; i <= 5; i++) {
+        if ($('input.flexSwitchCheck' + i).prop('checked', true)) {
+          list_well_name.push($('#well_name_id' + i).html())
+        }
+      }
+
+      console.log(list_well_name)
+      $.ajax({
+        url: '/send-well-list',
+        type: "post",
+        data: list_well_name,
+        success: function (data) {
+          $(".modal-body").html(data);
+          $("#ModalEvaluation").modal("show");
+        }
+      })
+    });
+
+  });
 </script>
 
 <script
