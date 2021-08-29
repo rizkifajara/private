@@ -35,8 +35,7 @@
           type: "post",
           data: {value_form: form},
           success: function(data){
-            // alert(form)
-            $("#mt-3").html(data);
+            $("body").html(data);
           }
         })
       });

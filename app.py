@@ -25,6 +25,8 @@ from math import cos, asin, sqrt
 
 from getData import get_data_from_dataiku
 
+import dataiku
+
 app = Flask(__name__)
 
 num_data_global=1500
@@ -204,17 +206,15 @@ def log():
     return render_template("wellLog.html")
 
 
-@app.route('/hist', methods=["POST","GET"])
+@app.route('/hist', methods=["POST", "GET"])
 def hist():
     global well_name
     well_name = request.form.get("value_well")
     if well_name == None:
-        well_name = "15/9-F-1"
+        well_name = "15/9-F-5"
     else:
         well_name = str(well_name)
-
     data, list_formation = get_form(nameWell=well_name)
-    print(list_formation)
     form = request.form.get('value_form')
     if form==None:
         try:
