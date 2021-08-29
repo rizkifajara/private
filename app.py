@@ -29,9 +29,11 @@ app = Flask(__name__)
 
 num_data_global=1500
 
+
 well_name_global = "15/9-F-5"
 
 well_name_list = []
+
 
 @app.route("/")
 def viewForm():
@@ -70,6 +72,7 @@ def analyze_page():
 def get_well_name():
     return json.dumps(well_name)
 
+
 @app.route("/send-well-list", methods=["GET","POST"])
 def send_well_list():
     global well_name_list
@@ -77,6 +80,8 @@ def send_well_list():
     well_name_list = request.form.getlist("list_well_name[]")
     print(well_name_list)
     return "ok"
+
+
 
 @app.route("/get-well-list", methods=["POST", "GET"])
 def get_well_list():
@@ -202,21 +207,18 @@ def well_table(id_well):
 
 @app.route('/well-log', methods=["POST", "GET"])
 def log():
-    
     return render_template("wellLog.html")
 
 
-@app.route('/hist', methods=["POST","GET"])
+@app.route('/hist', methods=["POST", "GET"])
 def hist():
     global well_name
     well_name = request.form.get("value_well")
     if well_name == None:
-        well_name = "15/9-F-1"
+        well_name = "15/9-F-5"
     else:
         well_name = str(well_name)
-
     data, list_formation = get_form(nameWell=well_name)
-    print(list_formation)
     form = request.form.get('value_form')
     if form==None:
         try:

@@ -53,8 +53,8 @@ def plot_histogram(data, nameWell, nameForm):
         p.legend.label_text_font_size = '8pt'
         p.legend.border_line_color = None
 
-
         script, div = components(p)
+        print(div)
         cdn_js = CDN.js_files[0]
 
     else:
