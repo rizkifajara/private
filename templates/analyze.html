@@ -43,7 +43,7 @@
                   <th scope="row">{{loop.index}}</th>
                   <td>VOLVE</td>
                   <td class="well_column" id="well_name_id{{loop.index}}">{{datum['label']}}</td>
-                  <td>{{"{:,.5f}".format(datum['dist'])}} meter</td>
+                  <td>{{"{:,.3f}".format(datum['dist'])}} meter</td>
                   <td>
                     <div class="small-4 medium-4 large-4 columns text-center m-2">
                       <!-- <form> -->
@@ -202,6 +202,8 @@
     for (let i = 1; i <= 5; i++) {
 
       $('#inputWellName' + i).click(function () {
+        e.preventDefault();
+        
         var value_well = $("#well_name_id" + i).html();
         console.log(value_well);
         $.ajax({
@@ -215,15 +217,11 @@
         })
       });
 
-
     }
 
 
-
     $('#btn_evaluate').click(function () {
-      console.log($("#well_name_id1").html())
       let list_well_name = []
-
 
       for (let i = 1; i <= 5; i++) {
         if ($('#flexSwitchCheck' + i).is(':checked')) {
