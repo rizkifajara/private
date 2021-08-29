@@ -29,8 +29,6 @@ app = Flask(__name__)
 
 num_data_global=1500
 
-well_name_global = "15/9-F-5"
-
 well_name_list = ["15/9-F-5"]
 
 @app.route("/")
@@ -200,7 +198,6 @@ def well_table(id_well):
 
 @app.route('/well-log', methods=["POST", "GET"])
 def log():
-    
     return render_template("wellLog.html")
 
 
