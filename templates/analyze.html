@@ -70,7 +70,8 @@
 
           <!--run button-->
 
-          <button data-toggle="modal" data-target="#ModalEvaluation" id="btn_evaluate" type="button" class="btn btn-warning btn pull-right">
+          <button data-toggle="modal" data-target="#ModalEvaluation" id="btn_evaluate" type="button"
+            class="btn btn-warning btn pull-right">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill"
               viewBox="0 0 16 16">
               <path
@@ -81,7 +82,7 @@
       </div>
     </div>
 
-    
+
     <!-- batas makmum -->
 
     <div class="modal fade" id="DescLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -105,27 +106,27 @@
         <div class="modal-content">
           <!-- charts -->
 
-          
+
 
           <div class="modal-body">
 
             <div id="chart"></div>
 
           </div>
-            <div class="row">
-              <div class="col-md-4 col-xs-offset-4" style="margin-top: -40px;">
+          <div class="row">
+            <div class="col-md-4 col-xs-offset-4" style="margin-top: -40px;">
 
-                <form>
-                  <label>Amount of data:</label>
-                  <input type="text" class="form-control mb-3" id="getNumData" placeholder="ex: 1000">
-                  <a id="buttonDetails" class="btn btn-warning btn-lg btn-block">
-                    Click for details</a>
-                </form>
-
-              </div>
+              <form>
+                <label>Amount of data:</label>
+                <input type="text" class="form-control mb-3" id="getNumData" placeholder="ex: 1000">
+                <a id="buttonDetails" class="btn btn-warning btn-lg btn-block">
+                  Click for details</a>
+              </form>
 
             </div>
-          
+
+          </div>
+
 
         </div>
       </div>
@@ -190,7 +191,7 @@
     $('#buttonDetails').click(function () {
       var ndata = document.getElementById("getNumData");
       var value_ndata = ndata.value;
-      
+
       location.href = URL_add_parameter("{{ url_for('vsh_page')}}", 'num', value_ndata);
       // location.href = "/vsh/"+"{{user_data}}"+"/?num="+value_ndata
       // location.href = "{{url_for('vsh_page',id=user_data['_id'])}}"
@@ -240,7 +241,7 @@
           // console.log(data)
           // // $(".modal-body").html(data);
           // $("#ModalEvaluation").modal("show");
-          
+
         }
       })
     });
@@ -409,7 +410,7 @@
     });
   }
 
-  
+
 </script>
 
 <script
