@@ -101,10 +101,6 @@ def upload_form():
     lon = request.form.get("form_lon")
     f = request.files['form_file']
 
-    mf = dataiku.Folder('O2B4wCQL') # name of the folder in the flow
-    target_path = '/%s' % f.filename
-    mf.upload_stream(target_path, f)
-
 
     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client.test
@@ -148,7 +144,7 @@ def upload_form():
     
     collection.insert_one(source)
     
-    return json.dumps("Data berhasil di input")
+    return render_template("redirect_form.html")
 
 
 def distance(lat1, lon1, lat2, lon2):
