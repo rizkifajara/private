@@ -191,12 +191,7 @@ def well_table(id_well):
 
     nearest = closest(list_coord, v)
 
-    
-
-    
-
     sorted_list_coord = sorted(list_coord, key = lambda i: i['dist'])
-
 
     return render_template("analyze.html", data=sorted_list_coord, user_data=user_data_dict)
 
