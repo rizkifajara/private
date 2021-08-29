@@ -79,7 +79,7 @@ def send_well_list():
     print(well_name_list)
     well_name_list = request.form.getlist("list_well_name[]")
     print(well_name_list)
-    return "ok"
+    return "<div id='chart'></div>"
 
 
 
