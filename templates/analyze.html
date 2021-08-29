@@ -207,7 +207,7 @@
           type: "post",
           data: { value_well: value_well },
           success: function (data) {
-            $(".modal-body").html(data);
+            $("#DescLog .modal-body").html(data);
             $("#DescLog").modal("show");
           }
         })
