@@ -67,8 +67,7 @@
 
           <!--run button-->
 
-          <button id="btn_evaluate" type="button" class="btn btn-warning btn pull-right" data-toggle="modal"
-            data-target="#ModalEvaluation">
+          <button id="btn_evaluate" type="button" class="btn btn-warning btn pull-right">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill"
               viewBox="0 0 16 16">
               <path
@@ -205,11 +204,12 @@
 
                   console.log(list_well_name)
                   $.ajax({
-                    url: '/well-log',
+                    url: '/send-well-list',
                     type: "post",
                     data: list_well_name,
                     success: function (data) {
-
+                        $(".modal-body").html(data);
+                        $("#ModalEvaluation").modal("show");
                     }
                   })
                 });
