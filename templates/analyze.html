@@ -37,6 +37,7 @@
               </tr>
             </thead>
             <tbody>
+            <form>
               {%for datum in data%}
                 <tr>
                   <th scope="row">{{loop.index}}</th>
@@ -81,6 +82,7 @@
                   </td>
                 </tr>
               {%endfor%}
+            </form>
             </tbody>
           </table>
 
@@ -201,39 +203,6 @@
                       }
                     })
                   });
-                }
-
-
-
-                  $('#btn_evaluate').click(function () {
-                    console.log($("#well_name_id1").html())
-                    let list_well_name = []
-                    // $('#mytable').find('tr').each(function () {
-                    //     var row = $(this);
-                    //       if (row.find('input[type="checkbox"]').is(':checked') {
-                    //         list_well_name.push($())
-                    //       }
-                    //           row.find('.well_column').val().length <= 0) {
-                    //           alert('You must fill the text area!');
-                    //       }
-                    // });
-                    for(let i = 1; i <= 5; i++) {
-                      if ($('input.flexSwitchCheck'+i).prop('checked', true)) {
-                        list_well_name.push($('#well_name_id'+i).html())
-                      }
-                    }
-
-                    console.log(list_well_name)
-                    $.ajax({
-                      url: '/well-log',
-                      type: "post",
-                      data: list_well_name,
-                      success: function(data){
-                        
-                      }
-                    })
-                  });
-
 
                   $('#inputWellName2' + i).click(function () {
                     
@@ -247,6 +216,45 @@
                       }
                     })
                   });
+                }
+
+
+
+                  $('#btn_evaluate').click(function () {
+                    console.log($("#well_name_id1").html())
+                    let list_well_name = []
+
+                    // for(let i = 1; i <= 5; i++) {
+                    //   console.log($("#well_name_id"+i).html())
+                    // }
+                    // $('#mytable').find('tr').each(function () {
+                    //     var row = $(this);
+                    //       if (row.find('input[type="checkbox"]').is(':checked') {
+                    //         list_well_name.push($())
+                    //       }
+                    //           row.find('.well_column').val().length <= 0) {
+                    //           alert('You must fill the text area!');
+                    //       }
+                    // });
+                    for(let i = 1; i <= 5; i++) {
+                      if ($('#flexSwitchCheck'+i).is(':checked')) {
+                        list_well_name.push($('#well_name_id'+i).html())
+                      }
+                    }
+
+                    console.log(list_well_name)
+                    $.ajax({
+                      url: '/send-well-list',
+                      type: "get",
+                      data: {list_well_name: list_well_name},
+                      success: function(data){
+                        console.log("ok")
+                      }
+                    })
+                  });
+
+
+                  
 
                 
                 

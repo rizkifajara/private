@@ -31,7 +31,7 @@ num_data_global=1500
 
 well_name_global = "15/9-F-5"
 
-well_name_list = ["15/9-F-5"]
+well_name_list = []
 
 @app.route("/")
 def viewForm():
@@ -70,11 +70,13 @@ def analyze_page():
 def get_well_name():
     return json.dumps(well_name)
 
-@app.route("/send-well-list", methods=["POST"])
+@app.route("/send-well-list", methods=["GET","POST"])
 def send_well_list():
     global well_name_list
-    well_name_list = request.form.get("list_well_name")
-    return None
+    print(well_name_list)
+    well_name_list = request.form.get("list_well_name[]")
+    print(well_name_list)
+    return "ok"
 
 @app.route("/get-well-list", methods=["POST", "GET"])
 def get_well_list():
