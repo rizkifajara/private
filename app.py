@@ -52,7 +52,7 @@ def viewForm():
 
     return render_template("form.html", user_data=user_data_list)
 
-@app.route("/delete/<id>/")
+@app.route("/delete/<id>")
 def delete_well(id):
     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client.test

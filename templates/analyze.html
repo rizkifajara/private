@@ -193,8 +193,6 @@
       var value_ndata = ndata.value;
 
       location.href = URL_add_parameter("{{ url_for('vsh_page')}}", 'num', value_ndata);
-      // location.href = "/vsh/"+"{{user_data}}"+"/?num="+value_ndata
-      // location.href = "{{url_for('vsh_page',id=user_data['_id'])}}"
     });
 
 
@@ -202,8 +200,6 @@
     for (let i = 1; i <= 5; i++) {
 
       $('#inputWellName' + i).click(function () {
-        e.preventDefault();
-        
         var value_well = $("#well_name_id" + i).html();
         console.log(value_well);
         $.ajax({
