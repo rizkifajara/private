@@ -245,7 +245,7 @@
                     console.log(list_well_name)
                     $.ajax({
                       url: '/send-well-list',
-                      type: "get",
+                      type: "post",
                       data: {list_well_name: list_well_name},
                       success: function(data){
                         console.log("ok")
