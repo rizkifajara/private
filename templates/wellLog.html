@@ -1,12 +1,13 @@
 {%extends "layout.html"%}
 {%block content%}
 
-<div>
-  <a href="{{ url_for('hist')}}"><button class="btn btn-warning m-3">Histogram</button></a>
-  <a href="{{ url_for('log')}}"><button class="btn btn-warning m-3 active">Well Log</button></a>
-</div>
 
 <div>
   <iframe width="100%" height="580" style="border: none;" src="https://log-plot.herokuapp.com/app">
 </div>
+
+<div id="DescLog">
+
+</div>
+
 {%endblock%}

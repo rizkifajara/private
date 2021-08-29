@@ -3,18 +3,13 @@
 <!-- <link rel="stylesheet" href=""> -->
 <script type="text/javascript" src={{cdn_js | safe}}></script>
 
-<div>
-  <a href="{{ url_for('hist')}}"><button class="btn btn-warning m-3 active">Histogram</button></a>
-  <a href="{{ url_for('log')}}"><button class="btn btn-warning m-3">Well Log</button></a>
-</div>
-
 <select name="formation" id="formation" class="form-select" method="GET" action="/">
   {% for formation in list_formation %}
-  {% if form == formation %}
-  <option value="{{formation}}" selected>{{formation}}</option>
-  {% else %}
-  <option value="{{formation}}">{{formation}}</option>
-  {% endif %}
+    {% if form == formation %}
+      <option value="{{formation}}" selected>{{formation}}</option>
+    {% else %}
+      <option value="{{formation}}">{{formation}}</option>
+    {% endif %}
   {% endfor %}
 </select>
 
@@ -26,12 +21,26 @@
 <script>
 
   $(document).ready(function () {
+    // $('#formation').change(function () {
+    //   var form = document.getElementById("formation");
+    //   var value_form = form.value;
+    //   console.log(value_form)
+    //   location.href = URL_add_parameter(location.href, 'param', value_form);
+    // });
+
     $('#formation').change(function () {
-      var form = document.getElementById("formation");
-      var value_form = form.value;
-      console.log(value_form)
-      location.href = URL_add_parameter(location.href, 'param', value_form);
-    });
+      var form = $('#formation').find(":selected").text();
+        $.ajax({
+          url: '/hist',
+          type: "post",
+          data: {value_form: form},
+          success: function(data){
+            // alert(form)
+            $("#mt-3").html(data);
+          }
+        })
+      });
+
   });
 </script>
 {%endblock%}

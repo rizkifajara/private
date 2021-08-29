@@ -31,6 +31,8 @@ num_data_global=1500
 
 well_name_global = "15/9-F-5"
 
+well_name_list = ["15/9-F-5"]
+
 @app.route("/")
 def viewForm():
     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
@@ -58,11 +60,25 @@ def delete_well(id):
 
     collection.delete_one({'_id': ObjectId(id)})
 
-    return None
+    return json.dumps("Data successfully removed")
 
 @app.route("/page-2")
 def analyze_page():
     return render_template("analyze.html")
+
+@app.route("/well-name", methods=["POST", "GET"])
+def get_well_name():
+    return json.dumps(well_name)
+
+@app.route("/send-well-list", methods=["POST"])
+def send_well_list():
+    global well_name_list
+    well_name_list = request.form.get("list_well_name")
+    return None
+
+@app.route("/get-well-list", methods=["POST", "GET"])
+def get_well_list():
+    return json.dumps(well_name_list)
 
 @app.route("/circles")
 def circle_page():
@@ -77,7 +93,10 @@ def upload_form():
     lon = request.form.get("form_lon")
     f = request.files['form_file']
 
-    
+    mf = dataiku.Folder('O2B4wCQL') # name of the folder in the flow
+    target_path = '/%s' % f.filename
+    mf.upload_stream(target_path, f)
+
 
     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
     db = client.test
@@ -179,30 +198,30 @@ def well_table(id_well):
     return render_template("analyze.html", data=sorted_list_coord, user_data=user_data_dict)
 
 
-@app.route('/well-log')
+@app.route('/well-log', methods=["POST", "GET"])
 def log():
     
     return render_template("wellLog.html")
 
 
-@app.route('/hist')
+@app.route('/hist', methods=["POST","GET"])
 def hist():
-    global well_name_global
-    well_name = request.args.get("value_well")
+    global well_name
+    well_name = request.form.get("value_well")
     if well_name == None:
-        well_name_global = "15/9-F-1"
+        well_name = "15/9-F-1"
     else:
-        well_name_global = str(well_name)
+        well_name = str(well_name)
 
-    data, list_formation = get_form(nameWell=well_name_global)
+    data, list_formation = get_form(nameWell=well_name)
     print(list_formation)
-    form = request.args.get('param')
+    form = request.form.get('value_form')
     if form==None:
         try:
             form=list_formation[0]
         except:
             form=None
-    script, div, cdn_js = plot_histogram(data=data, nameWell=well_name_global, nameForm=form)
+    script, div, cdn_js = plot_histogram(data=data, nameWell=well_name, nameForm=form)
     return render_template("hist.html",
                             list_formation = list_formation,
                             form=form,

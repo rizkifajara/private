@@ -25,7 +25,7 @@
       <div class="card">
         <div class="card-body">
           <!--table-->
-          <table class="table">
+          <table id="mytable" class="table">
             <thead class="table-dark">
               <tr>
                 <th scope="col">No</th>
@@ -41,21 +41,42 @@
                 <tr>
                   <th scope="row">{{loop.index}}</th>
                   <td>VOLVE</td>
-                  <td id="well_name_id{{loop.index}}">{{datum['label']}}</td>
+                  <td class="well_column"id="well_name_id{{loop.index}}">{{datum['label']}}</td>
                   <td>{{"{:,.5f}".format(datum['dist'])}} meter</td>
                   <td>
                     <div class="small-4 medium-4 large-4 columns text-center">
-                      <button class="btn btn-light" data-toggle="modal" data-target="#DescLog" id="inputWellName{{loop.index}}">
+                      <!-- <form> -->
+                      <button class="btn btn-light" id="inputWellName{{loop.index}}">
                       <!-- <button class="btn btn-light" id="inputWellName{{loop.index}}"> -->
+                      
+
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
                           viewBox="0 0 16 16">
                           <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
                           <path
                             d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
                         </svg>
+
+                      <!-- </form> -->
                       </button>
+
+
+
+                      <button class="btn btn-light" id="inputWellName2{{loop.index}}">
+                        <!-- <button class="btn btn-light" id="inputWellName{{loop.index}}"> -->
+                        
+  
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
+                            viewBox="0 0 16 16">
+                            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                            <path
+                              d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                          </svg>
+  
+                        <!-- </form> -->
+                        </button>
                       <!-- <button data-toggle="modal" data-target="#DescLog" id = "inputWellName{{loop.index}}">TEST</button> -->
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheck{{loop.index}}" checked>
                     </div>
                   </td>
                 </tr>
@@ -66,7 +87,7 @@
 
           <!--run button-->
 
-          <button type="button" class="btn btn-warning btn pull-right" data-toggle="modal"
+          <button id="btn_evaluate" type="button" class="btn btn-warning btn pull-right" data-toggle="modal"
             data-target="#ModalEvaluation">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill"
               viewBox="0 0 16 16">
@@ -85,6 +106,7 @@
         <!-- modal konten -->
         <div class="modal-content">
           <div class="modal-body">
+            <!-- <iframe width="100%" height="500" src="{{ url_for('hist')}}"></iframe> -->
             <iframe width="100%" height="500" src="{{ url_for('log')}}"></iframe>
           </div>
         </div>
@@ -151,6 +173,7 @@
               
 
               $(document).ready(function () {
+                
                 $('#buttonDetails').click(function () {
                   var ndata = document.getElementById("getNumData");
                   var value_ndata = ndata.value;
@@ -166,15 +189,66 @@
                 for(let i = 1; i<=5; i++) {
 
                   $('#inputWellName' + i).click(function () {
-                    var ndata_well = document.getElementById("well_name_id" + i);
-                    // var ndata_well = $('#well_name_id').val()
-                    var value_well_name = ndata_well.innerText;
-                    alert(value_well_name)
-                    // console.log(value_ndata)
-                    location.href = URL_add_parameter("{{ url_for('hist')}}", 'value_well', value_well_name);
+                    var value_well = $("#well_name_id"+i).html();
+                    console.log(value_well);
+                    $.ajax({
+                      url: '/hist',
+                      type: "post",
+                      data: {value_well: value_well},
+                      success: function(data){
+                        $(".modal-body").html(data);
+                        $("#DescLog").modal("show");
+                      }
+                    })
+                  });
+                }
+
+
+
+                  $('#btn_evaluate').click(function () {
+                    console.log($("#well_name_id1").html())
+                    let list_well_name = []
+                    // $('#mytable').find('tr').each(function () {
+                    //     var row = $(this);
+                    //       if (row.find('input[type="checkbox"]').is(':checked') {
+                    //         list_well_name.push($())
+                    //       }
+                    //           row.find('.well_column').val().length <= 0) {
+                    //           alert('You must fill the text area!');
+                    //       }
+                    // });
+                    for(let i = 1; i <= 5; i++) {
+                      if ($('input.flexSwitchCheck'+i).prop('checked', true)) {
+                        list_well_name.push($('#well_name_id'+i).html())
+                      }
+                    }
+
+                    console.log(list_well_name)
+                    $.ajax({
+                      url: '/well-log',
+                      type: "post",
+                      data: list_well_name,
+                      success: function(data){
+                        
+                      }
+                    })
                   });
 
-                }
+
+                  $('#inputWellName2' + i).click(function () {
+                    
+                    $.ajax({
+                      url: '/well-log',
+                      type: "post",
+                      data: {},
+                      success: function(data){
+                        $(".modal-body").html(data);
+                        $("#DescLog").modal("show");
+                      }
+                    })
+                  });
+
+                
                 
 
               });
@@ -200,6 +274,7 @@
     </div>
   </div>
 </div>
+
 
 
 <script>
