@@ -20,6 +20,7 @@ from py_viz.bkapp.perm import eval_perm
 from py_viz.bkapp.facies import eval_facies
 from py_viz.bkapp.hc import eval_hc
 from py_viz.bkapp.histplot import plot_histogram, get_form
+from py_viz.bkapp.resultLog import plot_result
 
 from math import cos, asin, sqrt
 
@@ -228,6 +229,14 @@ def hist():
                             div=div,
                             cdn_js=cdn_js)
 
+@app.route('/result', methods=['GET'])
+def result_page():
+    script, div, cdn_js = plot_result()
+    return render_template("evalLog/result.html",
+                            script=script,
+                            div=div,
+                            cdn_js=cdn_js)
+                            
 @app.route('/hc', methods=['GET'])
 def hc_page():
     script, div, cdn_js = eval_hc(num_data=num_data_global)

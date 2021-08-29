@@ -1,0 +1,11 @@
+{%extends "layout.html"%}
+{%block content%}
+<script type="text/javascript" src={{cdn_js | safe}}></script>
+
+<div class="col-xs-offset-2">
+  {{script | safe}}
+  {{div | safe}}
+  
+</div>
+
+{%endblock%}
