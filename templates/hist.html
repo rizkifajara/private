@@ -5,11 +5,11 @@
 
 <select name="formation" id="formation" class="form-select" method="GET" action="/">
   {% for formation in list_formation %}
-    {% if form == formation %}
-      <option value="{{formation}}" selected>{{formation}}</option>
-    {% else %}
-      <option value="{{formation}}">{{formation}}</option>
-    {% endif %}
+  {% if form == formation %}
+  <option value="{{formation}}" selected>{{formation}}</option>
+  {% else %}
+  <option value="{{formation}}">{{formation}}</option>
+  {% endif %}
   {% endfor %}
 </select>
 
@@ -30,15 +30,15 @@
 
     $('#formation').change(function () {
       var form = $('#formation').find(":selected").text();
-        $.ajax({
-          url: '/hist',
-          type: "post",
-          data: {value_form: form},
-          success: function(data){
-            $("body").html(data);
-          }
-        })
-      });
+      $.ajax({
+        url: '/hist',
+        type: "post",
+        data: { value_form: form },
+        success: function (data) {
+          $(".modal-body").html(data);
+        }
+      })
+    });
 
   });
 </script>
