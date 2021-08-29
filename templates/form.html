@@ -76,7 +76,7 @@
                     <button type="button" class="btn btn-warning" data-toggle="modal"
                       data-target="#exampleModal{{data['_id']}}">Details</button>
                     <a href="{{ url_for('well_table', id_well=data['_id'])}}" class="btn btn-primary">Analyze</a>
-                    <button type="button" class="btn btn-secondary" disabled>Result</button>
+                    <button type="button" class="btn btn-light">Result</button>
                     <a href="{{ url_for('delete_well', id=data['_id'])}}" class="btn btn-danger">Delete</a>
                   </tr>
 

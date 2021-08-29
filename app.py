@@ -189,7 +189,7 @@ def well_table(id_well):
     collection_name='user'
     collection=student_db[collection_name]
 
-    user_data_dict = collection.find_one({"_id": ObjectId(id_well)},{ "_id": 0, "data": 0 })
+    user_data_dict = collection.find_one({"_id": ObjectId(id_well)},{ "data": 0 })
     v = {"lat": float(user_data_dict['coordinate ']['LATITUDE']), "lon": float(user_data_dict['coordinate ']['LONGITUDE'])}
     print(v)
 
