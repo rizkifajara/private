@@ -28,10 +28,9 @@ from getData import get_data_from_dataiku
 
 app = Flask(__name__)
 
-num_data_global=1500
+# num_data_global=1500
 
-
-well_name_global = "15/9-F-5"
+# well_name_global = "15/9-F-5"
 
 well_name_list = []
 
