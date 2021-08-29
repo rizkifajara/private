@@ -4,6 +4,7 @@ charset-normalizer==2.0.4
 click==8.0.1
 # dataiku-internal-client==7.0.0
 https://ai-delfi-ing-hackathon.datascience.delfi.slb.com/public/packages/dataiku-internal-client.tar.gz
+dataiku.api_client
 dnspython==1.16.0
 Flask==2.0.1
 Flask-PyMongo==2.3.0
