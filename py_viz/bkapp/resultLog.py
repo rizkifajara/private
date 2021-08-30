@@ -116,6 +116,8 @@ def plot_result():
     p3.xaxis[1].ticker = [c, d]
     p3.xaxis[1].major_label_text_color = "darkblue"
     p3.xaxis[1].axis_label_text_color = "darkblue"
+    p3.xaxis[1].axis_label_text_font_size = "10px"
+    p3.xaxis[1].major_label_text_font_size = "8px"
     p3.add_tools(HoverTool(tooltips="""
     <div>
         <span style="font-size: 8px;"><b>DEPTH:</b> @DEPTH{0.2f}</span><br>
@@ -240,8 +242,10 @@ def plot_result():
     </div>
     """))
 
-    for p in [p1, p2, p4, p3, p5, p6, p7, p8, p9]:
+    for p in [p1, p2, p3, p4, p5, p6, p7, p8, p9]:
         p.xaxis[-1].visible = False
+        p.xaxis[0].axis_label_text_font_size = "10px"
+        p.xaxis[0].major_label_text_font_size = "8px"
 
     plot = row([p1, p2, p3, p4, p5, p6, p7, p8, p9])
 
