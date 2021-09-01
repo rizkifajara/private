@@ -10,16 +10,9 @@
           <div class="card-body">
             <form enctype="multipart/form-data" action="{{ url_for('upload_form')}}" method="POST">
               <div class="form-group">
-                <!-- <label for="exampleInputEmail1">Field Name</label>
+                <label for="exampleInputEmail1">Field Name</label>
                 <input name="field_name" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Enter Field Name"> -->
-                <button class="btn btn-light dropdown-toggle form-control" type="button" id="dropdownMenuButton"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Field Name
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">VOLVE</a>
-                </div>
+                  aria-describedby="emailHelp" placeholder="Enter Field Name">
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Well Name</label>
@@ -83,9 +76,8 @@
                     <button type="button" class="btn btn-warning" data-toggle="modal"
                       data-target="#exampleModal{{data['_id']}}">Details</button>
                     <a href="{{ url_for('well_table', id_well=data['_id'])}}" class="btn btn-primary">Analyze</a>
-                    <button data-toggle="modal" data-target="#ResultLog" class="btn btn-light" type="button"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
-                        viewBox="0 0 16 16">
+                    <button data-toggle="modal" data-target="#ResultLog" class="btn btn-light" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" fill="black" class="bi bi-eye-fill" viewBox="0 0 16 16">
                         <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
                         <path
                           d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
