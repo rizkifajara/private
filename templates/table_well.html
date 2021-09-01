@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Add Map</title>
 
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+<head>
+  <title>Add Map</title>
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous"> -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 
-    <style type="text/css">
-      /* Set the size of the div element that contains the map */
-      #map {
-        height: 500px;
-        /* The height is 400 pixels */
-        width: 80%;
-        /* The width is the width of the web page */
-      }
-    </style>
-   
-   <script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
+  <style type="text/css">
+    /* Set the size of the div element that contains the map */
+    #map {
+      height: 500px;
+      /* The height is 400 pixels */
+      width: 80%;
+      /* The width is the width of the web page */
+    }
+  </style>
+
+  <script>
     window.Promise ||
       document.write(
         '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
@@ -48,457 +51,457 @@
     };
   </script>
 
-<style>
+  <style>
+    #chart {
+      max-width: 650px;
+      margin: 35px auto;
+    }
 
-  #chart {
-    max-width: 650px;
-    margin: 35px auto;
-  }
+    .map-container {
+      overflow: hidden;
+      padding-bottom: 56.25%;
+      position: relative;
+      height: 0;
+    }
 
-  .map-container {
-    overflow: hidden;
-    padding-bottom: 56.25%;
-    position: relative;
-    height: 0;
-  }
+    .map-container iframe {
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
 
-  .map-container iframe {
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-  }
-
-  a:hover {
-    text-decoration: none;
-  }
-</style>
+    a:hover {
+      text-decoration: none;
+    }
+  </style>
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-  crossorigin="anonymous"></script>
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-  integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-  crossorigin="anonymous"></script>
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-  integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-  crossorigin="anonymous"></script>
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-    <script>
-      // Initialize and add the map
-      function initMap() {
-        let lat_user = "{{user_data['coordinate ']['LATITUDE']}}"
-        let lon_user = "{{user_data['coordinate ']['LONGITUDE']}}"
+  <script>
+    // Initialize and add the map
+    function initMap() {
+      let lat_user = "{{user_data['coordinate ']['LATITUDE']}}"
+      let lon_user = "{{user_data['coordinate ']['LONGITUDE']}}"
 
-        // myvar = '{{user_data|tojson}}';
-        // let parsed = JSON.parse(myvar);
-        // console.log(parsed)
+      // myvar = '{{user_data|tojson}}';
+      // let parsed = JSON.parse(myvar);
+      // console.log(parsed)
 
-        console.log("{{data}}")
+      console.log("{{data}}")
 
-        // The location of Uluru
-        const uluru = { lat: +lat_user, lng: +lon_user };
-        const uluru2 = { lat: +"{{data[0]['lat']}}", lng: +"{{data[0]['lon']}}" };
-        const uluru3 = { lat: +"{{data[1]['lat']}}", lng: +"{{data[1]['lon']}}" };
-        const uluru4 = { lat: +"{{data[2]['lat']}}", lng: +"{{data[2]['lon']}}" };
-        const uluru5 = { lat: +"{{data[3]['lat']}}", lng: +"{{data[3]['lon']}}" };
-        const uluru6 = { lat: +"{{data[4]['lat']}}", lng: +"{{data[4]['lon']}}" };
-        // The map, centered at Uluru
-        const map = new google.maps.Map(document.getElementById("map"), {
+      // The location of Uluru
+      const uluru = { lat: +lat_user, lng: +lon_user };
+      const uluru2 = { lat: +"{{data[0]['lat']}}", lng: +"{{data[0]['lon']}}" };
+      const uluru3 = { lat: +"{{data[1]['lat']}}", lng: +"{{data[1]['lon']}}" };
+      const uluru4 = { lat: +"{{data[2]['lat']}}", lng: +"{{data[2]['lon']}}" };
+      const uluru5 = { lat: +"{{data[3]['lat']}}", lng: +"{{data[3]['lon']}}" };
+      const uluru6 = { lat: +"{{data[4]['lat']}}", lng: +"{{data[4]['lon']}}" };
+      // The map, centered at Uluru
+      const map = new google.maps.Map(document.getElementById("map"), {
 
-          zoom: 21,
-          center: uluru,
+        zoom: 21,
+        center: uluru,
+      });
+
+      const contentString = "{{user_data['coordinate ']['WELL']}}"
+      // The marker, positioned at Uluru
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString,
+      });
+      const marker = new google.maps.Marker({
+        position: uluru,
+        title: "F19",
+        map: map,
+      });
+
+      // marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
+
+
+
+      marker.addListener("click", () => {
+        infowindow.open({
+          anchor: marker,
+          map,
+          shouldFocus: false,
         });
-
-        const contentString = "{{user_data['coordinate ']['WELL']}}"
-        // The marker, positioned at Uluru
-        const infowindow = new google.maps.InfoWindow({
-            content: contentString,
-        });
-        const marker = new google.maps.Marker({
-          position: uluru,
-          title: "F19",
-          map: map,
-        });
-
-        // marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png')
-
-        
-
-        marker.addListener("click", () => {
-            infowindow.open({
-                anchor: marker,
-                map,
-                shouldFocus: false,
-            });
-        });
+      });
 
 
 
-        /////////////2/////////////
-        const infowindow2 = new google.maps.InfoWindow({
-            content: "{{data[0]['label']}}",
-        });
+      /////////////2/////////////
+      const infowindow2 = new google.maps.InfoWindow({
+        content: "{{data[0]['label']}}",
+      });
 
-        const cityCircle = new google.maps.Circle({
-            strokeColor: "#0000FF",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#0000FF",
-            fillOpacity: 0.35,
-            map,
-            center: {lat: parseFloat("{{data[0]['lat']}}"), lng: parseFloat("{{data[0]['lon']}}")},
-            radius: 0.5,
-        });
+      const cityCircle = new google.maps.Circle({
+        strokeColor: "#0000FF",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#0000FF",
+        fillOpacity: 0.35,
+        map,
+        center: { lat: parseFloat("{{data[0]['lat']}}"), lng: parseFloat("{{data[0]['lon']}}") },
+        radius: 0.5,
+      });
 
-        google.maps.event.addListener(cityCircle, 'click', function(ev) {
-            infowindow2.setPosition(ev.latLng);
-            infowindow2.open(map);
-        });
-
-
-        ////////////3//////////
-        const infowindow3 = new google.maps.InfoWindow({
-            content: "{{data[1]['label']}}",
-        });
-
-        const cityCircle2 = new google.maps.Circle({
-            strokeColor: "#0000FF",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#0000FF",
-            fillOpacity: 0.35,
-            map,
-            center: {lat: parseFloat("{{data[1]['lat']}}"), lng: parseFloat("{{data[1]['lon']}}")},
-            radius: 0.5,
-        });
-
-        google.maps.event.addListener(cityCircle2, 'click', function(ev) {
-            infowindow3.setPosition(ev.latLng);
-            infowindow3.open(map);
-        });
+      google.maps.event.addListener(cityCircle, 'click', function (ev) {
+        infowindow2.setPosition(ev.latLng);
+        infowindow2.open(map);
+      });
 
 
+      ////////////3//////////
+      const infowindow3 = new google.maps.InfoWindow({
+        content: "{{data[1]['label']}}",
+      });
 
-        ///////////////4////////////
-        const infowindow4 = new google.maps.InfoWindow({
-            content: "{{data[2]['label']}}",
-        });
+      const cityCircle2 = new google.maps.Circle({
+        strokeColor: "#0000FF",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#0000FF",
+        fillOpacity: 0.35,
+        map,
+        center: { lat: parseFloat("{{data[1]['lat']}}"), lng: parseFloat("{{data[1]['lon']}}") },
+        radius: 0.5,
+      });
 
-        const cityCircle3 = new google.maps.Circle({
-            strokeColor: "#0000FF",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#0000FF",
-            fillOpacity: 0.35,
-            map,
-            center: {lat: parseFloat("{{data[2]['lat']}}"), lng: parseFloat("{{data[2]['lon']}}")},
-            radius: 0.5,
-        });
-
-        google.maps.event.addListener(cityCircle3, 'click', function(ev) {
-            infowindow4.setPosition(ev.latLng);
-            infowindow4.open(map);
-        });
-
-
-        //////////////5/////////
-        const infowindow5 = new google.maps.InfoWindow({
-            content: "{{data[3]['label']}}",
-        });
-
-        const cityCircle4 = new google.maps.Circle({
-            strokeColor: "#0000FF",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#0000FF",
-            fillOpacity: 0.35,
-            map,
-            center: {lat: parseFloat("{{data[3]['lat']}}"), lng: parseFloat("{{data[3]['lon']}}")},
-            radius: 0.5,
-        });
-
-        google.maps.event.addListener(cityCircle4, 'click', function(ev) {
-            infowindow5.setPosition(ev.latLng);
-            infowindow5.open(map);
-        });
+      google.maps.event.addListener(cityCircle2, 'click', function (ev) {
+        infowindow3.setPosition(ev.latLng);
+        infowindow3.open(map);
+      });
 
 
-        //////////6////////////
-        const infowindow6 = new google.maps.InfoWindow({
-            content: "{{data[4]['label']}}",
-        });
 
-        const cityCircle5 = new google.maps.Circle({
-            strokeColor: "#0000FF",
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: "#0000FF",
-            fillOpacity: 0.35,
-            map,
-            center: {lat: parseFloat("{{data[4]['lat']}}"), lng: parseFloat("{{data[4]['lon']}}")},
-            radius: 0.5,
-        });
+      ///////////////4////////////
+      const infowindow4 = new google.maps.InfoWindow({
+        content: "{{data[2]['label']}}",
+      });
 
-        google.maps.event.addListener(cityCircle5, 'click', function(ev) {
-            infowindow6.setPosition(ev.latLng);
-            infowindow6.open(map);
-        });
-      }
-    </script>
-  </head>
-  <body>
-    <!-- <h3>My Google Maps Demo</h3> -->
-    <!--The div element for the map -->
-    <br><br>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <!-- aaaaaaaaaaaaaaa -->
-                <div id="map"></div>
-                
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                      <!--table-->
-                      <table class="table">
-                        <thead class="table-dark">
-                          <tr>
-                            <th scope="col">No</th>
-                            <th scope="col">Field Name</th>
-                            <th scope="col">Nearest Well</th>
-                            <th scope="col">Well Distance</th>
-                            <th scope="col">Condition</th>
-                            <th></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>VOLVE</td>
-                            <td>{{data[0]['label']}}</td>
-                            <td>{{"{:,.5f}".format(data[0]['dist'])}}</td>
-                            <td>
-                              <div class="small-4 medium-4 large-4 columns text-center">
-                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
-                                    viewBox="0 0 16 16">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                    <path
-                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                  </svg>
-                                </a>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>VOLVE</td>
-                            <td>{{data[1]['label']}}</td>
-                            <td>{{"{:,.5f}".format(data[1]['dist'])}}</td>
-                            <td>
-                              <div class="small-4 medium-4 large-4 columns text-center">
-                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
-                                    viewBox="0 0 16 16">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                    <path
-                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                  </svg>
-                                </a>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>VOLVE</td>
-                            <td>{{data[2]['label']}}</td>
-                            <td>{{"{:,.5f}".format(data[2]['dist'])}}</td>
-                            <td>
-                              <div class="small-4 medium-4 large-4 columns text-center">
-                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
-                                    viewBox="0 0 16 16">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                    <path
-                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                  </svg>
-                                </a>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">4</th>
-                            <td>VOLVE</td>
-                            <td>{{data[3]['label']}}</td>
-                            <td>{{"{:,.5f}".format(data[3]['dist'])}}</td>
-                            <td>
-                              <div class="small-4 medium-4 large-4 columns text-center">
-                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
-                                    viewBox="0 0 16 16">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                    <path
-                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                  </svg>
-                                </a>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <th scope="row">5</th>
-                            <td>VOLVE</td>
-                            <td>{{data[4]['label']}}</td>
-                            <td>{{"{:,.5f}".format(data[4]['dist'])}}</td>
-                            <td>
-                              <div class="small-4 medium-4 large-4 columns text-center">
-                                <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
-                                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black" class="bi bi-eye-fill"
-                                    viewBox="0 0 16 16">
-                                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                                    <path
-                                      d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                                  </svg>
-                                </a>
-                                <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-            
-            
-                      <!--run button-->
-                      <div align="right">
-                        <button type="button" class="btn btn-warning btn pull-right" data-toggle="modal"
-                        data-target="#ModalEvaluation">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill"
-                          viewBox="0 0 16 16">
-                          <path
-                            d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
-                        </svg>Evaluate</button>
-                      </div>
-                      
-            
-                    </div>
-                  </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="modal fade" id="DescLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <!-- modal konten -->
-        <div class="modal-content">
-          <div class="modal-body">
-            <iframe width="100%" height="500" src="{{ url_for('log')}}"></iframe>
-          </div>
-        </div>
+      const cityCircle3 = new google.maps.Circle({
+        strokeColor: "#0000FF",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#0000FF",
+        fillOpacity: 0.35,
+        map,
+        center: { lat: parseFloat("{{data[2]['lat']}}"), lng: parseFloat("{{data[2]['lon']}}") },
+        radius: 0.5,
+      });
+
+      google.maps.event.addListener(cityCircle3, 'click', function (ev) {
+        infowindow4.setPosition(ev.latLng);
+        infowindow4.open(map);
+      });
+
+
+      //////////////5/////////
+      const infowindow5 = new google.maps.InfoWindow({
+        content: "{{data[3]['label']}}",
+      });
+
+      const cityCircle4 = new google.maps.Circle({
+        strokeColor: "#0000FF",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#0000FF",
+        fillOpacity: 0.35,
+        map,
+        center: { lat: parseFloat("{{data[3]['lat']}}"), lng: parseFloat("{{data[3]['lon']}}") },
+        radius: 0.5,
+      });
+
+      google.maps.event.addListener(cityCircle4, 'click', function (ev) {
+        infowindow5.setPosition(ev.latLng);
+        infowindow5.open(map);
+      });
+
+
+      //////////6////////////
+      const infowindow6 = new google.maps.InfoWindow({
+        content: "{{data[4]['label']}}",
+      });
+
+      const cityCircle5 = new google.maps.Circle({
+        strokeColor: "#0000FF",
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: "#0000FF",
+        fillOpacity: 0.35,
+        map,
+        center: { lat: parseFloat("{{data[4]['lat']}}"), lng: parseFloat("{{data[4]['lon']}}") },
+        radius: 0.5,
+      });
+
+      google.maps.event.addListener(cityCircle5, 'click', function (ev) {
+        infowindow6.setPosition(ev.latLng);
+        infowindow6.open(map);
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <!-- <h3>My Google Maps Demo</h3> -->
+  <!--The div element for the map -->
+  <br><br>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <!-- aaaaaaaaaaaaaaa -->
+        <div id="map"></div>
+
       </div>
-    </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <!--table-->
+            <table class="table">
+              <thead class="table-dark">
+                <tr>
+                  <th scope="col">No</th>
+                  <th scope="col">Field Name</th>
+                  <th scope="col">Nearest Well</th>
+                  <th scope="col">Well Distance</th>
+                  <th scope="col">Condition</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>VOLVE</td>
+                  <td>{{data[0]['label']}}</td>
+                  <td>{{"{:,.5f}".format(data[0]['dist'])}}</td>
+                  <td>
+                    <div class="small-4 medium-4 large-4 columns text-center">
+                      <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                          class="bi bi-eye-fill" viewBox="0 0 16 16">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </a>
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+                  <td>VOLVE</td>
+                  <td>{{data[1]['label']}}</td>
+                  <td>{{"{:,.5f}".format(data[1]['dist'])}}</td>
+                  <td>
+                    <div class="small-4 medium-4 large-4 columns text-center">
+                      <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                          class="bi bi-eye-fill" viewBox="0 0 16 16">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </a>
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>VOLVE</td>
+                  <td>{{data[2]['label']}}</td>
+                  <td>{{"{:,.5f}".format(data[2]['dist'])}}</td>
+                  <td>
+                    <div class="small-4 medium-4 large-4 columns text-center">
+                      <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                          class="bi bi-eye-fill" viewBox="0 0 16 16">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </a>
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">4</th>
+                  <td>VOLVE</td>
+                  <td>{{data[3]['label']}}</td>
+                  <td>{{"{:,.5f}".format(data[3]['dist'])}}</td>
+                  <td>
+                    <div class="small-4 medium-4 large-4 columns text-center">
+                      <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                          class="bi bi-eye-fill" viewBox="0 0 16 16">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </a>
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">5</th>
+                  <td>VOLVE</td>
+                  <td>{{data[4]['label']}}</td>
+                  <td>{{"{:,.5f}".format(data[4]['dist'])}}</td>
+                  <td>
+                    <div class="small-4 medium-4 large-4 columns text-center">
+                      <a data-toggle="modal" data-target="#DescLog" id="InputWellName">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="black"
+                          class="bi bi-eye-fill" viewBox="0 0 16 16">
+                          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                          <path
+                            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+                        </svg>
+                      </a>
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheck" checked>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-    <div class="modal fade" id="ModalEvaluation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-      aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
-        <!-- modal konten -->
-        <div class="modal-content">
-          <!-- charts -->
-          <div class="modal-body">
 
-            <div id="chart"></div>
-
-            <script>
-              // VSH    : 98 %
-              // PHIE   : 98 %
-              // SW     : 97 %
-              // PERM   : 92 %
-              // FACIES : 83 %
-              // HC     : 97 %
-
-              // VSH : 0,5  
-              // PHIE : 0,6
-              // SW : 0,6
-              // PERM : 0,7
-              // FACIES : 1,5
-              // HC : 0,2 
-
-              var options = {
-                series: [{
-                  name: 'score (%)',
-                  data: [98, 98, 97, 92, 83, 97]
-                }, {
-                  name: 'time (s)',
-                  data: [0.5, 0.6, 0.6, 0.7, 1.5, 0.2]
-                }],
-                chart: {
-                  type: 'bar',
-                  height: 350
-                },
-                plotOptions: {
-                  bar: {
-                    horizontal: true,
-                    dataLabels: {
-                      position: 'top',
-                    },
-                  }
-                },
-                dataLabels: {
-                  enabled: true,
-                  offsetX: -6,
-                  style: {
-                    fontSize: '12px',
-                    colors: ['#fff']
-                  }
-                },
-                stroke: {
-                  show: true,
-                  width: 0.2,
-                  colors: ['#fff']
-                },
-                tooltip: {
-                  shared: true,
-                  intersect: false
-                },
-                xaxis: {
-                  categories: ["VSH", "PHIE", "SW", "PERM", "FACIES", "HC",],
-                },
-              };
-
-              var chart = new ApexCharts(document.querySelector("#chart"), options);
-              chart.render();
-
-            </script>
-            <div class="row">
-              <div class="col-md-4 col-xs-offset-4" style="margin-top: -40px;">
-                <a>Amount of data:
-                  <input type="text" class="form-control mb-3" id="InputNumData" placeholder="min: 1500"></a>
-                <a href="{{ url_for('vsh_page')}}" type="button" class="btn btn-warning btn-lg btn-block">Click for
-                  details</a>
-              </div>
-
+            <!--run button-->
+            <div align="right">
+              <button type="button" class="btn btn-warning btn pull-right" data-toggle="modal"
+                data-target="#ModalEvaluation">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                  class="bi bi-play-fill" viewBox="0 0 16 16">
+                  <path
+                    d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+                </svg>Evaluate</button>
             </div>
+
+
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-  
+  <div class="modal fade" id="DescLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <!-- modal konten -->
+      <div class="modal-content">
+        <div class="modal-body">
+          <iframe width="100%" height="500" src="{{ url_for('log')}}"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
 
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF0AFZrT4iYWDmT5FAyoJfnO_C1bz4hgw&callback=initMap&libraries=&v=weekly"
-      async
-    ></script>
+  <div class="modal fade" id="ModalEvaluation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <!-- modal konten -->
+      <div class="modal-content">
+        <!-- charts -->
+        <div class="modal-body">
 
-  </body>
+          <div id="chart"></div>
+
+          <script>
+            // VSH    : 98 %
+            // PHIE   : 98 %
+            // SW     : 97 %
+            // PERM   : 92 %
+            // FACIES : 83 %
+            // HC     : 97 %
+
+            // VSH : 0,5  
+            // PHIE : 0,6
+            // SW : 0,6
+            // PERM : 0,7
+            // FACIES : 1,5
+            // HC : 0,2 
+
+            var options = {
+              series: [{
+                name: 'score (%)',
+                data: [98, 98, 97, 92, 83, 97]
+              }, {
+                name: 'time (s)',
+                data: [0.5, 0.6, 0.6, 0.7, 1.5, 0.2]
+              }],
+              chart: {
+                type: 'bar',
+                height: 350
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: true,
+                  dataLabels: {
+                    position: 'top',
+                  },
+                }
+              },
+              dataLabels: {
+                enabled: true,
+                offsetX: -6,
+                style: {
+                  fontSize: '12px',
+                  colors: ['#fff']
+                }
+              },
+              stroke: {
+                show: true,
+                width: 0.2,
+                colors: ['#fff']
+              },
+              tooltip: {
+                shared: true,
+                intersect: false
+              },
+              xaxis: {
+                categories: ["VSH", "PHIE", "SW", "PERM", "FACIES", "HC",],
+              },
+            };
+
+            var chart = new ApexCharts(document.querySelector("#chart"), options);
+            chart.render();
+
+          </script>
+          <div class="row">
+            <div class="col-md-4 col-xs-offset-4" style="margin-top: -40px;">
+              <a>Amount of data:
+                <input type="text" class="form-control mb-3" id="InputNumData" placeholder="min: 1500"></a>
+              <a href="{{ url_for('vsh_page')}}" type="button" class="btn btn-warning btn-lg btn-block">Click for
+                details</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+
+  <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF0AFZrT4iYWDmT5FAyoJfnO_C1bz4hgw&callback=initMap&libraries=&v=weekly"
+    async></script>
+
+</body>
+
 </html>
