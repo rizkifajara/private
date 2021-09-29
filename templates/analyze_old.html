@@ -1,5 +1,3 @@
-
-
 {%extends "layout.html"%}
 {%block content%}
 <style type="text/css">
@@ -263,6 +261,7 @@
     // The location of Uluru
     const uluru = { lat: +lat_user, lng: +lon_user };
     const uluru2 = { lat: +"{{data[0]['lat']}}", lng: +"{{data[0]['lon']}}" };
+    const traj = { lat: 58.44158, lng: 1.88751}
     const uluru3 = { lat: +"{{data[1]['lat']}}", lng: +"{{data[1]['lon']}}" };
     const uluru4 = { lat: +"{{data[2]['lat']}}", lng: +"{{data[2]['lon']}}" };
     const uluru5 = { lat: +"{{data[3]['lat']}}", lng: +"{{data[3]['lon']}}" };
@@ -273,6 +272,21 @@
       zoom: 21,
       center: uluru,
     });
+
+    const flightPlanCoordinates = [
+      uluru2,
+      traj,
+    ]
+
+    const flightPath = new google.maps.Polyline({
+      path: flightPlanCoordinates,
+      geodesic: true,
+      strokeColor: "#FF0000",
+      strokeOpacity: 1.0,
+      strokeWeight: 2,
+    });
+
+    flightPath.setMap(map);
 
     const contentString = "{{user_data['coordinate ']['WELL']}}"
     // The marker, positioned at Uluru
@@ -403,6 +417,27 @@
     google.maps.event.addListener(cityCircle5, 'click', function (ev) {
       infowindow6.setPosition(ev.latLng);
       infowindow6.open(map);
+    });
+
+    ////////////traj./////////////
+    const infowindow7 = new google.maps.InfoWindow({
+      content: "Trajectory",
+    });
+
+    const cityCircle6 = new google.maps.Circle({
+      strokeColor: "#FFFF00",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FFFF00",
+      fillOpacity: 0.35,
+      map,
+      center: { lat: 58.44158, lng: 1.88751 },
+      radius: 0.5,
+    });
+
+    google.maps.event.addListener(cityCircle6, 'click', function (ev) {
+      infowindow7.setPosition(ev.latLng);
+      infowindow7.open(map);
     });
   }
 
