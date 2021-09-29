@@ -135,7 +135,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['ILD'] is defined %}
+                      {% if dataa['data'][0]['ILD'] is defined or dataa['data'][0]['RT'] is defined or dataa['data'][0]['LLD'] is defined or dataa['data'][0]['HLLD'] is defined or dataa['data'][0]['IDFL'] is defined %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -149,7 +149,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['NPHI'] is defined %}
+                      {% if dataa['data'][0]['NPHI'] is defined or dataa['data'][0]['CNC'] is defined or dataa['data'][0]['TNPH'] is defined or dataa['data'][0]['TPHC'] is defined %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -163,7 +163,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['RHOB'] is defined %}
+                      {% if dataa['data'][0]['RHOB'] is defined or dataa['data'][0]['RHOZ'] is defined or dataa['data'][0]['ZDEN'] is defined or dataa['data'][0]['ZDNC'] is defined or dataa['data'][0]['HDEN'] is defined %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -177,7 +177,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['SW'] is defined %}
+                      {% if dataa['data'][0]['SW'] is defined or dataa['data'][0]['SWE']%}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -191,7 +191,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['VSH'] is defined %}
+                      {% if dataa['data'][0]['VSH'] is defined or dataa['data'][0]['Vshale'] is defined %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>

@@ -5,7 +5,7 @@ import pandas as pd
 # from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
-from pymongo import MongoClient
+# from pymongo import MongoClient
 import json
 import os
 from bson.objectid import ObjectId
@@ -38,6 +38,7 @@ well_name_list = []
 @app.route("/")
 def viewForm():
     client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    # client = pymongo.MongoClient("mongodb://johndoe:johndoe@cluster0-shard-00-00.jyb2o.mongodb.net:27017,cluster0-shard-00-01.jyb2o.mongodb.net:27017,cluster0-shard-00-02.jyb2o.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-94tnc1-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client.test
     database_name='hackuna_matata123'
     student_db=client[database_name]
@@ -140,10 +141,34 @@ def upload_form():
         source['data'].append(dict_df)
     
     # print(source)
+
+    #--------- update in /postform
+    true_col = ["GR", "ILD", "RHOB", "NPHI", "VSH", "PHIE", "SW", "PERM", "FACIES", "HC", "WELL"]
+    auto_mnemonic = {
+        "RHOZ": "RHOB", "ZDEN": "RHOB", "ZDNC": "RHOB", "HDEN": "RHOB",
+        "Vshale": "VSH",
+        "CNC": "NPHI", "TNPH":"NPHI", "TPHC":"NPHI",
+        "RT":"ILD", "LLD": "ILD", "HLLD": "ILD", "IDFL": "ILD",
+        "SWE": "SW"
+    }
+
+    dict_df = {}
+    for i in range(len(df)):
+        for col in df.columns:
+            new_col = auto_mnemonic.get(col, col)
+            if col not in true_col:
+                df = df.rename(columns={col: new_col})
+
+            dict_df[new_col] = df[new_col].iloc[i]
+        
+        dict_df["WELL"] = well_name
+        source["data"].append(dict_df)
+#----------
     
     collection.insert_one(source)
     
-    return render_template("redirect_form.html")
+    # return render_template("redirect_form.html")
+    return json.dumps("Data successfully uploaded")
 
 
 def distance(lat1, lon1, lat2, lon2):
