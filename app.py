@@ -54,16 +54,23 @@ def viewForm():
 
 @app.route("/delete/<id>")
 def delete_well(id):
-    client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client.test
-    database_name='hackuna_matata123'
-    student_db=client[database_name]
-    collection_name='user'
-    collection=student_db[collection_name]
 
-    collection.delete_one({'_id': ObjectId(id)})
+    try:
 
-    return json.dumps("Data successfully removed")
+        client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        db = client.test
+        database_name='hackuna_matata123'
+        student_db=client[database_name]
+        collection_name='user'
+        collection=student_db[collection_name]
+
+        collection.delete_one({'_id': ObjectId(id)})
+
+        return json.dumps("Data successfully removed")
+
+    except Exception as e:
+
+        return(str(e))
 
 @app.route("/page-2")
 def analyze_page():
@@ -95,80 +102,96 @@ def circle_page():
 @app.route("/postform", methods = ["POST"])
 def upload_form():
     
-    well_name = request.form.get("well_name")
-    field_name = request.form.get("field_name")
-    lat = request.form.get("form_lat")
-    lon = request.form.get("form_lon")
-    f = request.files['form_file']
+    try :
+        well_name = request.form.get("well_name")
+        field_name = request.form.get("field_name")
+        lat = request.form.get("form_lat")
+        lon = request.form.get("form_lon")
+        f = request.files['form_file']
 
+        if f.filename == '':
+            return "Belum memilih file"
 
-    client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client.test
+        if lat== '' or lan == '':
+            return "Belum mengisi lat lon"
 
-    # return db
+        if well_name == '':
+            return "Belum mengisi well name"
 
-    open('tmp/' + f.filename, 'wb').write(f.read())
-    
-    database_name='hackuna_matata123'
-    student_db=client[database_name]
+        if field_name == '':
+            return "Belum mengisi field name"
 
+        client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        db = client.test
 
-    collection_name='user'
-    collection=student_db[collection_name]
+        # return db
 
-
-    df = pd.read_csv("tmp/"+f.filename)
-    
-    source = {
-        "filename":f.filename,
-          "coordinate ": {"BAND":None, "EASTING":None,
-                          "LATITUDE": lat, "LONGITUDE": lon,
-                          "NORTHING": None, "WELL":well_name,
-                          "ZONE": None},
-          "data":[]
-
-    }
-    
-          
-    
-    for i in range(len(df)):
-        dict_df = {}
+        open('tmp/' + f.filename, 'wb').write(f.read())
         
-        for col in df.columns:
-            dict_df['WELL']=well_name
-            dict_df[col]=df[col].iloc[i]
+        database_name='hackuna_matata123'
+        student_db=client[database_name]
+
+
+        collection_name='user'
+        collection=student_db[collection_name]
+
+
+        df = pd.read_csv("tmp/"+f.filename)
+        
+        source = {
+            "filename":f.filename,
+            "coordinate ": {"BAND":None, "EASTING":None,
+                            "LATITUDE": lat, "LONGITUDE": lon,
+                            "NORTHING": None, "WELL":well_name,
+                            "ZONE": None},
+            "data":[]
+
+        }
+        
             
-        source['data'].append(dict_df)
-    
-    # print(source)
-
-    #--------- update in /postform
-    true_col = ["GR", "ILD", "RHOB", "NPHI", "VSH", "PHIE", "SW", "PERM", "FACIES", "HC", "WELL"]
-    auto_mnemonic = {
-        "RHOZ": "RHOB", "ZDEN": "RHOB", "ZDNC": "RHOB", "HDEN": "RHOB",
-        "Vshale": "VSH",
-        "CNC": "NPHI", "TNPH":"NPHI", "TPHC":"NPHI",
-        "RT":"ILD", "LLD": "ILD", "HLLD": "ILD", "IDFL": "ILD",
-        "SWE": "SW"
-    }
-
-    dict_df = {}
-    for i in range(len(df)):
-        for col in df.columns:
-            new_col = auto_mnemonic.get(col, col)
-            if col not in true_col:
-                df = df.rename(columns={col: new_col})
-
-            dict_df[new_col] = df[new_col].iloc[i]
         
-        dict_df["WELL"] = well_name
-        source["data"].append(dict_df)
-#----------
+        for i in range(len(df)):
+            dict_df = {}
+            
+            for col in df.columns:
+                dict_df['WELL']=well_name
+                dict_df[col]=df[col].iloc[i]
+                
+            source['data'].append(dict_df)
+        
+        # print(source)
+
+        #--------- update in /postform
+        true_col = ["GR", "ILD", "RHOB", "NPHI", "VSH", "PHIE", "SW", "PERM", "FACIES", "HC", "WELL"]
+        auto_mnemonic = {
+            "RHOZ": "RHOB", "ZDEN": "RHOB", "ZDNC": "RHOB", "HDEN": "RHOB",
+            "Vshale": "VSH",
+            "CNC": "NPHI", "TNPH":"NPHI", "TPHC":"NPHI",
+            "RT":"ILD", "LLD": "ILD", "HLLD": "ILD", "IDFL": "ILD",
+            "SWE": "SW"
+        }
+
+        dict_df = {}
+        for i in range(len(df)):
+            for col in df.columns:
+                new_col = auto_mnemonic.get(col, col)
+                if col not in true_col:
+                    df = df.rename(columns={col: new_col})
+
+                dict_df[new_col] = df[new_col].iloc[i]
+            
+            dict_df["WELL"] = well_name
+            source["data"].append(dict_df)
+    #----------
+        
+        collection.insert_one(source)
+        
+        # return render_template("redirect_form.html")
+        return json.dumps("Data successfully uploaded")
     
-    collection.insert_one(source)
-    
-    # return render_template("redirect_form.html")
-    return json.dumps("Data successfully uploaded")
+    except Exception as e:
+
+        return(str(e))
 
 
 def distance(lat1, lon1, lat2, lon2):
