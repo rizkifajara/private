@@ -1,61 +1,105 @@
-{%extends "layout.html"%}
-{%block content%}
-<div>
-
-  <br><br>
+{%extends "layout.html"%} {%block content%}
+<div class="form-container">
+  <br /><br />
   <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-md-4">
-        <div class="card" style="width: 30rem;">
+        <div class="card card-form" style="width: 30rem">
           <div class="card-body">
-            <form enctype="multipart/form-data" action="{{ url_for('upload_form')}}" method="POST">
+            <form id="needs-validation"
+            enctype="multipart/form-data"
+            action="{{ url_for('upload_form')}}"
+            method="POST"
+            novalidate>
               <div class="form-group">
                 <label for="exampleInputEmail1">Field Name</label>
-                <input name="field_name" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Enter Field Name">
+                <input
+                  name="field_name"
+                  type="text"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Field Name"
+                  required
+                />
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Well Name</label>
-                <input name="well_name" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Enter Well Name">
+                <input
+                  name="well_name"
+                  type="text"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter Well Name"
+                  required
+                />
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <label for="exampleInputEmail1">Latitude</label>
-                  <input name="form_lat" type="text" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Enter Latitude">
+                  <input
+                    name="form_lat"
+                    type="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter Latitude"
+                    required
+                  />
                 </div>
                 <div class="col-md-6">
                   <label for="exampleInputEmail1">Longitude</label>
-                  <input name="form_lon" ftype="text" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Enter Longitude">
+                  <input
+                    name="form_lon"
+                    ftype="text"
+                    class="form-control"
+                    id="exampleInputEmail1"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter Longitude"
+                    required
+                  />
                 </div>
               </div>
-              <br>
+              <br />
               <!-- <div class="custom-file">
                       <input name="form_file" type="file" class="custom-file-input" id="validatedCustomFile">
                       <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
                       <div class="invalid-feedback">Example invalid custom file feedback</div>
                     </div> -->
               <div class="form-group">
-                <label for="exampleFormControlFile1">Example file input</label>
-                <input name="form_file" type="file" class="form-control-file" id="exampleFormControlFile1">
+                <label for="exampleFormControlFile1"
+                  >Example file input</label
+                >
+                <input
+                  name="form_file"
+                  type="file"
+                  class="form-control-file"
+                  id="exampleFormControlFile1"
+                  accept=".csv"
+                  required
+                />
+                <div class="show-file-details">
+                </div>
+
+                <div class="invalid-feedback">
+                  Please provide a valid File
+                </div>
               </div>
-              <br><br><br>
+              <br /><br /><br />
               <div class="float-right">
-                <input type="submit" class="btn btn-primary">
+                <input type="submit" class="btn btn-primary" />
               </div>
             </form>
-
           </div>
         </div>
       </div>
 
       <div class="col-md-6">
-        <div class="card">
+        <div class="card card-list-field">
           <div class="card-body">
-            <table class="table">
-              <thead class="table-dark">
+            <table class="table table-list-field">
+              <thead>
                 <tr>
                   <th scope="col">No</th>
                   <th scope="col">Field Name</th>
@@ -65,7 +109,6 @@
                 </tr>
               </thead>
               <tbody>
-
                 {% for data in user_data %}
 
                 <tr>
@@ -73,33 +116,57 @@
                   <td>VOLVE</td>
                   <td>{{data['coordinate ']['WELL']}}</td>
                   <td>
-                    <button type="button" class="btn btn-warning" data-toggle="modal"
-                      data-target="#exampleModal{{data['_id']}}">Details</button>
-                    <a href="{{ url_for('well_table', id_well=data['_id'])}}" class="btn btn-primary">Analyze</a>
-                    <button data-toggle="modal" data-target="#ResultLog" class="btn btn-light" type="button"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" fill="black" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
-                        <path
-                          d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
-                      </svg> </button>
-                    <a href="{{ url_for('delete_well', id=data['_id'])}}" class="btn btn-danger">Delete</a>
+                    <button
+                      data-toggle="modal"
+                      data-target="#exampleModal{{data['_id']}}"
+                      style="background-color: white; border: none"
+                    >
+                      <img src="/static/detail.svg" alt="" />
+                    </button>
+
+                    <a
+                      href="{{ url_for('well_table', id_well=data['_id'])}}"
+                    >
+                      <img src="/static/analyze.svg" alt=""
+                    /></a>
+                    <button
+                      data-toggle="modal"
+                      data-target="#ResultLog"
+                      class="btn btn-light"
+                      type="button"
+                    >
+                      <img src="/static/view.svg" alt="">
+                    </button>
+                    <a
+                      href="{{ url_for('delete_well', id=data['_id'])}}"
+                      class="btn "
+                      ><img src="/static/delete.svg" alt=""></a
+                    >
+                  </td>
                 </tr>
 
                 {% endfor %}
-
               </tbody>
             </table>
           </div>
         </div>
 
         {% for dataa in user_data %}
-        <div class="modal fade" id="exampleModal{{dataa['_id']}}" tabindex="-1" role="dialog"
-          aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div
+          class="modal fade"
+          id="exampleModal{{dataa['_id']}}"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
           <div class="modal-dialog modal-lg" role="document">
             <!-- modal konten -->
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Well Data</h5>
+                <h5 class="modal-title" id="exampleModalLabel">
+                  Well Data
+                </h5>
               </div>
               <div class="modal-body">
                 <!-- tabel data sumur -->
@@ -123,147 +190,195 @@
                     <tbody>
                       {% if dataa['data'][0]['GR'] is defined %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %}
-
-                      {% if dataa['data'][0]['ILD'] is defined %}
+                      {% endif %} {% if dataa['data'][0]['ILD'] is defined
+                      %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %}
-
-                      {% if dataa['data'][0]['NPHI'] is defined %}
+                      {% endif %} {% if dataa['data'][0]['NPHI'] is
+                      defined %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %}
-
-                      {% if dataa['data'][0]['RHOB'] is defined %}
+                      {% endif %} {% if dataa['data'][0]['RHOB'] is
+                      defined %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %}
-
-                      {% if dataa['data'][0]['SW'] is defined %}
+                      {% endif %} {% if dataa['data'][0]['SW'] is defined
+                      %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %}
-
-                      {% if dataa['data'][0]['VSH'] is defined %}
+                      {% endif %} {% if dataa['data'][0]['VSH'] is defined
+                      %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %}
-
-                      {% if dataa['data'][0]['PHIE'] is defined %}
+                      {% endif %} {% if dataa['data'][0]['PHIE'] is
+                      defined %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %}
-
-                      {% if dataa['data'][0]['PERM'] is defined %}
+                      {% endif %} {% if dataa['data'][0]['PERM'] is
+                      defined %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %}
-
-                      {% if dataa['data'][0]['FACIES'] is defined %}
+                      {% endif %} {% if dataa['data'][0]['FACIES'] is
+                      defined %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %}
-
-                      {% if dataa['data'][0]['HC'] is defined %}
+                      {% endif %} {% if dataa['data'][0]['HC'] is defined
+                      %}
                       <td>
-                        <button type="button" class="btn btn-success btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-success btn-sm"
+                        >
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button type="button" class="btn btn-danger btn-sm">
+                        <button
+                          type="button"
+                          class="btn btn-danger btn-sm"
+                        >
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
                       {% endif %}
-
-
                     </tbody>
-
                   </table>
                 </div>
                 <!-- tabel data sumur -->
@@ -275,45 +390,118 @@
 
         <!-- modal result -->
 
-        <div class="modal fade" id="ResultLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-          aria-hidden="true">
+        <div
+          class="modal fade"
+          id="ResultLog"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
           <div class="modal-dialog modal-lg" role="document">
             <!-- modal konten -->
             <div class="modal-content">
               <div class="modal-body">
-                <iframe src="{{ url_for('result_page')}}" style="border: none;" width="100%" height="450"></iframe>
+                <iframe
+                  src="{{ url_for('result_page')}}"
+                  style="border: none"
+                  width="100%"
+                  height="450"
+                ></iframe>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>
         </div>
-
       </div>
-
     </div>
   </div>
-
   <script>
-
     $(document).ready(function () {
-
-      $('#btn_result').click(function () {
+      $("#btn_result").click(function () {
         $.ajax({
-          url: '/result',
+          url: "/result",
           type: "post",
           data: {},
           success: function (data) {
             $("#ResultLog .modal-body").html(data);
             $("#ResultLog").modal("show");
-          }
-        })
+          },
+        });
       });
-
     });
   </script>
 
+
+<!-- For Validate -->
+<script>
+  (function () {
+    "use strict";
+    window.addEventListener(
+      "load",
+      function () {
+        var form = document.getElementById("needs-validation");
+        form.addEventListener(
+          "submit",
+          function (event) {
+            if (form.checkValidity() == false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add("was-validated");
+          },
+          false
+        );
+      },
+      false
+    );
+  })();
+</script>
+
+<!-- for file validation -->
+<script>
+  $(document).ready(function (e) {
+    document
+      .getElementById("exampleFormControlFile1")
+      .addEventListener("change", checkFile, false);
+
+    function checkFile(e) {
+      var file_list = e.target.files;
+
+      for (var i = 0, file; (file = file_list[i]); i++) {
+        var sFileName = file.name;
+
+        var sFileExtension = sFileName.split(".")[1].toUpperCase();
+        var iFileSize = file.size;
+        var iConvert = (file.size / 5242880).toFixed(2);
+
+
+        if (
+          !(
+            sFileExtension === "CSV" 
+         
+          ) ||
+          iFileSize > 5242880
+        ) {
+          txt = "File type : " + sFileExtension + "<br/>";
+       
+          txt +=
+            "Only suport CSV file up to 5 MB.\n\n";
+          $(".show-file-details").html(txt);
+          // alert(txt);
+        }
+      }
+    }
+  });
+</script>
 </div>
 
 {%endblock%}

@@ -1,11 +1,6 @@
-{%extends "layout.html"%}
-{%block content%}
-<script type="text/javascript" src={{cdn_js | safe}}></script>
+{%extends "layout.html"%} {%block content%}
+<script type="text/javascript" src="{{cdn_js" | safe}}></script>
 
-<div>
-  {{script | safe}}
-  {{div | safe}}
-  
-</div>
+<div>{{script | safe}} {{div | safe}}</div>
 
 {%endblock%}

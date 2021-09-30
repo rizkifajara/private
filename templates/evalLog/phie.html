@@ -1,29 +1,49 @@
-{%extends "layout.html"%}
-{%block content%}
+{%extends "layout.html"%} {%block content%}
 <!-- <link rel="stylesheet" href=""> -->
-<script type="text/javascript" src={{cdn_js | safe}}></script>
+<script type="text/javascript" src="{{cdn_js" | safe}}></script>
 
-<div style="text-align: center;">
-  <a href="{{ url_for('analyze_page')}}"><button class="btn btn-danger m-3">Back</button></a>
-  <a href="{{ url_for('vsh_page')}}"><button class="btn btn-warning m-3">VSH</button></a>
-  <a href="{{ url_for('phie_page')}}"><button class="btn btn-warning m-3 active">PHIE</button></a>
-  <a href="{{ url_for('sw_page')}}"><button class="btn btn-warning m-3">SW</button></a>
-  <a href="{{ url_for('perm_page')}}"><button class="btn btn-warning m-3">PERM</button></a>
-  <a href="{{ url_for('facies_page')}}"><button class="btn btn-warning m-3">FACIES</button></a>
-  <a href="{{ url_for('hc_page')}}"><button class="btn btn-warning m-3">HC</button></a>
+<div style="text-align: center">
+  <a href="{{ url_for('analyze_page')}}"
+    ><button class="btn btn-danger m-3">Back</button></a
+  >
+  <a href="{{ url_for('vsh_page')}}"
+    ><button class="btn btn-warning m-3">VSH</button></a
+  >
+  <a href="{{ url_for('phie_page')}}"
+    ><button class="btn btn-warning m-3 active">PHIE</button></a
+  >
+  <a href="{{ url_for('sw_page')}}"
+    ><button class="btn btn-warning m-3">SW</button></a
+  >
+  <a href="{{ url_for('perm_page')}}"
+    ><button class="btn btn-warning m-3">PERM</button></a
+  >
+  <a href="{{ url_for('facies_page')}}"
+    ><button class="btn btn-warning m-3">FACIES</button></a
+  >
+  <a href="{{ url_for('hc_page')}}"
+    ><button class="btn btn-warning m-3">HC</button></a
+  >
 </div>
 
-<div class="col-xs-offset-2">
-  {{script | safe}}
-  {{div | safe}}
-</div>
+<div class="col-xs-offset-2">{{script | safe}} {{div | safe}}</div>
 
 <div class="col-6 col-xs-offset-3">
-  <a href="{{ url_for('viewForm')}}"><button class="btn btn-warning btn-lg btn-block mt-5"><svg
-        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill"
-        viewBox="0 0 16 16">
+  <a href="{{ url_for('viewForm')}}"
+    ><button class="btn btn-warning btn-lg btn-block mt-5">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-play-fill"
+        viewBox="0 0 16 16"
+      >
         <path
-          d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
-      </svg>Run Model</button></a>
+          d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
+        /></svg
+      >Run Model
+    </button></a
+  >
 </div>
 {%endblock%}
