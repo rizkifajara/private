@@ -4,8 +4,8 @@ from flask_pymongo import pymongo
 import pandas as pd
 # from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
-from werkzeug.datastructures import FileStorage
-from pymongo import MongoClient
+from werkzeug.datastructures import  FileStorage
+# from pymongo import MongoClientq
 import json
 import os
 from bson.objectid import ObjectId
@@ -36,8 +36,8 @@ well_name_list = []
 
 @app.route("/")
 def viewForm():
-    client = pymongo.MongoClient(
-        "mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    # client = pymongo.MongoClient("mongodb://johndoe:johndoe@cluster0-shard-00-00.jyb2o.mongodb.net:27017,cluster0-shard-00-01.jyb2o.mongodb.net:27017,cluster0-shard-00-02.jyb2o.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-94tnc1-shard-0&authSource=admin&retryWrites=true&w=majority")
     db = client.test
     database_name = 'hackuna_matata123'
     student_db = client[database_name]
@@ -53,17 +53,23 @@ def viewForm():
 
 @app.route("/delete/<id>")
 def delete_well(id):
-    client = pymongo.MongoClient(
-        "mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client.test
-    database_name = 'hackuna_matata123'
-    student_db = client[database_name]
-    collection_name = 'user'
-    collection = student_db[collection_name]
 
-    collection.delete_one({'_id': ObjectId(id)})
+    try:
 
-    return json.dumps("Data successfully removed")
+        client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        db = client.test
+        database_name='hackuna_matata123'
+        student_db=client[database_name]
+        collection_name='user'
+        collection=student_db[collection_name]
+
+        collection.delete_one({'_id': ObjectId(id)})
+
+        return json.dumps("Data successfully removed")
+
+    except Exception as e:
+
+        return(str(e))
 
 
 @app.route("/page-2")
@@ -97,53 +103,97 @@ def circle_page():
 
 @app.route("/postform", methods=["POST"])
 def upload_form():
+    
+    try :
+        well_name = request.form.get("well_name")
+        field_name = request.form.get("field_name")
+        lat = request.form.get("form_lat")
+        lon = request.form.get("form_lon")
+        f = request.files['form_file']
 
-    well_name = request.form.get("well_name")
-    field_name = request.form.get("field_name")
-    lat = request.form.get("form_lat")
-    lon = request.form.get("form_lon")
-    f = request.files['form_file']
+        if f.filename == '':
+            return "Belum memilih file"
 
-    client = pymongo.MongoClient(
-        "mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client.test
+        if lat== '' or lat == '':
+            return "Belum mengisi lat lon"
 
-    # return db
+        if well_name == '':
+            return "Belum mengisi well name"
 
-    open('tmp/' + f.filename, 'wb').write(f.read())
+        if field_name == '':
+            return "Belum mengisi field name"
 
-    database_name = 'hackuna_matata123'
-    student_db = client[database_name]
+        client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+        db = client.test
 
-    collection_name = 'user'
-    collection = student_db[collection_name]
+        # return db
 
-    df = pd.read_csv("tmp/"+f.filename)
+        open('tmp/' + f.filename, 'wb').write(f.read())
+        
+        database_name='hackuna_matata123'
+        student_db=client[database_name]
 
-    source = {
-        "filename": f.filename,
-        "coordinate ": {"BAND": None, "EASTING": None,
-                        "LATITUDE": lat, "LONGITUDE": lon,
-                        "NORTHING": None, "WELL": well_name,
-                        "ZONE": None},
-        "data": []
 
-    }
+        collection_name='user'
+        collection=student_db[collection_name]
 
-    for i in range(len(df)):
+
+        df = pd.read_csv("tmp/"+f.filename)
+        
+        source = {
+            "filename":f.filename,
+            "coordinate ": {"BAND":None, "EASTING":None,
+                            "LATITUDE": lat, "LONGITUDE": lon,
+                            "NORTHING": None, "WELL":well_name,
+                            "ZONE": None},
+            "data":[]
+
+        }
+        
+            
+        
+        for i in range(len(df)):
+            dict_df = {}
+            
+            for col in df.columns:
+                dict_df['WELL']=well_name
+                dict_df[col]=df[col].iloc[i]
+                
+            source['data'].append(dict_df)
+        
+        # print(source)
+
+        #--------- update in /postform
+        true_col = ["GR", "ILD", "RHOB", "NPHI", "VSH", "PHIE", "SW", "PERM", "FACIES", "HC", "WELL"]
+        auto_mnemonic = {
+            "RHOZ": "RHOB", "ZDEN": "RHOB", "ZDNC": "RHOB", "HDEN": "RHOB",
+            "Vshale": "VSH",
+            "CNC": "NPHI", "TNPH":"NPHI", "TPHC":"NPHI",
+            "RT":"ILD", "LLD": "ILD", "HLLD": "ILD", "IDFL": "ILD",
+            "SWE": "SW"
+        }
+
         dict_df = {}
+        for i in range(len(df)):
+            for col in df.columns:
+                new_col = auto_mnemonic.get(col, col)
+                if col not in true_col:
+                    df = df.rename(columns={col: new_col})
 
-        for col in df.columns:
-            dict_df['WELL'] = well_name
-            dict_df[col] = df[col].iloc[i]
+                dict_df[new_col] = df[new_col].iloc[i]
+            
+            dict_df["WELL"] = well_name
+            source["data"].append(dict_df)
+    #----------
+        
+        collection.insert_one(source)
+        
+        # return render_template("redirect_form.html")
+        return json.dumps("Data successfully uploaded")
+    
+    except Exception as e:
 
-        source['data'].append(dict_df)
-
-    # print(source)
-
-    collection.insert_one(source)
-
-    return render_template("redirect_form.html")
+        return(str(e))
 
 
 def distance(lat1, lon1, lat2, lon2):

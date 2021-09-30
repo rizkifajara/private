@@ -1,4 +1,3 @@
-
 {%extends "layout.html"%}
 {%block content%}
 <style type="text/css">
@@ -10,20 +9,14 @@
     /* The width is the width of the web page */
   }
 </style>
-<a href="{{ url_for('viewForm')}}"
-  ><button class="btn btn-danger m-3">Back</button></a
->
+<a href="{{ url_for('viewForm')}}"><button class="btn btn-danger m-3">Back</button></a>
 
 <div>
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-5">
       <!--Google map-->
-      <div
-        id="map-container-google-1"
-        class="z-depth-1-half map-container"
-        style="height: 500px"
-      >
+      <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
         <div id="map"></div>
       </div>
       <!--Google Maps-->
@@ -49,41 +42,23 @@
                 <tr>
                   <th scope="row">{{loop.index}}</th>
                   <td>VOLVE</td>
-                  <td class="well_column" id="well_name_id{{loop.index}}">
-                    {{datum['label']}}
-                  </td>
+                  <td class="well_column" id="well_name_id{{loop.index}}">{{datum['label']}}</td>
                   <td>{{"{:,.3f}".format(datum['dist'])}} meter</td>
                   <td>
-                    <div
-                      class="small-4 medium-4 large-4 columns text-center m-2"
-                    >
+                    <div class="small-4 medium-4 large-4 columns text-center m-2">
                       <!-- <form> -->
-                      <button
-                        type="button"
-                        class="btn btn-light"
-                        id="inputWellName{{loop.index}}"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="currentColor"
-                          class="bi bi-bar-chart"
-                          viewBox="0 0 16 16"
-                        >
+                      <button type="button" class="btn btn-light" id="inputWellName{{loop.index}}">
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                          class="bi bi-bar-chart" viewBox="0 0 16 16">
                           <path
-                            d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z"
-                          />
+                            d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
                         </svg>
+
                       </button>
 
-                      <input
-                        style="width: 16px; height: 16px"
-                        class="form-check-input"
-                        type="checkbox"
-                        id="flexSwitchCheck{{loop.index}}"
-                        checked
-                      />
+                      <input style="width: 16px; height: 16px;" class="form-check-input" type="checkbox"
+                        id="flexSwitchCheck{{loop.index}}" checked>
                     </div>
                   </td>
                 </tr>
@@ -92,184 +67,167 @@
             </tbody>
           </table>
 
+
           <!--run button-->
 
-          <button
-            data-toggle="modal"
-            data-target="#ModalEvaluation"
-            id="btn_evaluate"
-            type="button"
-            class="btn btn-warning btn pull-right"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              class="bi bi-play-fill"
-              viewBox="0 0 16 16"
-            >
+          <button data-toggle="modal" data-target="#ModalEvaluation" id="btn_evaluate" type="button"
+            class="btn btn-warning btn pull-right">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill"
+              viewBox="0 0 16 16">
               <path
-                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
-              /></svg
-            >Evaluate
-          </button>
+                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
+            </svg>Evaluate</button>
+
         </div>
       </div>
     </div>
 
+
     <!-- batas makmum -->
 
-    <div
-      class="modal fade"
-      id="DescLog"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="DescLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <!-- modal konten -->
         <div class="modal-content">
-          <div class="modal-body"></div>
+          <div class="modal-body">
+          </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">
-              Close
-            </button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div
-      class="modal fade"
-      id="ModalEvaluation"
-      tabindex="-1"
-      role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
+    <div class="modal fade" id="ModalEvaluation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <!-- modal konten -->
         <div class="modal-content">
           <!-- charts -->
 
+
+
           <div class="modal-body">
+
             <div id="chart"></div>
+
           </div>
           <div class="row">
-            <div class="col-md-4 col-xs-offset-4" style="margin-top: -40px">
+            <div class="col-md-4 col-xs-offset-4" style="margin-top: -40px;">
+
               <form>
                 <label>Amount of data:</label>
-                <input
-                  type="text"
-                  class="form-control mb-3"
-                  id="getNumData"
-                  placeholder="ex: 1000"
-                />
+                <input type="text" class="form-control mb-3" id="getNumData" placeholder="ex: 1000">
                 <a id="buttonDetails" class="btn btn-warning btn-lg btn-block">
-                  Click for details</a
-                >
+                  Click for details</a>
               </form>
+
             </div>
+
           </div>
+
+
         </div>
       </div>
     </div>
   </div>
 </div>
 
+
 <script>
+
   var options = {
-    series: [
-      {
-        name: "score (%)",
-        data: [98, 98, 97, 92, 83, 97],
-      },
-      {
-        name: "time (s)",
-        data: [0.5, 0.6, 0.6, 0.7, 1.5, 0.2],
-      },
-    ],
+    series: [{
+      name: 'score (%)',
+      data: [98, 98, 97, 92, 83, 97]
+    }, {
+      name: 'time (s)',
+      data: [0.5, 0.6, 0.6, 0.7, 1.5, 0.2]
+    }],
     chart: {
-      type: "bar",
-      height: 350,
+      type: 'bar',
+      height: 350
     },
     plotOptions: {
       bar: {
         horizontal: true,
         dataLabels: {
-          position: "top",
+          position: 'top',
         },
-      },
+      }
     },
     dataLabels: {
       enabled: true,
       offsetX: -6,
       style: {
-        fontSize: "12px",
-        colors: ["#fff"],
-      },
+        fontSize: '12px',
+        colors: ['#fff']
+      }
     },
     stroke: {
       show: true,
       width: 0.2,
-      colors: ["#fff"],
+      colors: ['#fff']
     },
     tooltip: {
       shared: true,
-      intersect: false,
+      intersect: false
     },
     xaxis: {
-      categories: ["VSH", "PHIE", "SW", "PERM", "FACIES", "HC"],
+      categories: ["VSH", "PHIE", "SW", "PERM", "FACIES", "HC",],
     },
   };
 
   var chart = new ApexCharts(document.querySelector("#chart"), options);
   chart.render();
 
-  $(document).ready(function () {
-    console.log("{{user_data['_id']}}");
 
-    $("#buttonDetails").click(function () {
+
+  $(document).ready(function () {
+
+    console.log("{{user_data['_id']}}")
+
+    $('#buttonDetails').click(function () {
       var ndata = document.getElementById("getNumData");
       var value_ndata = ndata.value;
 
-      location.href = URL_add_parameter(
-        "{{ url_for('vsh_page')}}",
-        "num",
-        value_ndata
-      );
+      location.href = URL_add_parameter("{{ url_for('vsh_page')}}", 'num', value_ndata);
     });
 
+
+
     for (let i = 1; i <= 5; i++) {
-      $("#inputWellName" + i).click(function () {
+
+      $('#inputWellName' + i).click(function () {
         var value_well = $("#well_name_id" + i).html();
         console.log(value_well);
         $.ajax({
-          url: "/hist",
+          url: '/hist',
           type: "post",
           data: { value_well: value_well },
           success: function (data) {
             $("#DescLog .modal-body").html(data);
             $("#DescLog").modal("show");
-          },
-        });
+          }
+        })
       });
+
     }
 
-    $("#btn_evaluate").click(function () {
-      let list_well_name = [];
+
+    $('#btn_evaluate').click(function () {
+      let list_well_name = []
 
       for (let i = 1; i <= 5; i++) {
-        if ($("#flexSwitchCheck" + i).is(":checked")) {
-          list_well_name.push($("#well_name_id" + i).html());
+        if ($('#flexSwitchCheck' + i).is(':checked')) {
+          list_well_name.push($('#well_name_id' + i).html())
         }
       }
 
-      console.log(list_well_name);
+      console.log(list_well_name)
       $.ajax({
-        url: "/send-well-list",
+        url: '/send-well-list',
         type: "post",
         data: { list_well_name: list_well_name },
         success: function (data) {
@@ -277,34 +235,60 @@
           // console.log(data)
           // // $(".modal-body").html(data);
           // $("#ModalEvaluation").modal("show");
-        },
-      });
+
+        }
+      })
     });
+
+
+
+
+
+
+
   });
+
 </script>
 
 <script>
   // Initialize and add the map
   function initMap() {
-    let lat_user = "{{user_data['coordinate ']['LATITUDE']}}";
-    let lon_user = "{{user_data['coordinate ']['LONGITUDE']}}";
+    let lat_user = "{{user_data['coordinate ']['LATITUDE']}}"
+    let lon_user = "{{user_data['coordinate ']['LONGITUDE']}}"
 
-    console.log("{{data}}");
+    console.log("{{data}}")
 
     // The location of Uluru
     const uluru = { lat: +lat_user, lng: +lon_user };
     const uluru2 = { lat: +"{{data[0]['lat']}}", lng: +"{{data[0]['lon']}}" };
+    const traj = { lat: 58.44158, lng: 1.88751}
     const uluru3 = { lat: +"{{data[1]['lat']}}", lng: +"{{data[1]['lon']}}" };
     const uluru4 = { lat: +"{{data[2]['lat']}}", lng: +"{{data[2]['lon']}}" };
     const uluru5 = { lat: +"{{data[3]['lat']}}", lng: +"{{data[3]['lon']}}" };
     const uluru6 = { lat: +"{{data[4]['lat']}}", lng: +"{{data[4]['lon']}}" };
     // The map, centered at Uluru
     const map = new google.maps.Map(document.getElementById("map"), {
+
       zoom: 21,
       center: uluru,
     });
 
-    const contentString = "{{user_data['coordinate ']['WELL']}}";
+    const flightPlanCoordinates = [
+      uluru2,
+      traj,
+    ]
+
+    const flightPath = new google.maps.Polyline({
+      path: flightPlanCoordinates,
+      geodesic: true,
+      strokeColor: "#FF0000",
+      strokeOpacity: 1.0,
+      strokeWeight: 2,
+    });
+
+    flightPath.setMap(map);
+
+    const contentString = "{{user_data['coordinate ']['WELL']}}"
     // The marker, positioned at Uluru
     const infowindow = new google.maps.InfoWindow({
       content: contentString,
@@ -323,6 +307,8 @@
       });
     });
 
+
+
     /////////////2/////////////
     const infowindow2 = new google.maps.InfoWindow({
       content: "{{data[0]['label']}}",
@@ -335,17 +321,15 @@
       fillColor: "#0000FF",
       fillOpacity: 0.35,
       map,
-      center: {
-        lat: parseFloat("{{data[0]['lat']}}"),
-        lng: parseFloat("{{data[0]['lon']}}"),
-      },
+      center: { lat: parseFloat("{{data[0]['lat']}}"), lng: parseFloat("{{data[0]['lon']}}") },
       radius: 0.5,
     });
 
-    google.maps.event.addListener(cityCircle, "click", function (ev) {
+    google.maps.event.addListener(cityCircle, 'click', function (ev) {
       infowindow2.setPosition(ev.latLng);
       infowindow2.open(map);
     });
+
 
     ////////////3//////////
     const infowindow3 = new google.maps.InfoWindow({
@@ -359,17 +343,16 @@
       fillColor: "#0000FF",
       fillOpacity: 0.35,
       map,
-      center: {
-        lat: parseFloat("{{data[1]['lat']}}"),
-        lng: parseFloat("{{data[1]['lon']}}"),
-      },
+      center: { lat: parseFloat("{{data[1]['lat']}}"), lng: parseFloat("{{data[1]['lon']}}") },
       radius: 0.5,
     });
 
-    google.maps.event.addListener(cityCircle2, "click", function (ev) {
+    google.maps.event.addListener(cityCircle2, 'click', function (ev) {
       infowindow3.setPosition(ev.latLng);
       infowindow3.open(map);
     });
+
+
 
     ///////////////4////////////
     const infowindow4 = new google.maps.InfoWindow({
@@ -383,17 +366,15 @@
       fillColor: "#0000FF",
       fillOpacity: 0.35,
       map,
-      center: {
-        lat: parseFloat("{{data[2]['lat']}}"),
-        lng: parseFloat("{{data[2]['lon']}}"),
-      },
+      center: { lat: parseFloat("{{data[2]['lat']}}"), lng: parseFloat("{{data[2]['lon']}}") },
       radius: 0.5,
     });
 
-    google.maps.event.addListener(cityCircle3, "click", function (ev) {
+    google.maps.event.addListener(cityCircle3, 'click', function (ev) {
       infowindow4.setPosition(ev.latLng);
       infowindow4.open(map);
     });
+
 
     //////////////5/////////
     const infowindow5 = new google.maps.InfoWindow({
@@ -407,17 +388,15 @@
       fillColor: "#0000FF",
       fillOpacity: 0.35,
       map,
-      center: {
-        lat: parseFloat("{{data[3]['lat']}}"),
-        lng: parseFloat("{{data[3]['lon']}}"),
-      },
+      center: { lat: parseFloat("{{data[3]['lat']}}"), lng: parseFloat("{{data[3]['lon']}}") },
       radius: 0.5,
     });
 
-    google.maps.event.addListener(cityCircle4, "click", function (ev) {
+    google.maps.event.addListener(cityCircle4, 'click', function (ev) {
       infowindow5.setPosition(ev.latLng);
       infowindow5.open(map);
     });
+
 
     //////////6////////////
     const infowindow6 = new google.maps.InfoWindow({
@@ -431,22 +410,41 @@
       fillColor: "#0000FF",
       fillOpacity: 0.35,
       map,
-      center: {
-        lat: parseFloat("{{data[4]['lat']}}"),
-        lng: parseFloat("{{data[4]['lon']}}"),
-      },
+      center: { lat: parseFloat("{{data[4]['lat']}}"), lng: parseFloat("{{data[4]['lon']}}") },
       radius: 0.5,
     });
 
-    google.maps.event.addListener(cityCircle5, "click", function (ev) {
+    google.maps.event.addListener(cityCircle5, 'click', function (ev) {
       infowindow6.setPosition(ev.latLng);
       infowindow6.open(map);
     });
+
+    ////////////traj./////////////
+    const infowindow7 = new google.maps.InfoWindow({
+      content: "Trajectory",
+    });
+
+    const cityCircle6 = new google.maps.Circle({
+      strokeColor: "#FFFF00",
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: "#FFFF00",
+      fillOpacity: 0.35,
+      map,
+      center: { lat: 58.44158, lng: 1.88751 },
+      radius: 0.5,
+    });
+
+    google.maps.event.addListener(cityCircle6, 'click', function (ev) {
+      infowindow7.setPosition(ev.latLng);
+      infowindow7.open(map);
+    });
   }
+
+
 </script>
 
 <script
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF0AFZrT4iYWDmT5FAyoJfnO_C1bz4hgw&callback=initMap&libraries=&v=weekly"
-  async
-></script>
+  async></script>
 {%endblock%}
