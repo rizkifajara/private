@@ -385,6 +385,13 @@
                       {% endif %}
                     </tbody>
                   </table>
+                  <br><br>
+                  
+                  {% for mnemonic in dataa["mnemonic_edit"] %}
+                    <h3>Before : {{mnemonic["before"]}}, After : {{mnemonic["after"]}}</h3>
+                    
+                    <br>
+                  {% endfor %}
                 </div>
                 <!-- tabel data sumur -->
               </div>
@@ -506,6 +513,12 @@
       }
     }
   });
+</script>
+
+<script>
+  console.log("halo")
+  let data = "{{user_data}}"
+  console.log(data[1]["mnemonic_edit"]["before"])
 </script>
 </div>
 

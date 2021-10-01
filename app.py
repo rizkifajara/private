@@ -142,6 +142,7 @@ def upload_form():
         
         source = {
             "filename":f.filename,
+            "mnemonic_edit":None,
             "coordinate ": {"BAND":None, "EASTING":None,
                             "LATITUDE": lat, "LONGITUDE": lon,
                             "NORTHING": None, "WELL":well_name,
@@ -174,11 +175,14 @@ def upload_form():
         }
 
         dict_df = {}
+        replace_mc = []
         for i in range(len(df)):
             for col in df.columns:
                 new_col = auto_mnemonic.get(col, col)
                 if col not in true_col:
                     df = df.rename(columns={col: new_col})
+                    # ---- tambah ini ya utk return mnemonic yg berubah
+                    if col!=new_col: replace_mc.append({"before": col, "after": new_col})
 
                 dict_df[new_col] = df[new_col].iloc[i]
             
@@ -186,6 +190,8 @@ def upload_form():
             source["data"].append(dict_df)
     #----------
         
+        source["mnemonic_edit"] = replace_mc
+
         collection.insert_one(source)
         
         # return render_template("redirect_form.html")
