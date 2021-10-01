@@ -138,10 +138,63 @@
                       <img src="/static/view.svg" alt="">
                     </button>
                     <a
-                      href="{{ url_for('delete_well', id=data['_id'])}}"
+                    data-toggle="modal" data-target="#basicModal"
                       class="btn "
                       ><img src="/static/delete.svg" alt=""></a
                     >
+
+                    <div
+                    class="modal fade"
+                    id="basicModal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="basicModal"
+                    aria-hidden="true"
+                    
+                  >
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                      
+                          <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close"
+                          >
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                      <div class="modal-body d-flex justify-content-center  " >
+                                  <div class="confirm-content  ">
+                                    <div class="confirm-massage ">
+                                      <div class="confirm-logo">
+                                        <img src="/static/confirm.svg" alt="" />
+                                      </div>
+                                      <div class="confirm-text">
+                                        <h3>Confirmation</h3>
+                                        <h6>Are you sure to delete this data?</h6>
+                                      </div>
+                                    </div>
+                                  </div>
+                       
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-default btn-lg"
+                          data-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <a   href="{{ url_for('delete_well', id=data['_id'])}}">
+                          <button type="button" class="btn btn-danger btn-lg">
+                            Delete
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                   </td>
                 </tr>
 
@@ -151,6 +204,9 @@
           </div>
         </div>
 
+
+        <!--  -->
+        <!--  -->
         {% for dataa in user_data %}
         <div
           class="modal fade"
@@ -444,6 +500,24 @@
       });
     });
   </script>
+<!-- 
+<script>
+  $(document).ready(function () {
+    $("#btn_input").click(function () {
+      $.ajax({
+        url: "/postform",
+        type: "post",
+        data: {},
+        success: function () {
+          swal("Good job!", "You clicked the button!", "success");
+        },
+      });
+    });
+  });
+</script> -->
+
+
+
 
 
 <!-- For Validate -->
