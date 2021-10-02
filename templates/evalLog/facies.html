@@ -1,49 +1,146 @@
 {%extends "layout.html"%} {%block content%}
-<!-- <link rel="stylesheet" href=""> -->
-<script type="text/javascript" src={{cdn_js | safe}}></script>
+<script type="text/javascript" src="{{cdn_js | safe}}"></script>
 
-<div style="text-align: center">
-  <a href="{{ url_for('analyze_page')}}"
-    ><button class="btn btn-danger m-3">Back</button></a
-  >
-  <a href="{{ url_for('vsh_page')}}"
-    ><button class="btn btn-warning m-3">VSH</button></a
-  >
-  <a href="{{ url_for('phie_page')}}"
-    ><button class="btn btn-warning m-3">PHIE</button></a
-  >
-  <a href="{{ url_for('sw_page')}}"
-    ><button class="btn btn-warning m-3">SW</button></a
-  >
-  <a href="{{ url_for('perm_page')}}"
-    ><button class="btn btn-warning m-3">PERM</button></a
-  >
-  <a href="{{ url_for('facies_page')}}"
-    ><button class="btn btn-warning m-3 active">FACIES</button></a
-  >
-  <a href="{{ url_for('hc_page')}}"
-    ><button class="btn btn-warning m-3">HC</button></a
-  >
+
+<div class="analyze-page">
+  <div class="sidebar-analyze-container">
+      <div class="analyze-button-container">
+        <a class="btn border-0 btn-lg" id="menu-btn"><svg width="35" height="40" viewBox="0 0 49 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.872871 14.2441C0.412409 14.6428 0.41241 15.3572 0.872872 15.7559L7.34535 21.3613C7.99299 21.9221 9 21.4621 9 20.6053L9 9.39467C9 8.53792 7.99299 8.07787 7.34535 8.63874L0.872871 14.2441Z" fill="#0D503C"/>
+          <path d="M47 2H14M47 15H14M47 28H14" stroke="#0D503C" stroke-width="4" stroke-miterlimit="10" stroke-linecap="round"/>
+          </svg>
+          
+                              </a>
+      </div>
+
+      <div class="analyze-table-container">
+          <div class="analyze-button-container">
+              <div class="analyze-dropdown">
+                  <p>Evaluation</p>
+                  <svg class="arrow-analyze-button" width="18" height="12" viewBox="0 0 18 12" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                          d="M9.76315 11.0988C9.36372 11.5705 8.63628 11.5705 8.23685 11.0988L0.867709 2.39622C0.317431 1.74637 0.779326 0.749998 1.63086 0.749998L16.3691 0.75C17.2207 0.75 17.6826 1.74637 17.1323 2.39622L9.76315 11.0988Z"
+                          fill="#0D503C" />
+                  </svg>
+
+              </div>
+
+              <div class="analyze-button-pack">
+
+                  <a href="{{ url_for('vsh_page')}}"><button
+                          class="btn btn-warning m-3 ">VSH</button></a>
+                  <a href="{{ url_for('phie_page')}}"><button class="btn btn-warning m-3">PHIE</button></a>
+                  <a href="{{ url_for('sw_page')}}"><button class="btn btn-warning m-3 ">SW</button></a>
+                  <a href="{{ url_for('perm_page')}}"><button class="btn btn-warning m-3 ">PERM</button></a>
+                  <a href="{{ url_for('facies_page')}}"><button
+                          class="btn btn-warning m-3  active">FACIES</button></a>
+                  <a href="{{ url_for('hc_page')}}"><button class="btn btn-warning m-3">HC</button></a>
+              </div>
+
+              <div class="info-analyze-dropdown">
+                  <p>Info</p>
+                  <svg  class="arrow-analyze-info"  width="18" height="12" viewBox="0 0 18 12" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                          d="M9.76315 11.0988C9.36372 11.5705 8.63628 11.5705 8.23685 11.0988L0.867709 2.39622C0.317431 1.74637 0.779326 0.749998 1.63086 0.749998L16.3691 0.75C17.2207 0.75 17.6826 1.74637 17.1323 2.39622L9.76315 11.0988Z"
+                          fill="#0D503C" />
+                  </svg>
+
+              </div>
+
+              <div class="info-analyze-pack">
+                  <p><span>Confusion Matrix</span> is Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                      In in nisl eu
+                      fames sem.
+                      Vitae rhoncus maecenas elit a arcu ut. Volutpat diam nunc interdum tellus. Diam sed sit
+                      porttitor
+                      pretium eget nulla habitasse. Sagittis aenean quisque at mattis sagittis ut enim, vitae.
+                      Phasellus eu,
+                      nulla tortor, bibendum volutpat. Placerat dictumst malesuada non proin dui sit phasellus
+                      eu. Aliquam
+                      gravida aenean lacus leo arcu ut netus et.</p>
+                  <p> <span>Blind Well Test </span> is Lorem ipsum dolor sit amet, consectetur adipiscing
+                      elit. Leo at
+                      volutpat eget
+                      pellentesque. Lectus iaculis adipiscing cras rutrum vitae dictumst sed. Nec in volutpat
+                      nunc scelerisque
+                      eget turpis sit iaculis. Diam dapibus sed duis pellentesque. Vel nunc ante porttitor
+                      pulvinar. Nibh
+                      quisque orci velit nibh eget massa placerat. Etiam gravida commodo cursus etiam
+                      tincidunt risus id
+                      varius pretium. Diam consequat id quis velit, eu. Lobortis volutpat amet est adipiscing.
+                      Sed ullamcorper
+                      posuere convallis risus.</p>
+                  <p><span>Predicted-actual data distribution </span> is Lorem ipsum dolor sit amet,
+                      consectetur adipiscing
+                      elit. Leo at
+                      volutpat eget pellentesque. Lectus iaculis adipiscing cras rutrum vitae dictumst sed.
+                      Nec in volutpat
+                      nunc scelerisque eget turpis sit iaculis. Diam dapibus sed duis pellentesque. Vel nunc
+                      ante porttitor
+                      pulvinar. Nibh quisque orci velit nibh eget massa placerat. </p>
+              </div>
+          </div>
+
+          <div class="button-bottom-container">
+              <a href="{{ url_for('analyze_page')}}" class="back-button">Back</a>
+              <a href="{{ url_for('viewForm')}}" class="analyze-button">
+                  <h6>Run Model</h6>
+                  <svg width="16" height="18" viewBox="0 0 16 18" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                          d="M2.23433 17.6251C1.94653 17.6245 1.66382 17.5491 1.41402 17.4062C0.851519 17.0874 0.501831 16.4687 0.501831 15.797V2.20321C0.501831 1.52961 0.851519 0.912739 1.41402 0.593989C1.66977 0.447006 1.96031 0.37142 2.25526 0.37513C2.55022 0.378841 2.83876 0.461713 3.09074 0.615083L14.7087 7.56946C14.9508 7.72128 15.1504 7.93211 15.2888 8.18218C15.4272 8.43225 15.4997 8.71336 15.4997 8.99915C15.4997 9.28494 15.4272 9.56605 15.2888 9.81611C15.1504 10.0662 14.9508 10.277 14.7087 10.4288L3.08886 17.3851C2.831 17.541 2.53565 17.6239 2.23433 17.6251Z"
+                          fill="black" />
+                  </svg>
+
+              </a>
+          </div>
+          <div class="analyze-content">
+          </div>
+      </div>
+  </div>
+
+  <div class="analyze-graph">
+    <div class="analyz-graph-content">
+    {{script | safe}} {{div | safe}}</div></div>
+
+
+
+  <script>
+    var menu_btn_analyze = document.querySelector("#menu-btn");
+    var sidebar_analyze = document.querySelector(".sidebar-analyze-container");
+    var container_analyze = document.querySelector(".my-container");
+    menu_btn_analyze.addEventListener("click", () => {
+      sidebar_analyze.classList.toggle("active-sidebar");
+      menu_btn_analyze.classList.toggle("active-sidebar-button")
+    });
+  </script>
+
+<script>
+  var dropdown_button_analyze = document.querySelector(".analyze-dropdown");
+  var container_button_analyze = document.querySelector(".analyze-button-pack");
+  var arrow_analyze_button = document.querySelector(".arrow-analyze-button");
+  dropdown_button_analyze.addEventListener("click", () => {
+    container_button_analyze.classList.toggle("active");
+    arrow_analyze_button.classList.toggle("active");
+  
+  });
+</script>
+
+
+
+<script>
+  var dropdown_info_analyze = document.querySelector(".info-analyze-dropdown");
+  var container_info_analyze  = document.querySelector(".info-analyze-pack");
+  var arrow_analyze_info = document.querySelector(".arrow-analyze-info");
+  dropdown_info_analyze .addEventListener("click", () => {
+    container_info_analyze.classList.toggle("active");
+    arrow_analyze_info.classList.toggle("active");
+  });
+</script>
+
 </div>
 
-<div class="col-xs-offset-2">{{script | safe}} {{div | safe}}</div>
 
-<div class="col-6 col-xs-offset-3">
-  <a href="{{ url_for('viewForm')}}"
-    ><button class="btn btn-warning btn-lg btn-block mt-5">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-play-fill"
-        viewBox="0 0 16 16"
-      >
-        <path
-          d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
-        /></svg
-      >Run Model
-    </button></a
-  >
-</div>
 {%endblock%}
