@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+  crossorigin="anonymous"
+/>
+
+<a id="hist_modal"><button class="btn btn-warning m-3">
+  <i class="fa fa-bar-chart" aria-hidden="true"></i> Histogram</button></a>
+<a id="trajectory_modal"><button class="btn btn-warning m-3">
+  <i class="fa fa-map-pin" aria-hidden="true"></i> Trajectory</button></a>
+<a id="log_modal"><button class="btn btn-warning m-3 active">
+  <i class="fa fa-line-chart" aria-hidden="true"></i> Well Log</button></a>
+
+<div>
+  <iframe width="100%" height="450" style="border: none;" src="https://log-plot.herokuapp.com/app">
+</div>
+
+<script>
+  $(document).ready(function () {
+
+    $('#hist_modal').click(function () {
+      $.ajax({
+        url: '/hist',
+        type: "post",
+        data: {},
+        success: function (data) {
+          $("#DescLog .modal-body").html(data);
+        }
+      })
+    });
+
+
+    $("#trajectory_modal").click(function () {
+      $.ajax({
+        url: "/trajectory",
+        type: "post",
+        data: {},
+        success: function (data) {
+          $("#DescLog .modal-body").html(data);
+        },
+      });
+    });
+
+  });
+</script>
