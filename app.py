@@ -13,6 +13,8 @@ from py_viz.bkapp.facies import eval_facies
 from py_viz.bkapp.hc import eval_hc
 from py_viz.bkapp.histplot import plot_histogram, get_form
 from py_viz.bkapp.resultLog import plot_result
+from py_viz.bkapp.trajectory import plot_trajectory
+
 from math import cos, asin, sqrt
 
 from getData import get_data_from_dataiku
@@ -195,7 +197,7 @@ def well_table(id_well):
 
 @app.route('/well-log', methods=["POST", "GET"])
 def log():
-    return render_template("wellLog.html")
+    return render_template("evalLog/wellLog.html")
 
 
 @app.route('/hist', methods=["POST", "GET"])
@@ -215,13 +217,27 @@ def hist():
             form = None
     script, div, cdn_js = plot_histogram(
         data=data, nameWell=well_name, nameForm=form)
-    return render_template("hist.html",
+    return render_template("evalLog/hist.html",
                            list_formation=list_formation,
                            form=form,
                            script=script,
                            div=div,
                            cdn_js=cdn_js)
 
+@app.route('/trajectory', methods=["POST", 'GET'])
+def trajectory_page():
+    global well_name
+    well_name = request.form.get("value_well")
+    if well_name == None:
+        well_name = "15/9-F-5"
+    else:
+        well_name = str(well_name)
+    print(well_name)
+    script, div, cdn_js = plot_trajectory(nameWell=well_name)
+    return render_template("evalLog/trajectory.html",
+                           script=script,
+                           div=div,
+                           cdn_js=cdn_js)
 
 @app.route('/result', methods=['GET'])
 def result_page():

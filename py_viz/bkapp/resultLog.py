@@ -246,6 +246,8 @@ def plot_result():
         p.xaxis[-1].visible = False
         p.xaxis[0].axis_label_text_font_size = "10px"
         p.xaxis[0].major_label_text_font_size = "8px"
+        p.yaxis[0].axis_label_text_font_size = "10px"
+        p.yaxis[0].major_label_text_font_size = "8px"
 
     plot = row([p1, p2, p3, p4, p5, p6, p7, p8, p9])
 
