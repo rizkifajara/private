@@ -1,375 +1,519 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Hackuna Matata - Delfi</title>
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
-      crossorigin="anonymous"
-    />
+<head>
+  <title>Hackuna Matata - Delfi</title>
 
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.0-dev.6/bokeh.min.js"></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous" />
 
-    <style>
-      body {
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        overflow: hidden;
-        background-image: url("/static/background.png");
-        position: relative;
-      }
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bokeh/2.4.0-dev.6/bokeh.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
-      #chart {
-        max-width: 650px;
-        margin: 35px auto;
-      }
+  <style>
+    body {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      background-image: url("/static/background.png");
+      position: relative;
+    }
 
-      .map-container {
-        overflow: hidden;
-        padding-bottom: 56.25%;
-        position: relative;
-        height: 0;
-      }
+    #chart {
+      max-width: 650px;
+      margin: 35px auto;
+    }
 
-      .map-container iframe {
-        left: 0;
-        top: 0;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-      }
+    .map-container {
+      overflow: hidden;
+      padding-bottom: 56.25%;
+      position: relative;
+      height: 0;
+    }
 
-      a:hover {
-        text-decoration: none;
-      }
+    .map-container iframe {
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
 
-      .navbar {
-        background-color: #e5e5e5;
-        width: 100%;
-        height: 10vh;
-        box-shadow: 2px -2px 10px -2px rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: flex-start;
-        padding: 0vh 10vh;
-        position: absolute;
-        top: 0;
-        z-index: 5;
-      }
-      .logo-container {
-        height: 5vh;
-      }
+    a:hover {
+      text-decoration: none;
+    }
 
-      img {
-        height: 100%;
-      }
+    .navbar {
+      background-color: #e5e5e5;
+      width: 100%;
+      height: 10vh;
+      box-shadow: 2px -2px 10px -2px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: flex-start;
+      padding: 0vh 10vh;
+      position: absolute;
+      top: 0;
+      z-index: 5;
+    }
 
-      .form-container {
-        height: 75vh;
-      }
+    .logo-container {
+      height: 5vh;
+    }
 
-      .footer {
-        background-color: #e5e5e5;
-        width: 100%;
-        height: 10vh;
-        box-shadow: 2px -2px 10px -2px rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0vh 10vh;
-        position: absolute;
-        bottom: 0;
-        z-index: 5;
-      }
+    img {
+      height: 100%;
+    }
 
-      .corporation {
-        display: flex;
-        justify-content: space-between;
-        width: 60%;
-      }
+    .form-container {
+      height: 75vh;
+    }
 
-      .contact {
-        display: flex;
-        justify-content: space-between;
-        width: 15%;
-      }
-      .card-form {
-        box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
-      }
-      .card-list-field {
-        box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
-      }
+    .footer {
+      background-color: #e5e5e5;
+      width: 100%;
+      height: 10vh;
+      box-shadow: 2px -2px 10px -2px rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0vh 10vh;
+      position: absolute;
+      bottom: 0;
+      z-index: 5;
+    }
 
-      .table-list-field > thead {
-        background-color: #17464e;
-      }
+    .corporation {
+      display: flex;
+      justify-content: space-between;
+      width: 60%;
+    }
 
-      .table-list-field > thead > tr > th {
-        color: white;
-        text-align: center;
-      }
+    .contact {
+      display: flex;
+      justify-content: space-between;
+      width: 15%;
+    }
 
-      .table-list-field > tbody > tr > th {
-        
-        text-align: center;
-      }
+    .card-form {
+      box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
+    }
 
-      .table-list-field > tbody > tr > td {
-        
-        text-align: center;
-      }
+    .card-list-field {
+      box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .table-list-field>thead {
+      background-color: #17464e;
+    }
+
+    .table-list-field>thead>tr>th {
+      color: white;
+      text-align: center;
+    }
+
+    .table-list-field>tbody>tr>th {
+
+      text-align: center;
+    }
+
+    .table-list-field>tbody>tr>td {
+
+      text-align: center;
+    }
 
 
 
-      .success-section {
-        display: flex;
-        width: 100vw;
-        min-height: 100vh;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(0, 0, 0, 0.5);
-   
-      }
+    .success-section {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.5);
 
-      .success-container {
-        height: 30%;
-        width: 30%;
-        background-color: white;
+    }
+
+    .success-container {
+      height: 30%;
+      width: 30%;
+      background-color: white;
       border-radius: 3vh;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
-      }
+      justify-content: center;
+      align-items: center;
+      display: flex;
+      box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+    }
 
-      .success-content {
-        width: 80%;
-        height: 80%;
-        justify-content: center;
-   
-        display: flex;
+    .success-content {
+      width: 80%;
+      height: 80%;
+      justify-content: center;
+
+      display: flex;
       flex-direction: column;
-      }
+    }
 
-      .success-massage {
-        display: flex;
-        width: 90%;
-      }
-      .success-logo {
-margin-right: 4vh;
-      }
-      .success-text {
-        display: flex;
-        flex-direction: column;
-      }
-      .success-text > h3 {
-        font-size: 3vh;
-        font-weight: 700;
-        color: #20C997;
-      }
-      .success-text > h6 {
-        font-size: 2vh;
-        margin-top: 2vh;
-   
-      }
+    .success-massage {
+      display: flex;
+      width: 90%;
+    }
 
-      .success-button {
-        display: flex;
-        justify-content: flex-end;
+    .success-logo {
+      margin-right: 4vh;
+    }
 
-      }
-
-      .success-button > a{
-       background-color: #0D503C;
-       border:none;
-       color: white;
-       font-weight: 500;
-       font-size: 1.5vh;
-       padding: 1vh 4vh;
-       border-radius: 2vh;
-       margin-top: 3vh;
-
-      }
-      .success-button > a:hover{
-       background-color: #0a3b2d;
-
-      }
-
-
-      .confirm-content {
-        width: 80%;
-        height: 20vh;
-        justify-content: center;
-   
-        display: flex;
+    .success-text {
+      display: flex;
       flex-direction: column;
-      }
+    }
 
-      .confirm-massage {
-        display: flex;
-        width: 90%;
-      }
-      .confirm-logo {
-margin-right: 4vh;
-      }
-      .confirm-text {
-        display: flex;
-        flex-direction: column;
-      }
-      .confirm-text > h3 {
-        font-size: 3vh;
-        font-weight: 700;
-        color: #1E448C;
-      }
-      .confirm-text > h6 {
-        font-size: 2vh;
-        margin-top: 2vh;
+    .success-text>h3 {
+      font-size: 3vh;
+      font-weight: 700;
+      color: #20C997;
+    }
+
+    .success-text>h6 {
+      font-size: 2vh;
+      margin-top: 2vh;
+
+    }
+
+    .success-button {
+      display: flex;
+      justify-content: flex-end;
+
+    }
+
+    .success-button>a {
+      background-color: #0D503C;
+      border: none;
+      color: white;
+      font-weight: 500;
+      font-size: 1.5vh;
+      padding: 1vh 4vh;
+      border-radius: 2vh;
+      margin-top: 3vh;
+
+    }
+
+    .success-button>a:hover {
+      background-color: #0a3b2d;
+
+    }
+
+
+    .confirm-content {
+      width: 80%;
+      height: 20vh;
+      justify-content: center;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .confirm-massage {
+      display: flex;
+      width: 90%;
+    }
+
+    .confirm-logo {
+      margin-right: 4vh;
+    }
+
+    .confirm-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .confirm-text>h3 {
+      font-size: 3vh;
+      font-weight: 700;
+      color: #1E448C;
+    }
+
+    .confirm-text>h6 {
+      font-size: 2vh;
+      margin-top: 2vh;
+
+    }
+
+    .confirm-button {
+      display: flex;
+      justify-content: flex-end;
+
+    }
+
+    .confirm-button>button {
+      background-color: #0D503C;
+      border: none;
+      color: white;
+      font-weight: 500;
+      font-size: 2vh;
+      padding: 1vh 4vh;
+      border-radius: 2vh;
+      margin-top: 3vh;
+
+    }
+
+    .confirm-button>button:hover {
+      background-color: #0a3b2d;
+
+    }
+
+
+    /* evaluation */
+    .evaluation-page {
+      width: 100vw;
+      height: 80vh;
+      position: relative;
+    }
+
+    .sidebar-evaluation-container {
+      height: 80vh;
+      width: 38vw;
+      background-color: white;
+      box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
+      position: absolute;
+      z-index: 5;
+
+    }
+
+    .sidebar-evaluation-container.active-sidebar {
+      left: -40vw;
+    }
+
+    .evaluation-button-container {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .evaluation-table-container {
+      overflow: scroll;
+      height: 100%;
+
+    }
+
+    .evaluation-table {
+      width: 100%;
+
+    }
+
+    .back-button.active-sidebar-button {
+      position: absolute;
+      left: 100vw;
+    }
+
+    #menu-btn {
+      position: absolute;
+      top: -9vh;
+      margin-left: 2vh;
+      background-color: #e5e5e5;
+
+    }
+
+    #menu-btn.active-sidebar-button {
+      position: absolute;
+      top: -9vh;
+      left: 40vw;
+      background-color: #e5e5e5;
+      ;
+      z-index: 5;
+    }
+
+    .table-evaluation>thead>tr>th {
+      color: white;
+      text-align: center;
+      background-color: #17464e;
+    }
+
+    .table-evaluation>tbody>form>tr>th {
    
+      text-align: center;
+ 
+    }
+
+    .button-buttom-container {
+      width: 100%;
+      height: 8vh;
+
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .button-buttom-container>.back-button {
+      width: 10%;
+      height: 100%;
+      background-color: red;
+text-decoration: none;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .button-buttom-container>.evaluate-button {
+      width: 90%;
+      height: 100%;
+      background-color: #FFC107;
+      bottom: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 3vh;
+    }
+
+    .button-buttom-container>.back-button {
+      font-weight: 500;
+      font-size: 2vh;
+      color: white;
+    }
+
+    .button-buttom-container>.evaluate-button>h6 {
+      margin-right: 5vh;
+      font-size: 2vh;
+    }
+
+
+    .map-evaluation-container {
+
+      z-index: 5;
+      width: 100%;
+      height: 80vh;
+      background-color: turquoise;
+    }
+
+    .map-evaluation-container>.map-container-google-1 {
+
+      z-index: 5;
+      width: 100%;
+      height: 80vh;
+      background-color: turquoise;
+    }
+
+    .map-evaluation-container>#map-container-google-1>#map {
+
+      z-index: 2;
+      width: 100%;
+      height: 80vh;
+      background-color: turquoise;
+    }
+  </style>
+  <script>
+    window.Promise ||
+      document.write(
+        '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+      );
+    window.Promise ||
+      document.write(
+        '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+      );
+    window.Promise ||
+      document.write(
+        '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+      );
+
+    // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
+    // Based on https://gist.github.com/blixt/f17b47c62508be59987b
+    var _seed = 42;
+    Math.random = function () {
+      _seed = (_seed * 16807) % 2147483647;
+      return (_seed - 1) / 2147483646;
+    };
+
+    function URL_add_parameter(url, param, value) {
+      var hash = {};
+      var parser = document.createElement("a");
+
+      parser.href = url;
+
+      var parameters = parser.search.split(/\?|&/);
+
+      for (var i = 0; i < parameters.length; i++) {
+        if (!parameters[i]) continue;
+
+        var ary = parameters[i].split("=");
+        hash[ary[0]] = ary[1];
       }
 
-      .confirm-button {
-        display: flex;
-        justify-content: flex-end;
+      hash[param] = value;
 
-      }
+      var list = [];
+      Object.keys(hash).forEach(function (key) {
+        list.push(key + "=" + hash[key]);
+      });
 
-      .confirm-button > button{
-       background-color: #0D503C;
-       border:none;
-       color: white;
-       font-weight: 500;
-       font-size: 2vh;
-       padding: 1vh 4vh;
-       border-radius: 2vh;
-       margin-top: 3vh;
+      parser.search = "?" + list.join("&");
+      return parser.href;
+    }
+  </script>
+</head>
 
-      }
-      .confirm-button > button:hover{
-       background-color: #0a3b2d;
+<body>
+  <div>
+    <!--Navbar  -->
+    <div class="navbar">
+      <div class="logo-container">
+        <img src="/static/black side.png" alt="" />
+      </div>
+    </div>
+    <!-- End Of Footer -->
+    {%block content%} {%endblock%}
+    <!--Navbar  -->
+    <div class="footer">
+      <div class="corporation">
 
-      }
-
-
-
-    </style>
-    <script>
-      window.Promise ||
-        document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
-        );
-      window.Promise ||
-        document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
-        );
-      window.Promise ||
-        document.write(
-          '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
-        );
-
-      // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
-      // Based on https://gist.github.com/blixt/f17b47c62508be59987b
-      var _seed = 42;
-      Math.random = function () {
-        _seed = (_seed * 16807) % 2147483647;
-        return (_seed - 1) / 2147483646;
-      };
-
-      function URL_add_parameter(url, param, value) {
-        var hash = {};
-        var parser = document.createElement("a");
-
-        parser.href = url;
-
-        var parameters = parser.search.split(/\?|&/);
-
-        for (var i = 0; i < parameters.length; i++) {
-          if (!parameters[i]) continue;
-
-          var ary = parameters[i].split("=");
-          hash[ary[0]] = ary[1];
-        }
-
-        hash[param] = value;
-
-        var list = [];
-        Object.keys(hash).forEach(function (key) {
-          list.push(key + "=" + hash[key]);
-        });
-
-        parser.search = "?" + list.join("&");
-        return parser.href;
-      }
-    </script>
-  </head>
-
-  <body>
-    <div>
-       <!--Navbar  -->
-       <div class="navbar">
         <div class="logo-container">
-          <img src="/static/black side.png" alt="" />
+          <img src="/static/delfi-logo-small.png" alt="" />
+        </div>
+        <div class="logo-container">
+          <img src="/static/logo_PHR-removebg-preview 1.png" alt="" />
+        </div>
+        <div class="logo-container">
+          <img src="/static/Logo Horizontal.png" alt="" />
+        </div>
+        <div class="logo-container">
+          <img src="/static/logo tulisan.png" alt="" />
         </div>
       </div>
-      <!-- End Of Footer -->
-      {%block content%} {%endblock%}
-          <!--Navbar  -->
-          <div class="footer">
-            <div class="corporation">
-        
-              <div class="logo-container">
-                <img src="/static/delfi-logo-small.png" alt="" />
-              </div>
-              <div class="logo-container">
-                <img src="/static/logo_PHR-removebg-preview 1.png" alt="" />
-              </div>
-              <div class="logo-container">
-                <img src="/static/Logo Horizontal.png" alt="" />
-              </div>
-              <div class="logo-container">
-                <img src="/static/logo tulisan.png" alt="" />
-              </div>
-            </div>
-    
-            <div class="contact">
-              <h3>Contact Us</h3>
-              <a href="youtube.com">
-                <img src="/static/mail.svg" alt="mail logo" />
-              </a>
-              <a href="youtube.com">
-                <img src="/static/youtube.svg" alt="mail logo" />
-              </a>
-            </div>
-          </div>
-          <!-- End Of Footer -->
+
+      <div class="contact">
+        <h3>Contact Us</h3>
+        <a href="youtube.com">
+          <img src="/static/mail.svg" alt="mail logo" />
+        </a>
+        <a href="youtube.com">
+          <img src="/static/youtube.svg" alt="mail logo" />
+        </a>
+      </div>
     </div>
-  </body>
+    <!-- End Of Footer -->
+  </div>
+
+</body>
+
 </html>
 
 <!-- <h1>halo</h1>

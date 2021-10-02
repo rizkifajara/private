@@ -9,82 +9,87 @@
     /* The width is the width of the web page */
   }
 </style>
-<a href="{{ url_for('viewForm')}}"><button class="btn btn-danger m-3">Back</button></a>
 
 <div>
-  <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-5">
-      <!--Google map-->
-      <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
-        <div id="map"></div>
-      </div>
-      <!--Google Maps-->
-    </div>
-    <div class="col-md-5">
-      <div class="card">
-        <div class="card-body">
-          <!--table-->
-          <table id="mytable" class="table">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">No</th>
-                <th scope="col">Field Name</th>
-                <th scope="col">Nearest Well</th>
-                <th scope="col">Well Distance</th>
-                <th scope="col">Condition</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              <form>
-                {%for datum in data%}
-                <tr>
-                  <th scope="row">{{loop.index}}</th>
-                  <td>VOLVE</td>
-                  <td class="well_column" id="well_name_id{{loop.index}}">{{datum['label']}}</td>
-                  <td>{{"{:,.3f}".format(datum['dist'])}} meter</td>
-                  <td>
-                    <div class="small-4 medium-4 large-4 columns text-center m-2">
-                      <!-- <form> -->
-                      <button type="button" class="btn btn-light" id="inputWellName{{loop.index}}">
-
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                          class="bi bi-bar-chart" viewBox="0 0 16 16">
-                          <path
-                            d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
-                        </svg>
-
-                      </button>
-
-                      <input style="width: 16px; height: 16px;" class="form-check-input" type="checkbox"
-                        id="flexSwitchCheck{{loop.index}}" checked>
-                    </div>
-                  </td>
-                </tr>
-                {%endfor%}
-              </form>
-            </tbody>
-          </table>
-
-
-          <!--run button-->
-
-          <button data-toggle="modal" data-target="#ModalEvaluation" id="btn_evaluate" type="button"
-            class="btn btn-warning btn pull-right">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-play-fill"
-              viewBox="0 0 16 16">
-              <path
-                d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z" />
-            </svg>Evaluate</button>
-
+  <div class="evaluation-page">
+    <div class="sidebar-evaluation-container">
+        <div class="evaluation-button-container">
+            <a href="{{ url_for('viewForm')}}"><button class="btn btn-danger m-3 back-button">Back</button></a>
+            <a class="btn border-0 btn-lg" id="menu-btn"><svg width="25" height="40" viewBox="0 0 37 30"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M35 2H2M35 15H2M35 28H2" stroke="#0D503C" stroke-width="4" stroke-miterlimit="10"
+                        stroke-linecap="round" />
+                </svg>
+            </a>
         </div>
-      </div>
+
+        <div class="evaluation-table-container">
+            <div class="evaluation-table">
+                <table id="mytable" class="table table-evaluation">
+                    <thead class="table-dark">
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Field Name</th>
+                            <th scope="col">Nearest Well</th>
+                            <th scope="col">Well Distance</th>
+                            <th scope="col">Condition</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <form>
+                            {%for datum in data%}
+                            <tr>
+                                <th scope="row">{{loop.index}}</th>
+                                <td>VOLVE</td>
+                                <td class="well_column" id="well_name_id{{loop.index}}">{{datum['label']}}</td>
+                                <td>{{"{:,.3f}".format(datum['dist'])}} meter</td>
+                                <td>
+                                    <div class="small-4 medium-4 large-4 columns text-center m-2">
+                                        <!-- <form> -->
+                                        <button type="button" class="btn btn-light"
+                                            id="inputWellName{{loop.index}}">
+
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
+                                            </svg>
+
+                                        </button>
+
+
+                                        <input style="width: 16px; height: 16px;" class="form-check-input"
+                                            type="checkbox" id="flexSwitchCheck{{loop.index}}" checked>
+                                    </div>
+                                </td>
+                            </tr>
+                            {%endfor%}
+                        </form>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="evaluate-button "data-toggle="modal" data-target="#ModalEvaluation" id="btn_evaluate" type="button">
+                <H6>Evaluate</H6>
+                <span>a</span>
+            </div>
+
+
+            <div class="evaluation-content">
+
+            </div>
+        </div>
     </div>
 
+    <div class="map-evaluation-container" >
+        <div id="map-container-google-1" class="z-depth-1-half ">
+            <div id="map"></div>
+        </div>
 
+    </div>
+</div>
     <!-- batas makmum -->
-
     <div class="modal fade" id="DescLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
@@ -442,6 +447,17 @@
   }
 
 
+</script>
+
+
+<script>
+    var menu_btn = document.querySelector("#menu-btn");
+    var sidebar = document.querySelector(".sidebar-evaluation-container");
+    var container = document.querySelector(".my-container");
+    menu_btn.addEventListener("click", () => {
+        sidebar.classList.toggle("active-sidebar");
+        menu_btn.classList.toggle("active-sidebar-button")
+    });
 </script>
 
 <script
