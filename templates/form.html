@@ -6,59 +6,28 @@
       <div class="col-md-4">
         <div class="card card-form" style="width: 30rem">
           <div class="card-body">
-            <form id="needs-validation"
-            enctype="multipart/form-data"
-            action="{{ url_for('upload_form')}}"
-            method="POST"
-            novalidate>
+            <form id="needs-validation" enctype="multipart/form-data" action="{{ url_for('upload_form')}}" method="POST"
+              novalidate>
               <div class="form-group">
                 <label for="exampleInputEmail1">Field Name</label>
-                <input
-                  name="field_name"
-                  type="text"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter Field Name"
-                  required
-                />
+                <input name="field_name" type="text" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Enter Field Name" required />
               </div>
               <div class="form-group">
                 <label for="exampleInputEmail1">Well Name</label>
-                <input
-                  name="well_name"
-                  type="text"
-                  class="form-control"
-                  id="exampleInputEmail1"
-                  aria-describedby="emailHelp"
-                  placeholder="Enter Well Name"
-                  required
-                />
+                <input name="well_name" type="text" class="form-control" id="exampleInputEmail1"
+                  aria-describedby="emailHelp" placeholder="Enter Well Name" required />
               </div>
               <div class="row">
                 <div class="col-md-6">
                   <label for="exampleInputEmail1">Latitude</label>
-                  <input
-                    name="form_lat"
-                    type="text"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter Latitude"
-                    required
-                  />
+                  <input name="form_lat" type="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter Latitude" required />
                 </div>
                 <div class="col-md-6">
                   <label for="exampleInputEmail1">Longitude</label>
-                  <input
-                    name="form_lon"
-                    ftype="text"
-                    class="form-control"
-                    id="exampleInputEmail1"
-                    aria-describedby="emailHelp"
-                    placeholder="Enter Longitude"
-                    required
-                  />
+                  <input name="form_lon" ftype="text" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter Longitude" required />
                 </div>
               </div>
               <br />
@@ -68,17 +37,9 @@
                       <div class="invalid-feedback">Example invalid custom file feedback</div>
                     </div> -->
               <div class="form-group">
-                <label for="exampleFormControlFile1"
-                  >Example file input</label
-                >
-                <input
-                  name="form_file"
-                  type="file"
-                  class="form-control-file"
-                  id="exampleFormControlFile1"
-                  accept=".csv"
-                  required
-                />
+                <label for="exampleFormControlFile1">Example file input</label>
+                <input name="form_file" type="file" class="form-control-file" id="exampleFormControlFile1" accept=".csv"
+                  required />
                 <div class="show-file-details">
                 </div>
 
@@ -116,85 +77,55 @@
                   <td>VOLVE</td>
                   <td>{{data['coordinate ']['WELL']}}</td>
                   <td>
-                    <button
-                      data-toggle="modal"
-                      data-target="#exampleModal{{data['_id']}}"
-                      style="background-color: white; border: none"
-                    >
+                    <button data-toggle="modal" data-target="#exampleModal{{data['_id']}}"
+                      style="background-color: white; border: none">
                       <img src="/static/detail.svg" alt="" />
                     </button>
 
-                    <a
-                      href="{{ url_for('well_table', id_well=data['_id'])}}"
-                    >
-                      <img src="/static/analyze.svg" alt=""
-                    /></a>
-                    <button
-                      data-toggle="modal"
-                      data-target="#ResultLog"
-                      class="btn btn-light"
-                      type="button"
-                    >
+                    <a href="{{ url_for('well_table', id_well=data['_id'])}}">
+                      <img src="/static/analyze.svg" alt="" /></a>
+                    <button data-toggle="modal" data-target="#ResultLog" class="btn btn-light" type="button">
                       <img src="/static/view.svg" alt="">
                     </button>
-                    <a
-                    data-toggle="modal" data-target="#basicModal"
-                      class="btn "
-                      ><img src="/static/delete.svg" alt=""></a
-                    >
+                    <a data-toggle="modal" data-target="#basicModal" class="btn "><img src="/static/delete.svg"
+                        alt=""></a>
 
-                    <div
-                    class="modal fade"
-                    id="basicModal"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="basicModal"
-                    aria-hidden="true"
-                    
-                  >
-                    <div class="modal-dialog modal-dialog-centered">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                      
-                          <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal"
+                      aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body d-flex justify-content-center  ">
+                            <div class="confirm-content  ">
+                              <div class="confirm-massage ">
+                                <div class="confirm-logo">
+                                  <img src="/static/confirm.svg" alt="" />
+                                </div>
+                                <div class="confirm-text">
+                                  <h3>Confirmation</h3>
+                                  <h6>Are you sure to delete this data?</h6>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default btn-lg" data-dismiss="modal">
+                              Close
+                            </button>
+                            <a href="{{ url_for('delete_well', id=data['_id'])}}">
+                              <button type="button" class="btn btn-danger btn-lg">
+                                Delete
+                              </button>
+                            </a>
+                          </div>
                         </div>
-                      <div class="modal-body d-flex justify-content-center  " >
-                                  <div class="confirm-content  ">
-                                    <div class="confirm-massage ">
-                                      <div class="confirm-logo">
-                                        <img src="/static/confirm.svg" alt="" />
-                                      </div>
-                                      <div class="confirm-text">
-                                        <h3>Confirmation</h3>
-                                        <h6>Are you sure to delete this data?</h6>
-                                      </div>
-                                    </div>
-                                  </div>
-                       
                       </div>
-                      <div class="modal-footer">
-                        <button
-                          type="button"
-                          class="btn btn-default btn-lg"
-                          data-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <a   href="{{ url_for('delete_well', id=data['_id'])}}">
-                          <button type="button" class="btn btn-danger btn-lg">
-                            Delete
-                          </button>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
                   </td>
                 </tr>
 
@@ -208,14 +139,8 @@
         <!--  -->
         <!--  -->
         {% for dataa in user_data %}
-        <div
-          class="modal fade"
-          id="exampleModal{{dataa['_id']}}"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
+        <div class="modal fade" id="exampleModal{{dataa['_id']}}" tabindex="-1" role="dialog"
+          aria-labelledby="exampleModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <!-- modal konten -->
             <div class="modal-content">
@@ -231,7 +156,7 @@
                     <thead>
                       <tr>
                         <th scope="col">GR</th>
-                        <th scope="col">ILD</th>
+                        <th scope="col">RT</th>
                         <th scope="col">NPHI</th>
                         <th scope="col">RHOB</th>
                         <th scope="col">SW</th>
@@ -246,195 +171,134 @@
                     <tbody>
                       {% if dataa['data'][0]['GR'] is defined %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-warning btn-sm"
-                        >
+                        <button type="button" class="btn btn-warning btn-sm">
                           <span class="glyphicon glyphicon-alert"></span>
                         </button>
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['ILD'] is defined or dataa['data'][0]['RT'] is defined or dataa['data'][0]['LLD'] is defined or dataa['data'][0]['HLLD'] is defined or dataa['data'][0]['IDFL'] is defined %}
+                      {% if dataa['data'][0]['RT'] is defined %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-warning btn-sm"
-                        >
+                        <button type="button" class="btn btn-warning btn-sm">
                           <span class="glyphicon glyphicon-alert"></span>
                         </button>
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['NPHI'] is defined or dataa['data'][0]['CNC'] is defined or dataa['data'][0]['TNPH'] is defined or dataa['data'][0]['TPHC'] is defined %}
+                      {% if dataa['data'][0]['NPHI'] %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-warning btn-sm"
-                        >
+                        <button type="button" class="btn btn-warning btn-sm">
                           <span class="glyphicon glyphicon-alert"></span>
                         </button>
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['RHOB'] is defined or dataa['data'][0]['RHOZ'] is defined or dataa['data'][0]['ZDEN'] is defined or dataa['data'][0]['ZDNC'] is defined or dataa['data'][0]['HDEN'] is defined %}
+                      {% if dataa['data'][0]['RHOB'] is defined %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-warning btn-sm"
-                        >
+                        <button type="button" class="btn btn-warning btn-sm">
                           <span class="glyphicon glyphicon-alert"></span>
                         </button>
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['SW'] is defined or dataa['data'][0]['SWE']%}
+                      {% if dataa['data'][0]['SW'] is defined %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm"
-                        >
+                        <button type="button" class="btn btn-danger btn-sm">
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['VSH'] is defined or dataa['data'][0]['Vshale'] is defined %}
+                      {% if dataa['data'][0]['VSH'] is defined %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm"
-                        >
+                        <button type="button" class="btn btn-danger btn-sm">
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
                       {% endif %} {% if dataa['data'][0]['PHIE'] is
                       defined %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm"
-                        >
+                        <button type="button" class="btn btn-danger btn-sm">
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
                       {% endif %} {% if dataa['data'][0]['PERM'] is
                       defined %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm"
-                        >
+                        <button type="button" class="btn btn-danger btn-sm">
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
                       {% endif %} {% if dataa['data'][0]['FACIES'] is
                       defined %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm"
-                        >
+                        <button type="button" class="btn btn-danger btn-sm">
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %} {% if dataa['data'][0]['HC'] is defined
-                      %}
+                      {% endif %} {% if dataa['data'][0]['HC'] is defined %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-success btn-sm"
-                        >
+                        <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                       {% else %}
                       <td>
-                        <button
-                          type="button"
-                          class="btn btn-danger btn-sm"
-                        >
+                        <button type="button" class="btn btn-danger btn-sm">
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
@@ -442,86 +306,112 @@
                     </tbody>
                   </table>
                   <br><br>
-                  
-               
-
 
                   <!-- monic -->
                   <div class="monic-content">
                     <div class="monic-dictionary-container">
-                        <div class="monic-dictionary-button">
-                            <p>Click to see our <span class="monic-button"> mnemonic dictionary</span></p>
-                        </div>
-                        <div class="monic-dictionary">
-                            <img src="/static/monic-dictionary.jpg" alt="" />
-                        </div>
+                      <div class="monic-dictionary-button">
+                        <p>Click to see our <span class="monic-button"> mnemonic dictionary</span></p>
+                      </div>
+                      <div class="monic-dictionary">
+                        <img src="/static/monic-dictionary.jpg" alt="" />
+                      </div>
                     </div>
                     {% for mnemonic in dataa["mnemonic_edit"] %}
-        
 
                     <div class="monic-data-fill">
-                      <span class="glyphicon glyphicon-ok text-success"></span>
-                      <p>
-                          Your data with curve mnemonic <span> {{mnemonic["before"]}}</span> was added into
-                          <span>{{mnemonic["after"]}}</span> .
-                      </p>
-                  </div>
-                  {% endfor %}
-                    <div class="monic-data-unfill">
-                        <span class="glyphicon glyphicon-alert text-warning"></span>
-                        <p>
-                            There is data that haven’t read yet. Please choose the choice
-                            below to make sure that all of the data have been added.
-                        </p>
+                      <label> <i class="glyphicon glyphicon-edit text-success"></i>
+                        Your data with curve mnemonic <span> {{mnemonic["before"]}}</span> was added into
+                        <span>{{mnemonic["after"]}}</span> .
+                      </label>
                     </div>
-    
-                
-    
+                    {% endfor %}
+
+                    {% if dataa['data'][0]['GR'] is defined and dataa['data'][0]['RT'] is defined
+                    and dataa['data'][0]['NPHI'] is defined and dataa['data'][0]['RHOB'] is defined%}
+                    <div></div>
+                    {% else %}
+                    <div class="monic-data-unfill">
+                      <span class="glyphicon glyphicon-alert text-warning"></span>
+                      <p>
+                        There is data that haven’t read yet. Please choose the choice
+                        below to make sure that all of the data have been added.
+                      </p>
+                    </div>
+
+                    <!-- manual mnemonic -->
                     <form id="needs-validation" enctype="multipart/form-data" action="{{ url_for('upload_form')}}"
-                        method="POST" novalidate class="monic-update-form">
-                        <div class="form-group">
-                            <label for="update1">From your file, GR is the same with</label>
-                            <select class="form-control" id="update1">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="update2">From your file, ILD is the same with</label>
-                            <select class="form-control" id="update2">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="update3">From your file, NPHI is the same with</label>
-                            <select class="form-control" id="update3">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-    
-                        <div class="form-group">
-                            <label for="update4">From your file, RHOB is the same with</label>
-                            <select class="form-control" id="update4">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-                        <div></div>
-                        <input type="submit"  />
+                      method="POST" novalidate class="monic-update-form">
+                      {% if dataa['data'][0]['GR'] is defined %}
+                      <div>
+                        <label for="update4">GR is defined </label> 
+                        <span class="glyphicon glyphicon-ok-circle text-success"></span>
+                      </div>
+                      {% else %}
+                      <div class="form-group">
+                        <label for="update1">In your file, GR is the same as</label>
+                        <select class="form-control" id="update1">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </select>
+                      </div>
+                      {% endif %}
+                      {% if dataa['data'][0]['RT'] is defined %}
+                      <div>
+                        <label for="update2">RT is defined </label> 
+                        <span class="glyphicon glyphicon-ok-circle text-success"></span>
+                      </div>
+                      {% else %}
+                      <div class="form-group">
+                        <label for="update2">In your file, RT is the same as</label>
+                        <select class="form-control" id="update2">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </select>
+                      </div>
+                      {% endif %}
+                      {% if dataa['data'][0]['NPHI'] is defined %}
+                      <div>
+                        <label for="update3">NPHI is defined </label> 
+                        <span class="glyphicon glyphicon-ok-circle text-success"></span>
+                      </div>
+                      {% else %}
+                      <div class="form-group">
+                        <label for="update3">In your file, NPHI the same as</label>
+                        <select class="form-control" id="update3">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </select>
+                      </div>
+                      {% endif %}
+                      {% if dataa['data'][0]['RHOB'] is defined %}
+                      <div>
+                        <label for="update4">RHOB is defined </label> 
+                        <span class="glyphicon glyphicon-ok-circle text-success"></span>
+                      </div>
+                      {% else %}
+                      <div class="form-group">
+                        <label for="update4">In your file, RHOB is the same as</label>
+                        <select class="form-control" id="update4">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                        </select>
+                      </div>
+                      {% endif %}
+                      <div></div>
+                      <input type="submit" />
+
+                      {% endif %}
                     </form>
-                </div>
+                  </div>
                   <!-- end of monic -->
                 </div>
                 <!-- tabel data sumur -->
@@ -533,31 +423,16 @@
 
         <!-- modal result -->
 
-        <div
-          class="modal fade"
-          id="ResultLog"
-          tabindex="-1"
-          role="dialog"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
+        <div class="modal fade" id="ResultLog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
             <!-- modal konten -->
             <div class="modal-content">
               <div class="modal-body">
-                <iframe
-                  src="{{ url_for('result_page')}}"
-                  style="border: none"
-                  width="100%"
-                  height="450"
-                ></iframe>
+                <iframe src="{{ url_for('result_page')}}" style="border: none" width="100%" height="450"></iframe>
               </div>
               <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-dismiss="modal"
-                >
+                <button type="button" class="btn btn-danger" data-dismiss="modal">
                   Close
                 </button>
               </div>
@@ -582,7 +457,7 @@
       });
     });
   </script>
-<!-- 
+  <!-- 
 <script>
   $(document).ready(function () {
     $("#btn_input").click(function () {
@@ -602,79 +477,79 @@
 
 
 
-<!-- For Validate -->
-<script>
-  (function () {
-    "use strict";
-    window.addEventListener(
-      "load",
-      function () {
-        var form = document.getElementById("needs-validation");
-        form.addEventListener(
-          "submit",
-          function (event) {
-            if (form.checkValidity() == false) {
-              event.preventDefault();
-              event.stopPropagation();
-            }
-            form.classList.add("was-validated");
+  <!-- For Validate -->
+  <script>
+    (function () {
+      "use strict";
+      window.addEventListener(
+        "load",
+        function () {
+          var form = document.getElementById("needs-validation");
+          form.addEventListener(
+            "submit",
+            function (event) {
+              if (form.checkValidity() == false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add("was-validated");
 
-          },
-          false
-        );
-      },
-      false
-    );
-  })();
-</script>
+            },
+            false
+          );
+        },
+        false
+      );
+    })();
+  </script>
 
-<!-- for file validation -->
-<script>
-  $(document).ready(function (e) {
-    document
-      .getElementById("exampleFormControlFile1")
-      .addEventListener("change", checkFile, false);
+  <!-- for file validation -->
+  <script>
+    $(document).ready(function (e) {
+      document
+        .getElementById("exampleFormControlFile1")
+        .addEventListener("change", checkFile, false);
 
-    function checkFile(e) {
-      var file_list = e.target.files;
+      function checkFile(e) {
+        var file_list = e.target.files;
 
-      for (var i = 0, file; (file = file_list[i]); i++) {
-        var sFileName = file.name;
+        for (var i = 0, file; (file = file_list[i]); i++) {
+          var sFileName = file.name;
 
-        var sFileExtension = sFileName.split(".")[1].toUpperCase();
-        var iFileSize = file.size;
-        var iConvert = (file.size / 5242880).toFixed(2);
+          var sFileExtension = sFileName.split(".")[1].toUpperCase();
+          var iFileSize = file.size;
+          var iConvert = (file.size / 5242880).toFixed(2);
 
 
-        if (
-          !(
-            sFileExtension === "CSV" 
-         
-          ) ||
-          iFileSize > 5242880
-        ) {
-          txt = "File type : " + sFileExtension + "<br/>";
-       
-          txt +=
-            "Only suport CSV file up to 5 MB.\n\n";
-          $(".show-file-details").html(txt);
-          // alert(txt);
+          if (
+            !(
+              sFileExtension === "CSV"
+
+            ) ||
+            iFileSize > 5242880
+          ) {
+            txt = "File type : " + sFileExtension + "<br/>";
+
+            txt +=
+              "Only suport CSV file up to 5 MB.\n\n";
+            $(".show-file-details").html(txt);
+            // alert(txt);
+          }
         }
       }
-    }
-  });
-</script>
+    });
+  </script>
 
-<script>
-  var monic_dictionary_button = document.querySelector(".monic-button");
-  var monic_dictionary = document.querySelector(".monic-dictionary");
+  <script>
+    var monic_dictionary_button = document.querySelector(".monic-button");
+    var monic_dictionary = document.querySelector(".monic-dictionary");
 
 
-  monic_dictionary_button.addEventListener("click", () => {
+    monic_dictionary_button.addEventListener("click", () => {
       monic_dictionary.classList.toggle("active");
 
-  });
-</script>
+    });
+  </script>
 
 
 </div>
