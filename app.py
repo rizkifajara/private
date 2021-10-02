@@ -39,6 +39,11 @@ def viewForm():
     return render_template("form.html", user_data=user_data_list)
 
 
+@app.route("/landing")
+def viewLanding():
+    return render_template("login.html")
+
+
 @app.route("/delete/<id>")
 def delete_well(id):
 
