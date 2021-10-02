@@ -41,7 +41,8 @@ def delete_well(id):
     try:
         collection.delete_one({'_id': ObjectId(id)})
 
-        return json.dumps("Data successfully removed")
+        # return json.dumps("Data successfully removed")
+        return render_template("redirect_delete.html")
 
     except Exception as e:
 
@@ -142,7 +143,7 @@ def upload_form():
 
         collection.insert_one(source)
         
-        return json.dumps("Data successfully uploaded")
+        return render_template("redirect_form.html")
     
     except Exception as e:
 

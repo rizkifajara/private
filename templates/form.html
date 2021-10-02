@@ -257,9 +257,9 @@
                       <td>
                         <button
                           type="button"
-                          class="btn btn-danger btn-sm"
+                          class="btn btn-warning btn-sm"
                         >
-                          <span class="glyphicon glyphicon-remove"></span>
+                          <span class="glyphicon glyphicon-alert"></span>
                         </button>
                       </td>
                       {% endif %}
@@ -277,9 +277,9 @@
                       <td>
                         <button
                           type="button"
-                          class="btn btn-danger btn-sm"
+                          class="btn btn-warning btn-sm"
                         >
-                          <span class="glyphicon glyphicon-remove"></span>
+                          <span class="glyphicon glyphicon-alert"></span>
                         </button>
                       </td>
                       {% endif %}
@@ -297,9 +297,9 @@
                       <td>
                         <button
                           type="button"
-                          class="btn btn-danger btn-sm"
+                          class="btn btn-warning btn-sm"
                         >
-                          <span class="glyphicon glyphicon-remove"></span>
+                          <span class="glyphicon glyphicon-alert"></span>
                         </button>
                       </td>
                       {% endif %}
@@ -317,9 +317,9 @@
                       <td>
                         <button
                           type="button"
-                          class="btn btn-danger btn-sm"
+                          class="btn btn-warning btn-sm"
                         >
-                          <span class="glyphicon glyphicon-remove"></span>
+                          <span class="glyphicon glyphicon-alert"></span>
                         </button>
                       </td>
                       {% endif %}
@@ -443,11 +443,86 @@
                   </table>
                   <br><br>
                   
-                  {% for mnemonic in dataa["mnemonic_edit"] %}
-                    <h3>Before : {{mnemonic["before"]}}, After : {{mnemonic["after"]}}</h3>
-                    
-                    <br>
+               
+
+
+                  <!-- monic -->
+                  <div class="monic-content">
+                    <div class="monic-dictionary-container">
+                        <div class="monic-dictionary-button">
+                            <p>Click to see our <span class="monic-button"> mnemonic dictionary</span></p>
+                        </div>
+                        <div class="monic-dictionary">
+                            <img src="/static/monic-dictionary.jpg" alt="" />
+                        </div>
+                    </div>
+                    {% for mnemonic in dataa["mnemonic_edit"] %}
+        
+
+                    <div class="monic-data-fill">
+                      <span class="glyphicon glyphicon-ok text-success"></span>
+                      <p>
+                          Your data with curve mnemonic <span> {{mnemonic["before"]}}</span> was added into
+                          <span>{{mnemonic["after"]}}</span> .
+                      </p>
+                  </div>
                   {% endfor %}
+                    <div class="monic-data-unfill">
+                        <span class="glyphicon glyphicon-alert text-warning"></span>
+                        <p>
+                            There is data that haven’t read yet. Please choose the choice
+                            below to make sure that all of the data have been added.
+                        </p>
+                    </div>
+    
+                
+    
+                    <form id="needs-validation" enctype="multipart/form-data" action="{{ url_for('upload_form')}}"
+                        method="POST" novalidate class="monic-update-form">
+                        <div class="form-group">
+                            <label for="update1">From your file, GR is the same with</label>
+                            <select class="form-control" id="update1">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="update2">From your file, ILD is the same with</label>
+                            <select class="form-control" id="update2">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="update3">From your file, NPHI is the same with</label>
+                            <select class="form-control" id="update3">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+    
+                        <div class="form-group">
+                            <label for="update4">From your file, RHOB is the same with</label>
+                            <select class="form-control" id="update4">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                        <div></div>
+                        <input type="submit"  />
+                    </form>
+                </div>
+                  <!-- end of monic -->
                 </div>
                 <!-- tabel data sumur -->
               </div>
@@ -589,6 +664,18 @@
     }
   });
 </script>
+
+<script>
+  var monic_dictionary_button = document.querySelector(".monic-button");
+  var monic_dictionary = document.querySelector(".monic-dictionary");
+
+
+  monic_dictionary_button.addEventListener("click", () => {
+      monic_dictionary.classList.toggle("active");
+
+  });
+</script>
+
 
 </div>
 
