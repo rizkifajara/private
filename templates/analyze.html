@@ -219,16 +219,10 @@
         });
       }
 
-      $("#btn_evaluate").click(function () {
-        let list_well_name = [];
-
-        for (let i = 1; i <= 5; i++) {
-          if ($("#flexSwitchCheck" + i).is(":checked")) {
-            list_well_name.push($("#well_name_id" + i).html());
-          }
-        }
-
-        console.log(list_well_name);
+    for (let i = 1; i <= 5; i++) {
+      $("#inputWellName" + i).click(function () {
+        var value_well = $("#well_name_id" + i).html()
+        console.log(value_well);
         $.ajax({
           url: "/send-well-list",
           type: "post",

@@ -1,5 +1,5 @@
 from threading import Thread
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, Response
 from flask_pymongo import pymongo
 import pandas as pd
 # from flask import Flask, render_template, request
@@ -267,12 +267,15 @@ def log():
 def hist():
     global well_name
     well_name = request.form.get("value_well")
+    
     if well_name == None:
         well_name = "15/9-F-5"
     else:
-        well_name = str(well_name)
+        well_name = well_name.strip()
+
     data, list_formation = get_form(nameWell=well_name)
     form = request.form.get('value_form')
+
     if form == None:
         try:
             form = list_formation[0]
