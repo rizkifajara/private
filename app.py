@@ -28,6 +28,8 @@ hackuna_db = client[database_name]
 collection_name = 'user'
 collection = hackuna_db[collection_name]
 
+num_data_global = 1500
+
 @app.route("/")
 def viewForm():
     user_data_list = []
@@ -42,7 +44,6 @@ def delete_well(id):
 
     try:
         collection.delete_one({'_id': ObjectId(id)})
-
         return json.dumps("Data successfully removed")
 
     except Exception as e:
@@ -121,7 +122,7 @@ def upload_form():
             "RHOZ": "RHOB", "ZDEN": "RHOB", "ZDNC": "RHOB", "HDEN": "RHOB",
             "Vshale": "VSH",
             "CNC": "NPHI", "TNPH":"NPHI", "TPHC":"NPHI",
-            "RT":"ILD", "LLD": "ILD", "HLLD": "ILD", "IDFL": "ILD",
+            "ILD":"RT", "LLD": "RT", "HLLD": "RT", "IDFL": "RT",
             "SWE": "SW"
         }
 
@@ -250,6 +251,7 @@ def result_page():
 
 @app.route('/hc', methods=['GET'])
 def hc_page():
+    global num_data_global
     script, div, cdn_js = eval_hc(num_data=num_data_global)
     return render_template("evalLog/hc.html",
                            script=script,
@@ -259,6 +261,7 @@ def hc_page():
 
 @app.route('/facies', methods=['GET'])
 def facies_page():
+    global num_data_global
     script, div, cdn_js = eval_facies(num_data=num_data_global)
     return render_template("evalLog/facies.html",
                            script=script,
@@ -268,6 +271,7 @@ def facies_page():
 
 @app.route('/perm', methods=['GET'])
 def perm_page():
+    global num_data_global
     script, div, cdn_js = eval_perm(num_data=num_data_global)
     return render_template("evalLog/perm.html",
                            script=script,
@@ -277,6 +281,7 @@ def perm_page():
 
 @app.route('/sw', methods=['GET'])
 def sw_page():
+    global num_data_global
     script, div, cdn_js = eval_sw(num_data=num_data_global)
     return render_template("evalLog/sw.html",
                            script=script,
@@ -286,6 +291,7 @@ def sw_page():
 
 @app.route('/phie', methods=['GET'])
 def phie_page():
+    global num_data_global
     script, div, cdn_js = eval_phie(num_data=num_data_global)
     return render_template("evalLog/phie.html",
                            script=script,
