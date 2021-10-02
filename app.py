@@ -1,18 +1,9 @@
-from threading import Thread
-from flask import Flask, render_template, request, Response
+from flask import Flask, render_template, request
 from flask_pymongo import pymongo
 import pandas as pd
-# from flask import Flask, render_template, request
-from werkzeug.utils import secure_filename
-from werkzeug.datastructures import  FileStorage
-# from pymongo import MongoClientq
 import json
 import os
 from bson.objectid import ObjectId
-
-# import dnspython
-
-from bokeh.embed import server_document
 
 from py_viz.bkapp.vsh import eval_vsh
 from py_viz.bkapp.phie import eval_phie
@@ -27,27 +18,20 @@ from math import cos, asin, sqrt
 from getData import get_data_from_dataiku
 app = Flask(__name__)
 
-# num_data_global=1500
-
-# well_name_global = "15/9-F-5"
-
 well_name_list = []
-
+mongoClient = "mongodb://johndoe:johndoe@cluster0-shard-00-00.jyb2o.mongodb.net:27017,cluster0-shard-00-01.jyb2o.mongodb.net:27017,cluster0-shard-00-02.jyb2o.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-94tnc1-shard-0&authSource=admin&retryWrites=true&w=majority"
+client = pymongo.MongoClient(mongoClient)
+database_name = 'hackuna_matata123'
+hackuna_db = client[database_name]
+collection_name = 'user'
+collection = hackuna_db[collection_name]
 
 @app.route("/")
 def viewForm():
-    client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    # client = pymongo.MongoClient("mongodb://johndoe:johndoe@cluster0-shard-00-00.jyb2o.mongodb.net:27017,cluster0-shard-00-01.jyb2o.mongodb.net:27017,cluster0-shard-00-02.jyb2o.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-94tnc1-shard-0&authSource=admin&retryWrites=true&w=majority")
-    db = client.test
-    database_name = 'hackuna_matata123'
-    student_db = client[database_name]
-    collection_name = 'user'
-    collection = student_db[collection_name]
     user_data_list = []
     for document in collection.find():
+        document['data'] = [document['data'][0]]
         user_data_list.append(document)
-        # print(document)
-    # print(user_data_list[0]["data"])
     return render_template("form.html", user_data=user_data_list)
 
 
@@ -55,18 +39,9 @@ def viewForm():
 def delete_well(id):
 
     try:
-
-        client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-        db = client.test
-        database_name='hackuna_matata123'
-        student_db=client[database_name]
-        collection_name='user'
-        collection=student_db[collection_name]
-
         collection.delete_one({'_id': ObjectId(id)})
 
-        # return json.dumps("Data successfully removed")
-        return render_template("redirect_delete.html")
+        return json.dumps("Data successfully removed")
 
     except Exception as e:
 
@@ -124,21 +99,8 @@ def upload_form():
         if field_name == '':
             return "Belum mengisi field name"
 
-        client = pymongo.MongoClient("mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-        db = client.test
-
-        # return db
-
         open('tmp/' + f.filename, 'wb').write(f.read())
         
-        database_name='hackuna_matata123'
-        student_db=client[database_name]
-
-
-        collection_name='user'
-        collection=student_db[collection_name]
-
-
         df = pd.read_csv("tmp/"+f.filename)
         
         source = {
@@ -152,20 +114,6 @@ def upload_form():
 
         }
         
-            
-        
-        for i in range(len(df)):
-            dict_df = {}
-            
-            for col in df.columns:
-                dict_df['WELL']=well_name
-                dict_df[col]=df[col].iloc[i]
-                
-            source['data'].append(dict_df)
-        
-        # print(source)
-
-        #--------- update in /postform
         true_col = ["GR", "ILD", "RHOB", "NPHI", "VSH", "PHIE", "SW", "PERM", "FACIES", "HC", "WELL"]
         auto_mnemonic = {
             "RHOZ": "RHOB", "ZDEN": "RHOB", "ZDNC": "RHOB", "HDEN": "RHOB",
@@ -175,28 +123,26 @@ def upload_form():
             "SWE": "SW"
         }
 
-        dict_df = {}
         replace_mc = []
         for i in range(len(df)):
+            dict_df = {}
             for col in df.columns:
                 new_col = auto_mnemonic.get(col, col)
                 if col not in true_col:
                     df = df.rename(columns={col: new_col})
-                    # ---- tambah ini ya utk return mnemonic yg berubah
                     if col!=new_col: replace_mc.append({"before": col, "after": new_col})
 
                 dict_df[new_col] = df[new_col].iloc[i]
             
+            dict_df['id'] = i
             dict_df["WELL"] = well_name
             source["data"].append(dict_df)
-    #----------
         
         source["mnemonic_edit"] = replace_mc
 
         collection.insert_one(source)
         
-        return render_template("redirect_form.html")
-        # return json.dumps("Data successfully uploaded")
+        return json.dumps("Data successfully uploaded")
     
     except Exception as e:
 
@@ -215,7 +161,6 @@ def closest(data, v):
     for dd in data:
         dd['dist'] = distance(v['lat'], v['lon'], dd['lat'], dd['lon'])
         print(dd)
-        #wow.jarak = distance(v['lat'],v['lon'],wow.get('lat'),wow.get('lon'))
 
     return min(data, key=lambda p: distance(v['lat'], v['lon'], p['lat'], p['lon']))
 
@@ -224,8 +169,6 @@ def closest(data, v):
 def well_table(id_well):
 
     df = get_data_from_dataiku("database_coordinate")
-
-    # df = pd.read_csv("tmp/volve_coordinate.csv")
 
     list_coord = list()
 
@@ -236,14 +179,6 @@ def well_table(id_well):
         dict_coord['label'] = df['WELL'][i]
         dict_coord['dist'] = None
         list_coord.append(dict_coord)
-
-    client = pymongo.MongoClient(
-        "mongodb+srv://johndoe:johndoe@cluster0.jyb2o.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client.test
-    database_name = 'hackuna_matata123'
-    student_db = client[database_name]
-    collection_name = 'user'
-    collection = student_db[collection_name]
 
     user_data_dict = collection.find_one(
         {"_id": ObjectId(id_well)}, {"data": 0})
@@ -267,15 +202,12 @@ def log():
 def hist():
     global well_name
     well_name = request.form.get("value_well")
-    
     if well_name == None:
         well_name = "15/9-F-5"
     else:
-        well_name = well_name.strip()
-
+        well_name = str(well_name)
     data, list_formation = get_form(nameWell=well_name)
     form = request.form.get('value_form')
-
     if form == None:
         try:
             form = list_formation[0]
@@ -367,4 +299,4 @@ def nice():
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port, debug=False)
+    app.run(host='0.0.0.0', port=port, debug=True)
