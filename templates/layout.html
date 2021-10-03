@@ -21,14 +21,30 @@
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+    integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+    integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous">
+  </script>
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
   <style>
     body {
       width: 100vw;
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      overflow: hidden;
       background-image: url("/static/background.png");
       position: relative;
     }
@@ -79,7 +95,7 @@
     }
 
     .form-container {
-      height: 75vh;
+      min-height: 75vh;
     }
 
     .footer {
@@ -93,7 +109,7 @@
       padding: 0vh 10vh;
       position: absolute;
       bottom: 0;
-      z-index: 5;
+      z-index: 6;
     }
 
     .corporation {
@@ -116,24 +132,20 @@
       box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
     }
 
-    .table-list-field>thead {
+    .table-form>thead {
       background-color: #17464e;
     }
 
-    .table-list-field>thead>tr>th {
+    .table-form>thead>tr>th {
       color: white;
       text-align: center;
     }
 
-    .table-list-field>tbody>tr>th {
+    .table-form>tbody>tr>td {
 
       text-align: center;
     }
 
-    .table-list-field>tbody>tr>td {
-
-      text-align: center;
-    }
 
 
 
@@ -344,10 +356,10 @@
     }
 
     .table-evaluation>tbody>tr>td {
-  
-     
+
+
       text-align: center;
-    
+
 
     }
 
@@ -414,10 +426,19 @@
 
     .map-evaluation-container {
 
-      z-index: 5;
-      width: 100%;
+      z-index: 4;
+      width: 62vw;
       height: 80vh;
+      right: 0;
       background-color: turquoise;
+      position: absolute;
+    }
+
+    .map-evaluation-container.active {
+
+
+      width: 100%;
+
     }
 
     .map-evaluation-container>.map-container-google-1 {
@@ -436,22 +457,22 @@
       background-color: turquoise;
     }
 
-    #eye-off{
-          display: flex;
-      }
+    #eye-off {
+      display: flex;
+    }
 
-      #eye-off.active{
-          display: none;
-      }
+    #eye-off.active {
+      display: none;
+    }
 
-      
-      #eye-open{
-          display: none;
-      }
 
-      #eye-open.active{
-          display: flex;
-      }
+    #eye-open {
+      display: none;
+    }
+
+    #eye-open.active {
+      display: flex;
+    }
 
 
 
@@ -468,7 +489,7 @@
       background-color: white;
       box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.25);
       position: absolute;
-      z-index: 5;
+      z-index: 6;
 
     }
 
@@ -516,7 +537,7 @@
       cursor: pointer;
     }
 
-    .button-bottom-container>.back-button:hover{
+    .button-bottom-container>.back-button:hover {
 
       background-color: rgb(180, 3, 3);
 
@@ -555,9 +576,19 @@
 
     .map-analyze-container {
       width: auto;
-      height: 80vh;
+      height: 75vh;
       background-color: turquoise;
+      position: absolute;
+      z-index: 4;
+
     }
+
+    .map-analyze-container.active {
+
+
+width: 100%;
+
+}
 
     #menu-btn {
       position: absolute;
@@ -634,14 +665,26 @@
       font-weight: 700;
     }
 
+
+
+
     .analyze-graph {
 
-      width: 100%;
+      width: 75vw;
       height: 100%;
-      display: flex;
-      justify-content: center;
+  
       align-items: center;
+      position: absolute;
+      z-index: 4;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .analyze-graph.active {
+
+      width: 100%;
+}
 
     .arrow-analyze-button,
     .arrow-analyze-info {
@@ -654,111 +697,112 @@
     }
 
 
-      /* monic */
-      .monic-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100%;
-            flex-direction: column;
-        }
+    /* monic */
+    .monic-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100%;
+      flex-direction: column;
+    }
 
-        .monic-content {
-            height: 70%;
-            width: 100%;
-            background-color: white;
-            padding: 2vh;
-            display: flex;
-           
-            align-items: center;
-            flex-direction: column;
-        }
+    .monic-content {
+      height: 70%;
+      width: 100%;
+      background-color: white;
+      padding: 2vh;
+      display: flex;
 
-        .monic-dictionary-container {
-            width: 100%;
-        }
+      align-items: center;
+      flex-direction: column;
+    }
 
-        .monic-dictionary-button {
-            display: flex;
-        }
+    .monic-dictionary-container {
+      width: 100%;
+    }
 
-        .monic-dictionary-button>p {
-            font-size: 2vh;
-        }
+    .monic-dictionary-button {
+      display: flex;
+    }
 
-        .monic-dictionary-button>p>span {
-            font-style: italic;
-            color: rgb(0, 162, 255);
-            text-decoration: underline;
-            cursor: pointer;
-        }
+    .monic-dictionary-button>p {
+      font-size: 2vh;
+    }
 
-        .monic-dictionary {
-            
-            justify-content: center;
-            margin-top: 2vh;
-            display:none;
-        }
-        .monic-dictionary.active{
-            display: flex;
-         
-        }
-      
+    .monic-dictionary-button>p>span {
+      font-style: italic;
+      color: rgb(0, 162, 255);
+      text-decoration: underline;
+      cursor: pointer;
+    }
 
-        .monic-dictionary>img {
-            height: 15vh;
-        }
+    .monic-dictionary {
 
-        .monic-data-unfill,
-        .monic-data-fill {
-            width: 90%;
-            display: flex;
-            flex-direction: row;
-            margin-top: 3vh;
-        }
+      justify-content: center;
+      margin-top: 2vh;
+      display: none;
+    }
 
-        .monic-data-unfill>span,
-        .monic-data-fill>span {
-            margin-right: 3vh;
-            font-size: 3vh;
-        }
+    .monic-dictionary.active {
+      display: flex;
 
-        .monic-data-unfill>p,
-        .monic-data-fill>p {
-            font-size: 2vh;
-        }
+    }
 
-        .monic-update-form {
-            width: 80%;
-            display: grid;
-            grid-gap: 3vh;
-            justify-items: center;
-            align-items: center;
-            grid-template-columns: repeat(2, 1fr);
-            margin-top: 5vh;
-        }
 
-        .monic-update-form >.form-group {
-            width: 100%;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            grid-gap: 2vh;
-        }
+    .monic-dictionary>img {
+      height: 15vh;
+    }
 
-        .monic-update-form > input {
-            background-color: #0D503C;
-            border: none;
-            color: white;
-            padding: 1vh 4vh;
-            border-radius: 2vh;
-         
-        }
+    .monic-data-unfill,
+    .monic-data-fill {
+      width: 90%;
+      display: flex;
+      flex-direction: row;
+      margin-top: 3vh;
+    }
 
-        .monic-update-form > input:hover {
-            background-color: #094130;
-          
-        }
+    .monic-data-unfill>span,
+    .monic-data-fill>span {
+      margin-right: 3vh;
+      font-size: 3vh;
+    }
+
+    .monic-data-unfill>p,
+    .monic-data-fill>p {
+      font-size: 2vh;
+    }
+
+    .monic-update-form {
+      width: 80%;
+      display: grid;
+      grid-gap: 3vh;
+      justify-items: center;
+      align-items: center;
+      grid-template-columns: repeat(2, 1fr);
+      margin-top: 5vh;
+    }
+
+    .monic-update-form>.form-group {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 2vh;
+    }
+
+    .monic-update-form>input {
+      background-color: #0D503C;
+      border: none;
+      color: white;
+      padding: 1vh 4vh;
+      border-radius: 2vh;
+
+    }
+
+    .monic-update-form>input:hover {
+      background-color: #094130;
+
+    }
   </style>
   <script>
     window.Promise ||

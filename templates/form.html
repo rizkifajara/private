@@ -56,24 +56,24 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-8">
         <div class="card card-list-field">
           <div class="card-body">
-            <table class="table table-list-field">
+            <table class="table table-fluid table-form" id="myTableForm">
               <thead>
                 <tr>
                   <th scope="col">No</th>
                   <th scope="col">Field Name</th>
                   <th scope="col">Well Name</th>
                   <th scope="col">Data</th>
-                  <th scope="col"></th>
+               
                 </tr>
               </thead>
               <tbody>
                 {% for data in user_data %}
 
                 <tr>
-                  <th scope="row">{{loop.index}}</th>
+                  <td scope="row">{{loop.index}}</td>
                   <td>VOLVE</td>
                   <td>{{data['coordinate ']['WELL']}}</td>
                   <td>
@@ -475,7 +475,6 @@
 
 
 
-
   <!-- For Validate -->
   <script>
     (function () {
@@ -554,6 +553,12 @@
 
     }
   </script>
+
+<script>
+  $(document).ready(function () {
+      $('#myTableForm').DataTable();
+  });
+</script>
 </div>
 
 {%endblock%}

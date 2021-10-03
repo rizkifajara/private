@@ -26,8 +26,8 @@
         </div>
 
         <div class="evaluation-table-container">
-          <div class="evaluation-table">
-            <table id="mytable" class="table table-evaluation">
+          <div class="evaluation-table p-2">
+            <table id="myTableEvaluation" class="table table-fluid table-evaluation">
               <thead class="table-dark">
                 <tr>
                   <th scope="col">No</th>
@@ -35,7 +35,7 @@
                   <th scope="col">Nearest Well</th>
                   <th scope="col">Well Distance</th>
                   <th scope="col">Condition</th>
-                  <th></th>
+                
                 </tr>
               </thead>
               <tbody>
@@ -524,6 +524,9 @@
                 cityCircle[x].setMap(null);
               } else {
                 cityCircle[x].setMap(map);
+                map.setZoom(8);
+                map.setCenter(  cityCircle[x].getPosition());
+                
               }
             });
 
@@ -536,6 +539,8 @@
               if (!tempYellow[x]) {
                 cityCircleYellow[x].setMap(map);
                 cityPolylinePath[x].setMap(map);
+                map.setZoom(3);
+                map.setCenter( cityPolylinePath[x].getPosition());
               } else {
                 cityCircleYellow[x].setMap(null);
                 cityPolylinePath[x].setMap(null);
@@ -555,11 +560,19 @@
     var menu_btn = document.querySelector("#menu-btn");
     var sidebar = document.querySelector(".sidebar-evaluation-container");
     var container = document.querySelector(".my-container");
+    var map_evaluation = document.querySelector(".map-evaluation-container");
     menu_btn.addEventListener("click", () => {
       sidebar.classList.toggle("active-sidebar");
       menu_btn.classList.toggle("active-sidebar-button");
+      map_evaluation.classList.toggle("active");
     });
   </script>
+
+<script>
+  $(document).ready(function () {
+      $('#myTableEvaluation').DataTable();
+  });
+</script>
 
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF0AFZrT4iYWDmT5FAyoJfnO_C1bz4hgw&callback=initMap&libraries=&v=weekly"
