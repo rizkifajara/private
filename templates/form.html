@@ -156,7 +156,7 @@
                     <thead>
                       <tr>
                         <th scope="col">GR</th>
-                        <th scope="col">ILD</th>
+                        <th scope="col">RT</th>
                         <th scope="col">NPHI</th>
                         <th scope="col">RHOB</th>
                         <th scope="col">SW</th>
@@ -183,7 +183,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['ILD'] is defined or dataa['data'][0]['RT'] is defined or dataa['data'][0]['LLD'] is defined or dataa['data'][0]['HLLD'] is defined or dataa['data'][0]['IDFL'] is defined %}
+                      {% if dataa['data'][0]['RT'] is defined %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -197,7 +197,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['NPHI'] is defined or dataa['data'][0]['CNC'] is defined or dataa['data'][0]['TNPH'] is defined or dataa['data'][0]['TPHC'] is defined %}
+                      {% if dataa['data'][0]['NPHI'] %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -211,7 +211,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['RHOB'] is defined or dataa['data'][0]['RHOZ'] is defined or dataa['data'][0]['ZDEN'] is defined or dataa['data'][0]['ZDNC'] is defined or dataa['data'][0]['HDEN'] is defined %}
+                      {% if dataa['data'][0]['RHOB'] is defined %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -225,7 +225,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['SW'] is defined or dataa['data'][0]['SWE']%}
+                      {% if dataa['data'][0]['SW'] is defined %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -239,7 +239,7 @@
                       </td>
                       {% endif %}
 
-                      {% if dataa['data'][0]['VSH'] is defined or dataa['data'][0]['Vshale'] is defined %}
+                      {% if dataa['data'][0]['VSH'] is defined %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -290,8 +290,7 @@
                           <span class="glyphicon glyphicon-remove"></span>
                         </button>
                       </td>
-                      {% endif %} {% if dataa['data'][0]['HC'] is defined
-                      %}
+                      {% endif %} {% if dataa['data'][0]['HC'] is defined %}
                       <td>
                         <button type="button" class="btn btn-success btn-sm">
                           <span class="glyphicon glyphicon-ok"></span>
@@ -308,9 +307,6 @@
                   </table>
                   <br><br>
 
-
-
-
                   <!-- monic -->
                   <div class="monic-content">
                     <div class="monic-dictionary-container">
@@ -323,13 +319,17 @@
                     </div>
                     {% for mnemonic in dataa["mnemonic_edit"] %}
                     <div class="monic-data-fill">
-                      <span class="glyphicon glyphicon-ok text-success"></span>
-                      <p>
+                      <label> <i class="glyphicon glyphicon-edit text-success"></i>
                         Your data with curve mnemonic <span> {{mnemonic["before"]}}</span> was added into
                         <span>{{mnemonic["after"]}}</span> .
-                      </p>
+                      </label>
                     </div>
                     {% endfor %}
+
+                    {% if dataa['data'][0]['GR'] is defined and dataa['data'][0]['RT'] is defined
+                    and dataa['data'][0]['NPHI'] is defined and dataa['data'][0]['RHOB'] is defined%}
+                    <div></div>
+                    {% else %}
                     <div class="monic-data-unfill">
                       <span class="glyphicon glyphicon-alert text-warning"></span>
                       <p>
@@ -338,12 +338,17 @@
                       </p>
                     </div>
 
-
-
+                    <!-- manual mnemonic -->
                     <form id="needs-validation" enctype="multipart/form-data" action="{{ url_for('upload_form')}}"
                       method="POST" novalidate class="monic-update-form">
+                      {% if dataa['data'][0]['GR'] is defined %}
+                      <div>
+                        <label for="update4">GR is defined </label> 
+                        <span class="glyphicon glyphicon-ok-circle text-success"></span>
+                      </div>
+                      {% else %}
                       <div class="form-group">
-                        <label for="update1">From your file, GR is the same with</label>
+                        <label for="update1">In your file, GR is the same as</label>
                         <select class="form-control" id="update1">
                           <option>1</option>
                           <option>2</option>
@@ -351,9 +356,15 @@
                           <option>4</option>
                         </select>
                       </div>
-
+                      {% endif %}
+                      {% if dataa['data'][0]['RT'] is defined %}
+                      <div>
+                        <label for="update2">RT is defined </label> 
+                        <span class="glyphicon glyphicon-ok-circle text-success"></span>
+                      </div>
+                      {% else %}
                       <div class="form-group">
-                        <label for="update2">From your file, ILD is the same with</label>
+                        <label for="update2">In your file, RT is the same as</label>
                         <select class="form-control" id="update2">
                           <option>1</option>
                           <option>2</option>
@@ -361,9 +372,15 @@
                           <option>4</option>
                         </select>
                       </div>
-
+                      {% endif %}
+                      {% if dataa['data'][0]['NPHI'] is defined %}
+                      <div>
+                        <label for="update3">NPHI is defined </label> 
+                        <span class="glyphicon glyphicon-ok-circle text-success"></span>
+                      </div>
+                      {% else %}
                       <div class="form-group">
-                        <label for="update3">From your file, NPHI is the same with</label>
+                        <label for="update3">In your file, NPHI the same as</label>
                         <select class="form-control" id="update3">
                           <option>1</option>
                           <option>2</option>
@@ -371,9 +388,15 @@
                           <option>4</option>
                         </select>
                       </div>
-
+                      {% endif %}
+                      {% if dataa['data'][0]['RHOB'] is defined %}
+                      <div>
+                        <label for="update4">RHOB is defined </label> 
+                        <span class="glyphicon glyphicon-ok-circle text-success"></span>
+                      </div>
+                      {% else %}
                       <div class="form-group">
-                        <label for="update4">From your file, RHOB is the same with</label>
+                        <label for="update4">In your file, RHOB is the same as</label>
                         <select class="form-control" id="update4">
                           <option>1</option>
                           <option>2</option>
@@ -381,8 +404,11 @@
                           <option>4</option>
                         </select>
                       </div>
+                      {% endif %}
                       <div></div>
                       <input type="submit" />
+
+                      {% endif %}
                     </form>
                   </div>
                   <!-- end of monic -->
@@ -486,8 +512,7 @@
       function checkFile(e) {
         var file_list = e.target.files;
 
-        for (var i = 0, file;
-          (file = file_list[i]); i++) {
+        for (var i = 0, file; (file = file_list[i]); i++) {
           var sFileName = file.name;
 
           var sFileExtension = sFileName.split(".")[1].toUpperCase();

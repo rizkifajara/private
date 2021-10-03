@@ -45,7 +45,7 @@ def eval_facies(num_data):
     hgh = 500
     tools = "crosshair, pan,reset,wheel_zoom"
 
-    # track: HC
+    # track: facies
     a, b = -0.5, 0.5
     p1 = figure(width=int(wdt*1.15), height=hgh, x_range=[a, b], y_range=[d2, d1],
                 tools=tools, title='Blind Well Test', y_axis_label='n_data')
@@ -63,11 +63,11 @@ def eval_facies(num_data):
         <span style="font-size: 8px;"><b>WELL:</b> 
         <span style="font-size: 8px;"><b>DEPTH:</b> @DEPTH{0.2f}</span><br>
         <span style="font-size: 8px;"><b>index:</b> @index</span><br>
-        <span style="font-size: 8px;"><b>HC:</b> @HC</span>
+        <span style="font-size: 8px;"><b>FACIES:</b> @FACIES</span>
     </div>
     """))
 
-    # track: HC
+    # track: facies
     a, b = -0.5, 0.5
     p2 = figure(width=wdt, height=hgh, x_range=[a, b], y_range=[d2, d1],
                 tools=tools)

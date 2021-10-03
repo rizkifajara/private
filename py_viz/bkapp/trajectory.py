@@ -61,15 +61,15 @@ def plot_trajectory(nameWell, data=df):
                 y_range=[df_well.TVD_ft.max()*1.1, 0], y_axis_location='right',
                 y_axis_label='TVD (ft)', x_axis_label='Distance (ft)'
                 )
-    p2.cross('East', 'TVD', source=source, color='gold',
-             size=3, legend_label='TVD x (West - East)')
-    p2.line('East', 'TVD', source=source, color='gold',
-            legend_label='TVD x (West - East)', line_width=0.2)
-    p2.cross('North', 'TVD', source=source, color='blue',
-             size=3, legend_label='TVD x (South - North)')
-    p2.line('North', 'TVD', source=source, color='blue',
-            legend_label='TVD x (South - North)', line_width=0.2)
-    # p2.cross('Dist', 'TVD', source=source, color='green', size=3, legend_label='TVD x Resultan')
+    # p2.cross('East', 'TVD', source=source, color='gold',
+    #          size=3, legend_label='TVD x (West - East)')
+    # p2.line('East', 'TVD', source=source, color='gold',
+    #         legend_label='TVD x (West - East)', line_width=0.2)
+    # p2.cross('North', 'TVD', source=source, color='blue',
+    #          size=3, legend_label='TVD x (South - North)')
+    # p2.line('North', 'TVD', source=source, color='blue',
+    #         legend_label='TVD x (South - North)', line_width=0.2)
+    p2.cross('Dist', 'TVD', source=source, color='green', size=3, legend_label='TVD x Resultan')
 
     p2.xaxis.major_label_orientation = 'vertical'
     p2.add_tools(HoverTool(tooltips="""
