@@ -350,10 +350,9 @@
                       <div class="form-group">
                         <label for="update1">In your file, GR is the same as</label>
                         <select class="form-control" id="update1">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
+                          {% for key, value in dataa['data'][0].items() if key != "id"%}
+                            <option>{{key}}</option>
+                          {% endfor %}
                         </select>
                       </div>
                       {% endif %}
@@ -366,10 +365,9 @@
                       <div class="form-group">
                         <label for="update2">In your file, RT is the same as</label>
                         <select class="form-control" id="update2">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
+                          {% for key, value in dataa['data'][0].items() if key != "id"%}
+                            <option>{{key}}</option>
+                          {% endfor %}
                         </select>
                       </div>
                       {% endif %}
@@ -382,10 +380,9 @@
                       <div class="form-group">
                         <label for="update3">In your file, NPHI the same as</label>
                         <select class="form-control" id="update3">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
+                          {% for key, value in dataa['data'][0].items() if key != "id"%}
+                            <option>{{key}}</option>
+                          {% endfor %}
                         </select>
                       </div>
                       {% endif %}
@@ -398,10 +395,9 @@
                       <div class="form-group">
                         <label for="update4">In your file, RHOB is the same as</label>
                         <select class="form-control" id="update4">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
+                          {% for key, value in dataa['data'][0].items() if key != "id"%}
+                            <option>{{key}}</option>
+                          {% endfor %}
                         </select>
                       </div>
                       {% endif %}
