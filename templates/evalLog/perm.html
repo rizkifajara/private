@@ -102,21 +102,20 @@
   </div>
 
   <div class="analyze-graph">
-    <div class="analyz-graph-content">
+    <div class="analyze-graph-content">
     {{script | safe}} {{div | safe}}</div></div>
 
 
-
-  <script>
-    var menu_btn_analyze = document.querySelector("#menu-btn");
-    var sidebar_analyze = document.querySelector(".sidebar-analyze-container");
-    var container_analyze = document.querySelector(".my-container");
-    menu_btn_analyze.addEventListener("click", () => {
-      sidebar_analyze.classList.toggle("active-sidebar");
-      menu_btn_analyze.classList.toggle("active-sidebar-button")
-    });
-  </script>
-
+    <script>
+      var menu_btn_analyze = document.querySelector("#menu-btn");
+      var sidebar_analyze = document.querySelector(".sidebar-analyze-container");
+      var container_analyze = document.querySelector(".analyze-graph");
+      menu_btn_analyze.addEventListener("click", () => {
+        sidebar_analyze.classList.toggle("active-sidebar");
+        menu_btn_analyze.classList.toggle("active-sidebar-button")
+        container_analyze.classList.toggle("active")
+      });
+    </script>
 <script>
   var dropdown_button_analyze = document.querySelector(".analyze-dropdown");
   var container_button_analyze = document.querySelector(".analyze-button-pack");
