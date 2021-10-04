@@ -66,7 +66,7 @@
                   <th scope="col">Field Name</th>
                   <th scope="col">Well Name</th>
                   <th scope="col">Data</th>
-               
+
                 </tr>
               </thead>
               <tbody>
@@ -151,20 +151,51 @@
               </div>
               <div class="modal-body">
                 <!-- tabel data sumur -->
-                <div class="table-responsive">
-                  <table class="table">
+                <div class="card-body">
+
+                  <table class="table table-status">
                     <thead>
+
                       <tr>
-                        <th scope="col">GR</th>
-                        <th scope="col">RT</th>
-                        <th scope="col">NPHI</th>
-                        <th scope="col">RHOB</th>
-                        <th scope="col">SW</th>
-                        <th scope="col">VSH</th>
-                        <th scope="col">PHIE</th>
-                        <th scope="col">PERM</th>
-                        <th scope="col">FACIES</th>
-                        <th scope="col">HC</th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right" title="GR (Gamma Ray Log) is a log that measures the natural radioactivity in formations which can be used for identifying lithologies and correlating zones.
+                          ">GR</span>
+                        </th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right" title="RT (True Resistivity Log) is an electrical log that measures the value of the electric current resistance in the rock formation.
+                            ">RT</span>
+                        </th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right" title="NPHI (Neutron-Porosity Log) is a radioactive log that serves to identify lithology based on the porosity value as measured by the hydrogen concentration in rock formations.
+                            ">NPHI</span>
+                        </th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right" title="RHOB (Density Log) is a radioactive log that measures the electron density of a rock layer associated with the value of bulk density.
+                            ">RHOB</span>
+                        </th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right" title="SW (Water Saturation) is the sum of the pore volumes in a rock filled with water.
+                            ">SW</span>
+                        </th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right" title="VSH (Volume Shale) is the amount of shale content in rock pores.">VSH</span>
+                        </th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right" title="PHIE (Effective Porosity) is the porosity of a rock or sediment available to contribute to fluid flow through the rock.
+                            ">PHIE</span>
+                        </th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right"
+                            title="PERM (Permeability) is a measure of the ability of a porous rock to allow fluids to pass through it.">PERM</span>
+                        </th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right" title="FACIES is a body of rock with specified characteristics which can be any observable attribute of rocks and the changes that may occur in those attributes over a geographic area. 
+                            ">FACIES</span>
+                        </th>
+                        <th scope="col"><span class="tooltiptext" data-bs-toggle="tooltip" data-bs-container="body"
+                            data-bs-placement="right" title="HC is Hydrocarbon (oil or gas) zone.
+                            ">HC</span>
+                        </th>
                       </tr>
                     </thead>
 
@@ -343,7 +374,7 @@
                       method="POST" novalidate class="monic-update-form">
                       {% if dataa['data'][0]['GR'] is defined %}
                       <div>
-                        <label for="update4">GR is defined </label> 
+                        <label for="update4">GR is defined </label>
                         <span class="glyphicon glyphicon-ok-circle text-success"></span>
                       </div>
                       {% else %}
@@ -351,14 +382,14 @@
                         <label for="update1">In your file, GR is the same as</label>
                         <select class="form-control" id="update1">
                           {% for key, value in dataa['data'][0].items() if key != "id"%}
-                            <option>{{key}}</option>
+                          <option>{{key}}</option>
                           {% endfor %}
                         </select>
                       </div>
                       {% endif %}
                       {% if dataa['data'][0]['RT'] is defined %}
                       <div>
-                        <label for="update2">RT is defined </label> 
+                        <label for="update2">RT is defined </label>
                         <span class="glyphicon glyphicon-ok-circle text-success"></span>
                       </div>
                       {% else %}
@@ -366,14 +397,14 @@
                         <label for="update2">In your file, RT is the same as</label>
                         <select class="form-control" id="update2">
                           {% for key, value in dataa['data'][0].items() if key != "id"%}
-                            <option>{{key}}</option>
+                          <option>{{key}}</option>
                           {% endfor %}
                         </select>
                       </div>
                       {% endif %}
                       {% if dataa['data'][0]['NPHI'] is defined %}
                       <div>
-                        <label for="update3">NPHI is defined </label> 
+                        <label for="update3">NPHI is defined </label>
                         <span class="glyphicon glyphicon-ok-circle text-success"></span>
                       </div>
                       {% else %}
@@ -381,14 +412,14 @@
                         <label for="update3">In your file, NPHI the same as</label>
                         <select class="form-control" id="update3">
                           {% for key, value in dataa['data'][0].items() if key != "id"%}
-                            <option>{{key}}</option>
+                          <option>{{key}}</option>
                           {% endfor %}
                         </select>
                       </div>
                       {% endif %}
                       {% if dataa['data'][0]['RHOB'] is defined %}
                       <div>
-                        <label for="update4">RHOB is defined </label> 
+                        <label for="update4">RHOB is defined </label>
                         <span class="glyphicon glyphicon-ok-circle text-success"></span>
                       </div>
                       {% else %}
@@ -396,7 +427,7 @@
                         <label for="update4">In your file, RHOB is the same as</label>
                         <select class="form-control" id="update4">
                           {% for key, value in dataa['data'][0].items() if key != "id"%}
-                            <option>{{key}}</option>
+                          <option>{{key}}</option>
                           {% endfor %}
                         </select>
                       </div>
@@ -507,7 +538,8 @@
       function checkFile(e) {
         var file_list = e.target.files;
 
-        for (var i = 0, file; (file = file_list[i]); i++) {
+        for (var i = 0, file;
+          (file = file_list[i]); i++) {
           var sFileName = file.name;
 
           var sFileExtension = sFileName.split(".")[1].toUpperCase();
@@ -550,11 +582,19 @@
     }
   </script>
 
-<script>
-  $(document).ready(function () {
+  <script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+  </script>
+
+
+  <script>
+    $(document).ready(function () {
       $('#myTableForm').DataTable();
-  });
-</script>
+    });
+  </script>
 </div>
 
 {%endblock%}

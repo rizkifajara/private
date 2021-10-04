@@ -147,6 +147,11 @@
     }
 
 
+    .table-status > thead > tr > th > span{
+ 
+      cursor:pointer;
+    }
+ 
 
 
     .success-section {
@@ -238,6 +243,13 @@
       flex-direction: column;
     }
 
+.tooltip {
+  font-size: 1.5vh;
+}
+.tooltip-inner {
+  max-width: 300px;
+
+}
     .confirm-massage {
       display: flex;
       width: 90%;
@@ -586,9 +598,9 @@
     .map-analyze-container.active {
 
 
-width: 100%;
+      width: 100%;
 
-}
+    }
 
     #menu-btn {
       position: absolute;
@@ -672,7 +684,7 @@ width: 100%;
 
       width: 75vw;
       height: 100%;
-  
+
       align-items: center;
       position: absolute;
       z-index: 4;
@@ -681,10 +693,11 @@ width: 100%;
       align-items: center;
       justify-content: center;
     }
+
     .analyze-graph.active {
 
       width: 100%;
-}
+    }
 
     .arrow-analyze-button,
     .arrow-analyze-info {
@@ -803,6 +816,8 @@ width: 100%;
       background-color: #094130;
 
     }
+
+  
   </style>
   <script>
     window.Promise ||
