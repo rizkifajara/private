@@ -16,13 +16,16 @@
         html {
             background-image: url("https://smagasemarang.com/delfisaga/fs/aset/background.png");
             /* background-color: #cccccc; */
-
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
             background-position: center;
             background-repeat: no-repeat;
-            background-size: auto auto;
+            background-size: cover;
+
         }
 
-      
+
         h1,
         h2,
         h3,
@@ -48,7 +51,26 @@
             background-color: #17464E !important;
         }
 
-      
+        .title-login>h3 {
+            font-size: 5vh;
+            font-weight: 700;
+            margin-bottom: 5vh;
+        }
+
+        .title-login>h5 {
+            font-size: 3vh;
+            line-height: 1.5;
+            margin-bottom: 5vh;
+        }
+
+        .title-login>a {
+            height: 7vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            font-size: 2vh;
+        }
     </style>
 
 
@@ -77,7 +99,7 @@
 
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-5">
+        <div class="col-md-5 title-login ">
             <h3>Welcome to PRIVATE!</h3>
             <h5>Explore a better experience to create a bteer simulation for oil and gas exploration</h5>
             <a href="" class="btn btn-primary btn-sm border-dark rounded-pill" data-toggle="modal"
@@ -91,7 +113,7 @@
 
             <div class="modal fade bd-example-modal-lg" id="videoModal" tabindex="-1" role="dialog"
                 aria-labelledby="videoModal" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-body">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -112,7 +134,7 @@
             <div class="card">
 
                 <!-- konten form -->
-                <div class="card-body">
+                <div class="card-body login-container">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -127,64 +149,113 @@
 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="row">
-                                <div class="col-md-12">
+                        <form  method="POST" class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab" enctype="multipart/form-data" action="{{ url_for('upload_form')}}" novalidate >
+                                <div class="form-group">
                                     <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="#" class="form-control" id="inputPassword4" placeholder="abc@mail.com">
+                                    <input type="#" class="form-control" id="inputPassword4" placeholder="abc@mail.com"
+                                        required>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="inputPassword" class="form-label">Password</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="P@ssw0rd">
+                                    <input type="email" class="form-control" id="inputEmail4" placeholder="P@ssw0rd"
+                                        required>
                                 </div>
-                            </div>
                             <br>
+                            <button type="submit" class="btn btn-primary btn-md border-dark">Login</button>
 
-                            <button type="button" class="btn btn-primary btn-md border-dark">Login</button>
-
-                        </div>
-                        <div class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="row">
-                                <div class="col-md-12">
+                        </form>
+                        <form  enctype="multipart/form-data" action="{{ url_for('upload_form')}}" method="POST" class="tab-pane" id="profile" role="tabpanel" aria-labelledby="profile-tab" novalidate>
+                          
+                                <div class="form-group">
                                     <label for="inputName" class="form-label">Full Name</label>
-                                    <input type="#" class="form-control" id="inputName" placeholder="James Bond">
+                                    <input type="#" class="form-control" id="inputName" placeholder="James Bond" required>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="inputInstitution" class="form-label">Institution</label>
                                     <input type="#" class="form-control" id="inputInstitution"
-                                        placeholder="Your Company Name">
+                                        placeholder="Your Company Name" required>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="inputEmail" class="form-label">Email</label>
-                                    <input type="#" class="form-control" id="inputEmail" placeholder="abc@mail.com">
+                                    <input type="#" class="form-control" id="inputEmail" placeholder="abc@mail.com" required>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="inputPassword" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="inputPassword"
+                                    <input type="password" class="form-control" id="inputPassword" required
                                         placeholder="P@ssw0rd">
                                 </div>
-                                <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="inputConfirmPassword" class="form-label">Confirm Password</label>
                                     <input type="password" class="form-control" id="inputConfirmPassword"
-                                        placeholder="P@ssw0rd">
+                                        placeholder="P@ssw0rd" required>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="form-group">
                                     <label for="inputEmail" class="form-label">What purpose you use PRIVATE</label>
                                     <input type="#" class="form-control" id="inputPassword4"
-                                        placeholder="My purpose is....">
+                                        placeholder="My purpose is...." required>
                                 </div>
-                            </div>
+                         
                             <br>
 
-                            <button type="button" class="btn btn-primary btn-md border-dark">Sign Up</button>
+                            <button type="submit" class="btn btn-primary btn-md border-dark">Sign Up</button>
 
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-md-1"></div>
     </div>
+
+    <script>
+        (function () {
+          "use strict";
+          window.addEventListener(
+            "load",
+            function () {
+              var form = document.getElementById("home");
+              form.addEventListener(
+                "submit",
+                function (event) {
+                  if (form.checkValidity() == false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                  }
+                  form.classList.add("was-validated");
+    
+                },
+                false
+              );
+            },
+            false
+          );
+        })();
+      </script>
+
+<script>
+    (function () {
+      "use strict";
+      window.addEventListener(
+        "load",
+        function () {
+          var form = document.getElementById("profile");
+          form.addEventListener(
+            "submit",
+            function (event) {
+              if (form.checkValidity() == false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add("was-validated");
+
+            },
+            false
+          );
+        },
+        false
+      );
+    })();
+  </script>
 
     <!-- jQuery library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
