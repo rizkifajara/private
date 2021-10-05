@@ -85,6 +85,35 @@ def circle_page():
     return render_template("circle.html")
 
 
+@app.route("/volveform", methods=["POST"])
+def volveForm():
+
+    collection_name = 'volve'
+    collection = hackuna_db[collection_name]
+
+    wellName = request.form["well_name"]
+    east = request.form.get("easting")
+    north = request.form.get("northing")
+    zoneForm = request.form.get("zone")
+    bandForm = request.form.get("band")
+    latitudeForm = request.form.get("latitude")
+    longitudeForm = request.form.get("longitude")
+
+    sendForm = {
+        "well_name": wellName,
+        "easting": east,
+        "northing": north,
+        "zone": zoneForm,
+        "band": bandForm,
+        "latitude": latitudeForm,
+        "longitude": longitudeForm
+    }
+
+    collection.insert_one(sendForm)
+
+    return json.dumps("data berhasil diinput")
+
+
 @app.route("/postform", methods=["POST"])
 def upload_form():
     
