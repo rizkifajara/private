@@ -30,7 +30,7 @@ collection = hackuna_db[collection_name]
 
 num_data_global = 1500
 
-@app.route("/")
+@app.route("/form")
 def viewForm():
     user_data_list = []
     for document in collection.find():
@@ -39,7 +39,7 @@ def viewForm():
     return render_template("form.html", user_data=user_data_list)
 
 
-@app.route("/landing")
+@app.route("/")
 def viewLanding():
     return render_template("login.html")
 

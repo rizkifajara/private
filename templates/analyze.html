@@ -256,8 +256,8 @@
               value_well: value_well,
             },
             success: function (data) {
-              // $("#DescLog .modal-body").html(data);
-              // $("#DescLog").modal("show");
+              $("#DescLog .modal-body").html(data);
+              $("#DescLog").modal("show");
             },
           });
         });
@@ -438,7 +438,7 @@
           });
 
           infoGraphYellow[x] = new google.maps.InfoWindow({
-            content: "disisni grafik",
+            content: 'disini grafik',
           });
 
           cityCircle[x] = new google.maps.Marker({
