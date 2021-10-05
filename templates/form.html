@@ -87,10 +87,10 @@
                     <button data-toggle="modal" data-target="#ResultLog" class="btn btn-light" type="button">
                       <img src="/static/view.svg" alt="">
                     </button>
-                    <a data-toggle="modal" data-target="#basicModal" class="btn "><img src="/static/delete.svg"
+                    <a data-toggle="modal" data-target="#deleteModal{{loop.index}}" class="btn "><img src="/static/delete.svg"
                         alt=""></a>
 
-                    <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal"
+                    <div class="modal fade" id="deleteModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="deleteModal{{loop.index}}"
                       aria-hidden="true">
                       <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
