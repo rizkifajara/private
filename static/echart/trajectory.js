@@ -1,4 +1,7 @@
-window.onload = function () { 
+// import { currentWellName } from '/templates/analyze.html'
+
+// window.onload = function () { 
+function changeTrajectory(currentWellNamea) {
   var lateralChart = echarts.init(document.getElementById('lateral'));
   var profileChart = echarts.init(document.getElementById('profile'));
 
@@ -6,7 +9,7 @@ window.onload = function () {
 lateralChart.showLoading()
 profileChart.showLoading()
 
-const callTrajectoryWell = (wellName) => {
+let callTrajectoryWell = (wellName) => {
   $.getJSON('/static/echart/trajectory.json', (response) => {
     dataLateral = response[wellName]['lateral'];
     dataProfile = response[wellName]['profile'];
