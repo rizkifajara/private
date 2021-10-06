@@ -232,7 +232,15 @@ def well_table(id_well):
 
 @app.route('/well-log', methods=["POST", "GET"])
 def log():
-    return render_template("evalLog/wellLog.html")
+    global well_name
+    well_name = request.form.get("value_well")
+    if well_name == None:
+        well_name = str("15/9-F-5")
+    else:
+        well_name = str(well_name)
+    print(well_name)
+    return render_template("evalLog/wellLog.html",
+                            NameWell=well_name)
 
 
 @app.route('/hist', methods=["POST", "GET"])
@@ -257,7 +265,8 @@ def hist():
                            form=form,
                            script=script,
                            div=div,
-                           cdn_js=cdn_js)
+                           cdn_js=cdn_js,
+                           NameWell=well_name)
 
 @app.route('/trajectory', methods=["POST", 'GET'])
 def trajectory_page():

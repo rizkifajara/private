@@ -53,7 +53,9 @@
       $.ajax({
         url: "/well-log",
         type: "post",
-        data: {},
+        data: {
+          value_well: "{{NameWell}}"
+        },
         success: function (data) {
           $("#DescLog .modal-body").html(data);
         },
