@@ -109,7 +109,7 @@
 
       <div class="map-evaluation-container">
         <div class="graph-yow">
-          <div id="lateral" class="col-6" style="height:300px; width:300px"></div>
+          <div id="lateral" class="col-6" style="height:250px; width:300px"></div>
           <div id="profile" class="col-4" style="height:300px; width:300px"></div>
         </div>
         <div id="map-container-google-1" class="z-depth-1-half">
@@ -386,30 +386,29 @@
         },
 
       ];
-
       let coordinateYellow = [{
-          "lat": 37.772,
-          "lng": -122.214,
+          "lat": parseFloat("{{data[0]['lat']}}") + parseFloat("{{data[0]['dLat']}}"),
+          "lng": parseFloat("{{data[0]['lon']}}") + parseFloat("{{data[0]['dLon']}}"),
           "label": "{{data[0]['label']}}",
         },
         {
-          "lat": 37.772,
-          "lng": -100.214,
+          "lat": parseFloat("{{data[1]['lat']}}") + parseFloat("{{data[1]['dLat']}}"),
+          "lng": parseFloat("{{data[1]['lon']}}") + parseFloat("{{data[1]['dLon']}}"),
           "label": "{{data[1]['label']}}",
         },
         {
-          "lat": 37.772,
-          "lng": -95.214,
+          "lat": parseFloat("{{data[2]['lat']}}") + parseFloat("{{data[2]['dLat']}}"),
+          "lng": parseFloat("{{data[2]['lon']}}") + parseFloat("{{data[2]['dLon']}}"),
           "label": "{{data[2]['label']}}",
         },
         {
-          "lat": 37.772,
-          "lng": -80.214,
+          "lat": parseFloat("{{data[3]['lat']}}") + parseFloat("{{data[3]['dLat']}}"),
+          "lng": parseFloat("{{data[3]['lon']}}") + parseFloat("{{data[3]['dLon']}}"),
           "label": "{{data[3]['label']}}",
         },
         {
-          "lat": 37.772,
-          "lng": -140.214,
+          "lat": parseFloat("{{data[4]['lat']}}") + parseFloat("{{data[4]['dLat']}}"),
+          "lng": parseFloat("{{data[4]['lon']}}") + parseFloat("{{data[4]['dLon']}}"),
           "label": "{{data[4]['label']}}",
         },
 
@@ -449,7 +448,7 @@
             content: coordinateBlue[x].label,
           });
           infowindowYellow[x] = new google.maps.InfoWindow({
-            content: coordinateBlue[x].label,
+            content: coordinateYellow[x].label,
           });
 
 
@@ -473,8 +472,8 @@
 
           cityCircleYellow[x] = new google.maps.Marker({
             position: {
-              lat: coordinateYellow[x].lat,
-              lng: coordinateYellow[x].lng,
+              lat: parseFloat(coordinateYellow[x].lat),
+              lng: parseFloat(coordinateYellow[x].lng),
             },
             icon: svgMarkerYellow,
             map: map,
@@ -524,8 +523,8 @@
               lng: parseFloat(coordinateBlue[x].lng),
             },
             {
-              lat: coordinateYellow[x].lat,
-              lng: coordinateYellow[x].lng,
+              lat: parseFloat(coordinateYellow[x].lat),
+              lng: parseFloat(coordinateYellow[x].lng),
             },
           ];
 
@@ -587,13 +586,13 @@
                 cityPolylinePath[x].setMap(map);
                 map.setZoom(8);
                 map.setCenter(cityCircleYellow[x].getPosition());
-                smoothZoom(map, 12, map.getZoom());
+                smoothZoom(map, 15, map.getZoom());
               } else {
                 cityCircleYellow[x].setMap(null);
                 cityPolylinePath[x].setMap(null);
                 map.setZoom(8);
                 map.setCenter(cityCircle[x].getPosition());
-                smoothZoom(map, 12, map.getZoom());
+                smoothZoom(map, 22, map.getZoom());
               }
             });
         })(i)
