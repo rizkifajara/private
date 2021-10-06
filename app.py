@@ -264,7 +264,7 @@ def trajectory_page():
     global well_name
     well_name = request.form.get("value_well")
     if well_name == None:
-        well_name = "15/9-F-5"
+        well_name = str("15/9-F-5")
     else:
         well_name = str(well_name)
     print(well_name)
