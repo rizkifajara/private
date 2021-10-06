@@ -13,13 +13,11 @@ const callTrajectoryWell = (wellName) => {
     profileEchart(dataProfile, profileChart, wellName);
 
     bottomDepth = dataLateral[dataLateral.length - 1].map((x) => {return x * 0.3048/111});
-    console.log(bottomDepth)
-    return bottomDepth
   });
+  
 }
 
-callTrajectoryWell('15/9-F-1')
-// console.log(bottomDepth)
+callTrajectoryWell('15/9-F-12')
 
 const lateralEchart = (data, chart, wellname) => {
   chart.hideLoading()

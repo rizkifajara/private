@@ -19,7 +19,7 @@ const callWellLog = (wellName) => {
   });
 }
 
-callWellLog('15/9-F-14')
+callWellLog('15/9-F-12')
 
 const logEchart = (data, dataHC, dataFACIES, chart, wellname) => {
   chart.hideLoading();
