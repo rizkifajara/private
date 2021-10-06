@@ -36,7 +36,7 @@ const callBlindLog = (col) => {
   });
 }
 
-callBlindLog('FACIES')
+callBlindLog('VSH')
 
 const blindEchart = (data, chart, col) => {
   chart.hideLoading();

@@ -1,11 +1,13 @@
-var lateralChart = echarts.init(document.getElementById('lateral'));
-var profileChart = echarts.init(document.getElementById('profile'));
+window.onload = function () { 
+  var lateralChart = echarts.init(document.getElementById('lateral'));
+  var profileChart = echarts.init(document.getElementById('profile'));
 
+  
 lateralChart.showLoading()
 profileChart.showLoading()
 
 const callTrajectoryWell = (wellName) => {
-  $.getJSON('./trajectory.json', (response) => {
+  $.getJSON('/static/echart/trajectory.json', (response) => {
     dataLateral = response[wellName]['lateral'];
     dataProfile = response[wellName]['profile'];
 
@@ -226,4 +228,5 @@ profileEchart = (data, chart, wellname) => {
   };
   
   chart.setOption(option);
+}
 }

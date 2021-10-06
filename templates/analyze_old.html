@@ -191,7 +191,7 @@
 
   $(document).ready(function () {
 
-    console.log("{{user_data['_id']}}")
+    // console.log("{{user_data['_id']}}")
 
     $('#buttonDetails').click(function () {
       var ndata = document.getElementById("getNumData");
@@ -206,7 +206,7 @@
 
       $('#inputWellName' + i).click(function () {
         var value_well = $("#well_name_id" + i).html();
-        console.log(value_well);
+        // console.log(value_well);
         $.ajax({
           url: '/hist',
           type: "post",
@@ -230,7 +230,7 @@
         }
       }
 
-      console.log(list_well_name)
+      // console.log(list_well_name)
       $.ajax({
         url: '/send-well-list',
         type: "post",

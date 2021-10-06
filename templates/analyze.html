@@ -35,7 +35,7 @@
                   <th scope="col">Nearest Well</th>
                   <th scope="col">Well Distance</th>
                   <th scope="col">Condition</th>
-                
+
                 </tr>
               </thead>
               <tbody>
@@ -93,6 +93,7 @@
           </div>
 
           <div class="button-buttom-container">
+
             <a href="{{url_for('viewForm')}}" class="back-button">Back</a>
             <div class="evaluate-button" data-toggle="modal" data-target="#ModalEvaluation" id="btn_evaluate"
               type="button">
@@ -109,6 +110,10 @@
       </div>
 
       <div class="map-evaluation-container">
+        <div class="graph-yow">
+          <div id="lateral" class="col-6" style="height:300px; width:300px"></div>
+          <div id="profile" class="col-4" style="height:300px; width:300px"></div>
+        </div>
         <div id="map-container-google-1" class="z-depth-1-half">
           <div id="map"></div>
         </div>
@@ -232,7 +237,7 @@
     chart.render();
 
     $(document).ready(function () {
-      console.log("{{user_data['_id']}}");
+      // console.log("{{user_data['_id']}}");
 
       $("#buttonDetails").click(function () {
         var ndata = document.getElementById("getNumData");
@@ -248,7 +253,7 @@
       for (let i = 1; i <= 5; i++) {
         $("#inputWellName" + i).click(function () {
           var value_well = $("#well_name_id" + i).html();
-          console.log(value_well);
+          // console.log(value_well);
           $.ajax({
             url: "/hist",
             type: "post",
@@ -266,7 +271,7 @@
       for (let i = 1; i <= 5; i++) {
         $("#inputWellName" + i).click(function () {
           var value_well = $("#well_name_id" + i).html();
-          console.log(value_well);
+          // console.log(value_well);
           $.ajax({
             url: "/send-well-list",
             type: "post",
@@ -285,13 +290,15 @@
     });
   </script>
 
+
+
   <script>
     // Initialize and add the map
     function initMap() {
       let lat_user = "{{user_data['coordinate ']['LATITUDE']}}";
       let lon_user = "{{user_data['coordinate ']['LONGITUDE']}}";
 
-      console.log("{{data}}");
+      // console.log("{{data}}");
 
       // The location of Uluru
       const uluru = {
@@ -381,32 +388,36 @@
       ];
 
       let coordinateYellow = [{
-        "lat": 37.772,
-              "lng": -122.214,
+          "lat": 37.772,
+          "lng": -122.214,
           "label": "{{data[0]['label']}}",
         },
         {
           "lat": 37.772,
-              "lng": -122.214,
+          "lng": -100.214,
           "label": "{{data[1]['label']}}",
         },
         {
           "lat": 37.772,
-              "lng": -122.214,
+          "lng": -95.214,
           "label": "{{data[2]['label']}}",
         },
         {
           "lat": 37.772,
-              "lng": -122.214,
+          "lng": -80.214,
           "label": "{{data[3]['label']}}",
         },
         {
           "lat": 37.772,
-              "lng": -122.214,
+          "lng": -140.214,
           "label": "{{data[4]['label']}}",
         },
 
       ];
+
+
+      const GraphTooltip = '<div class="graph-trajectory">' +
+        ' </div>';
 
       const svgMarker = {
         path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
@@ -426,6 +437,10 @@
         scale: 2,
         anchor: new google.maps.Point(10, 0),
       };
+      infoGraphYellow = new google.maps.InfoWindow({
+        content: GraphTooltip,
+      });
+
       for (let i = 0; i < coordinateBlue.length; i++) {
         (function (x) {
 
@@ -437,9 +452,15 @@
             content: coordinateBlue[x].label,
           });
 
-          infoGraphYellow[x] = new google.maps.InfoWindow({
-            content: 'disini grafik',
+
+
+          google.maps.event.addListener(infoGraphYellow, 'domready', function () {
+            const halo = document.querySelector('.graph-yow')
+            const hai = document.querySelector('.graph-trajectory')
+            halo.style.display = "flex"
+            hai.appendChild(halo);
           });
+
 
           cityCircle[x] = new google.maps.Marker({
             position: {
@@ -484,14 +505,12 @@
               infowindowYellow[x].close();
             }
           );
-
-          
           google.maps.event.addListener(
             cityCircleYellow[x],
             "click",
             function (ev) {
-              infoGraphYellow[x].setPosition(ev.latLng);
-              infoGraphYellow[x].open(map);
+              infoGraphYellow.setPosition(ev.latLng);
+              infoGraphYellow.open(map);
             }
           );
           cityPolyline[x] = [{
@@ -514,36 +533,61 @@
 
           cityPolylinePath[x].setMap(null);
 
+          function smoothZoom(map, max, cnt) {
+            if (cnt >= max) {
+              return;
+            } else {
+              z = google.maps.event.addListener(map, 'zoom_changed', function (event) {
+                google.maps.event.removeListener(z);
+                smoothZoom(map, max, cnt + 1);
+              });
+              setTimeout(function () {
+                map.setZoom(cnt)
+              }, 80); // 80ms is what I found to work well on my system -- it might not work well on all systems
+            }
+          }
+
           temp[x] = true;
+          tempYellow[x] = true;
           document
             .getElementById("flexSwitchCheck" + i)
             .addEventListener("click", () => {
               temp[x] = !temp[x];
-              console.log(temp[x]);
+              // console.log(temp[x]);
               if (!temp[x]) {
+              
+              
+                tempYellow[x] = !tempYellow[x];
+                map.setCenter(cityCircle[x].getPosition());
                 cityCircle[x].setMap(null);
               } else {
+        
                 cityCircle[x].setMap(map);
                 map.setZoom(8);
-                map.setCenter(  cityCircle[x].getPosition());
-                
+                map.setCenter(cityCircle[x].getPosition());
+                smoothZoom(map, 12, map.getZoom());
               }
             });
 
-          tempYellow[x] = true;
+
           document
             .getElementById("eye-evaluation" + i)
             .addEventListener("click", () => {
               tempYellow[x] = !tempYellow[x];
-              console.log(tempYellow[x]);
+              // console.log(tempYellow[x]);
               if (!tempYellow[x]) {
+              
                 cityCircleYellow[x].setMap(map);
                 cityPolylinePath[x].setMap(map);
-                map.setZoom(3);
-                map.setCenter( cityPolylinePath[x].getPosition());
+                map.setZoom(8);
+                map.setCenter(cityCircleYellow[x].getPosition());
+                smoothZoom(map, 12, map.getZoom());
               } else {
                 cityCircleYellow[x].setMap(null);
                 cityPolylinePath[x].setMap(null);
+                map.setZoom(8);
+                map.setCenter(cityCircle[x].getPosition());
+                smoothZoom(map, 12, map.getZoom());
               }
             });
         })(i)
@@ -552,9 +596,9 @@
   </script>
   <!-- Try For Loop -->
 
-  <script>
-
-  </script>
+  <script type="text/javascript" src="/static/echart/trajectory.js"></script>
+  <script type="text/javascript" src="/static/echart/plotLog.js"></script>
+  <script type="text/javascript" src="/static/echart/evaluationLog.js"></script>
 
   <script>
     var menu_btn = document.querySelector("#menu-btn");
@@ -568,11 +612,11 @@
     });
   </script>
 
-<script>
-  $(document).ready(function () {
+  <script>
+    $(document).ready(function () {
       $('#myTableEvaluation').DataTable();
-  });
-</script>
+    });
+  </script>
 
   <script
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBF0AFZrT4iYWDmT5FAyoJfnO_C1bz4hgw&callback=initMap&libraries=&v=weekly"

@@ -12,4 +12,4 @@ for(let i = 0; i<data['DEPTH'].length; i++) {
   newArray.push(heatmapConv(data, 'FACIES', i))
 }
 
-console.log(newArray)
+// console.log(newArray)
