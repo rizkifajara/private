@@ -288,11 +288,14 @@
     });
   </script>
 
-
+  <script type="text/javascript" src="/static/echart/trajectory.js"></script>
 
   <script>
     // Initialize and add the map
     function initMap() {
+
+      let currentWellName;
+
       let lat_user = "{{user_data['coordinate ']['LATITUDE']}}";
       let lon_user = "{{user_data['coordinate ']['LONGITUDE']}}";
 
@@ -509,6 +512,12 @@
             function (ev) {
               infoGraphYellow.setPosition(ev.latLng);
               infoGraphYellow.open(map);
+              let clickedWellName = coordinateBlue[i].label;
+              currentWellName = clickedWellName;
+              console.log(currentWellName);
+              console.log(clickedWellName);
+              changeTrajectory(clickedWellName);
+              // export { currentWellName }
             }
           );
           cityPolyline[x] = [{
@@ -594,7 +603,7 @@
   </script>
   <!-- Try For Loop -->
 
-  <script type="text/javascript" src="/static/echart/trajectory.js"></script>
+  
   <script type="text/javascript" src="/static/echart/plotLog.js"></script>
   <script type="text/javascript" src="/static/echart/evaluationLog.js"></script>
 
