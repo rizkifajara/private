@@ -93,7 +93,7 @@
           </div>
 
           <div class="button-buttom-container">
-            
+
             <a href="{{url_for('viewForm')}}" class="back-button">Back</a>
             <div class="evaluate-button" data-toggle="modal" data-target="#ModalEvaluation" id="btn_evaluate"
               type="button">
@@ -111,8 +111,8 @@
 
       <div class="map-evaluation-container">
         <div class="graph-yow">
-          <div id="lateral" class="col-6" style="height:300px; width:500px"></div>
-          <div id="profile" class="col-4" style="height:500px; width:500px"></div>
+          <div id="lateral" class="col-6" style="height:300px; width:300px"></div>
+          <div id="profile" class="col-4" style="height:300px; width:300px"></div>
         </div>
         <div id="map-container-google-1" class="z-depth-1-half">
           <div id="map"></div>
@@ -135,7 +135,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="modal fade" id="ModalEvaluation" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -394,38 +394,30 @@
         },
         {
           "lat": 37.772,
-          "lng": -122.214,
+          "lng": -100.214,
           "label": "{{data[1]['label']}}",
         },
         {
           "lat": 37.772,
-          "lng": -122.214,
+          "lng": -95.214,
           "label": "{{data[2]['label']}}",
         },
         {
           "lat": 37.772,
-          "lng": -122.214,
+          "lng": -80.214,
           "label": "{{data[3]['label']}}",
         },
         {
           "lat": 37.772,
-          "lng": -122.214,
+          "lng": -140.214,
           "label": "{{data[4]['label']}}",
         },
 
       ];
 
-     
-      const GraphTooltip = '<div class="">' +
-        '<div id="lateral" style="height:300px; width:500px;"></div>' +
-        '<div id="profile"  style="height:500px; width:500px;"></div>' +
+
+      const GraphTooltip = '<div class="graph-trajectory">' +
         ' </div>';
-
-        // const GraphTooltip = '<div class="graph-trajectory">' +
-        // ' </div>';
-
-        // $(".graph-yow").appendTo(".graph-trajectory");
-    
 
       const svgMarker = {
         path: "M10.453 14.016l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM12 2.016q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
@@ -445,6 +437,10 @@
         scale: 2,
         anchor: new google.maps.Point(10, 0),
       };
+      infoGraphYellow = new google.maps.InfoWindow({
+            content: GraphTooltip,
+          });
+
       for (let i = 0; i < coordinateBlue.length; i++) {
         (function (x) {
 
@@ -456,9 +452,15 @@
             content: coordinateBlue[x].label,
           });
 
-          infoGraphYellow[x] = new google.maps.InfoWindow({
-            content: GraphTooltip,
+       
+
+          google.maps.event.addListener(infoGraphYellow[x], 'domready', function () {
+            const halo = document.querySelector('.graph-yow')
+            const hai = document.querySelector('.graph-trajectory')
+            halo.style.display = "flex"
+            hai.appendChild(halo);
           });
+
 
           cityCircle[x] = new google.maps.Marker({
             position: {
@@ -507,8 +509,8 @@
             cityCircleYellow[x],
             "click",
             function (ev) {
-              infoGraphYellow[x].setPosition(ev.latLng);
-              infoGraphYellow[x].open(map);
+              infoGraphYellow.setPosition(ev.latLng);
+              infoGraphYellow.open(map);
             }
           );
           cityPolyline[x] = [{
@@ -552,18 +554,13 @@
               temp[x] = !temp[x];
               // console.log(temp[x]);
               if (!temp[x]) {
-
-                map.setZoom(8);
                 map.setCenter(cityCircle[x].getPosition());
                 cityCircle[x].setMap(null);
-                smoothZoom(map, 12, map.getZoom());
               } else {
-
                 cityCircle[x].setMap(map);
                 map.setZoom(8);
                 map.setCenter(cityCircle[x].getPosition());
                 smoothZoom(map, 12, map.getZoom());
-
               }
             });
 
@@ -592,7 +589,7 @@
     }
   </script>
   <!-- Try For Loop -->
- 
+
   <script type="text/javascript" src="/static/echart/trajectory.js"></script>
   <script type="text/javascript" src="/static/echart/plotLog.js"></script>
   <script type="text/javascript" src="/static/echart/evaluationLog.js"></script>

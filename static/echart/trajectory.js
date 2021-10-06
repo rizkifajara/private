@@ -1,10 +1,8 @@
 window.onload = function () { 
   var lateralChart = echarts.init(document.getElementById('lateral'));
   var profileChart = echarts.init(document.getElementById('profile'));
- 
 
-
-
+  
 lateralChart.showLoading()
 profileChart.showLoading()
 
