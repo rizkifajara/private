@@ -438,8 +438,8 @@
         anchor: new google.maps.Point(10, 0),
       };
       infoGraphYellow = new google.maps.InfoWindow({
-            content: GraphTooltip,
-          });
+        content: GraphTooltip,
+      });
 
       for (let i = 0; i < coordinateBlue.length; i++) {
         (function (x) {
@@ -452,7 +452,7 @@
             content: coordinateBlue[x].label,
           });
 
-       
+
 
           google.maps.event.addListener(infoGraphYellow, 'domready', function () {
             const halo = document.querySelector('.graph-yow')
@@ -548,15 +548,20 @@
           }
 
           temp[x] = true;
+          tempYellow[x] = true;
           document
             .getElementById("flexSwitchCheck" + i)
             .addEventListener("click", () => {
               temp[x] = !temp[x];
               // console.log(temp[x]);
               if (!temp[x]) {
+              
+              
+                tempYellow[x] = !tempYellow[x];
                 map.setCenter(cityCircle[x].getPosition());
                 cityCircle[x].setMap(null);
               } else {
+        
                 cityCircle[x].setMap(map);
                 map.setZoom(8);
                 map.setCenter(cityCircle[x].getPosition());
@@ -564,13 +569,14 @@
               }
             });
 
-          tempYellow[x] = true;
+
           document
             .getElementById("eye-evaluation" + i)
             .addEventListener("click", () => {
               tempYellow[x] = !tempYellow[x];
               // console.log(tempYellow[x]);
               if (!tempYellow[x]) {
+              
                 cityCircleYellow[x].setMap(map);
                 cityPolylinePath[x].setMap(map);
                 map.setZoom(8);
