@@ -1,11 +1,15 @@
-var lateralChart = echarts.init(document.getElementById('lateral'));
-var profileChart = echarts.init(document.getElementById('profile'));
+window.onload = function () { 
+  var lateralChart = echarts.init(document.getElementById('lateral'));
+  var profileChart = echarts.init(document.getElementById('profile'));
+ 
+
+
 
 lateralChart.showLoading()
 profileChart.showLoading()
 
 const callTrajectoryWell = (wellName) => {
-  $.getJSON('./trajectory.json', (response) => {
+  $.getJSON('/static/echart/trajectory.json', (response) => {
     dataLateral = response[wellName]['lateral'];
     dataProfile = response[wellName]['profile'];
 
@@ -13,13 +17,13 @@ const callTrajectoryWell = (wellName) => {
     profileEchart(dataProfile, profileChart, wellName);
 
     bottomDepth = dataLateral[dataLateral.length - 1].map((x) => {return x * 0.3048/111});
-    console.log(bottomDepth)
+    // console.log(bottomDepth)
     return bottomDepth
   });
 }
 
-callTrajectoryWell('15/9-F-1')
-// console.log(bottomDepth)
+callTrajectoryWell('15/9-F-14')
+//console.log(bottomDepth)
 
 const lateralEchart = (data, chart, wellname) => {
   chart.hideLoading()
@@ -228,4 +232,5 @@ profileEchart = (data, chart, wellname) => {
   };
   
   chart.setOption(option);
+}
 }
