@@ -283,6 +283,10 @@ def trajectory_page():
                            div=div,
                            cdn_js=cdn_js)
 
+@app.route('/eval', methods=['GET'])
+def eval_page():
+    return render_template("evalLog/eval.html")
+
 @app.route('/result', methods=['GET'])
 def result_page():
     script, div, cdn_js = plot_result()
