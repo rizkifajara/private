@@ -36,7 +36,7 @@ const callBlindLog = (col) => {
   });
 }
 
-callBlindLog('VSH')
+callBlindLog('HC')
 
 const blindEchart = (data, chart, col) => {
   chart.hideLoading();
@@ -75,7 +75,8 @@ const blindEchart = (data, chart, col) => {
           showSymbol: false,
           lineStyle: {
             width: 0.5,
-            type: 'dashed'
+            type: [5,5],
+            dashOffset: 5
           },
           color: 'red',
           encode: {
@@ -103,7 +104,20 @@ const blindEchart = (data, chart, col) => {
             y: 'prediction',
             tooltip: [col, 'prediction', 'error', 'DEPTH', 'WELL']
           }
-        }
+        },
+        {
+          name: 'propper aproach to predicted value',
+          type: 'line',
+          showSymbol: false,
+          lineStyle: {
+            width: 1.5,
+            type: 'dashed'
+          },
+          color: 'black',
+          data: [[range[0], range[0]], [range[1], range[1]]],
+          xAxisIndex: 3,
+          yAxisIndex: 3,
+        },
       ],
       visualMap: [
         {
@@ -451,19 +465,19 @@ const blindEchart = (data, chart, col) => {
         {
           top: 80,
           left: '17%',
-          width: 100,
+          width: 500,
           height: '80%'
         },
         {
           top: 80,
           left: '21%',
-          width: 100,
+          width: 500,
           height: '80%'
         },
         {
           top: 80,
           left: '30%',
-          width: 100,
+          width: 500,
           height: '80%'
         },
         {
@@ -510,10 +524,10 @@ const blindEchart = (data, chart, col) => {
     grid: params[model]['grid'],
     yAxis: [
       {
-        type: 'value',
+        type: 'category',
         axisLabel: {
           fontSize: 9,
-          interval: 499,
+          interval: 1000,
         },
         name: 'num_data',
         nameLocation: 'middle',
@@ -521,16 +535,20 @@ const blindEchart = (data, chart, col) => {
           padding: 20
         },
         inverse: true,
+        splitLine: { show: false },
+        axisLine: { show: false },
+        axisTick: { show: false },
       },
       {
         gridIndex: 1,
-        type: 'value',
+        type: 'category',
         axisLabel: {
           show: false,
-          interval: 499
+          interval: 1000
         },
         axisLine: { show: true },
         axisTick: { show: true },
+        splitLine: { show: false },
         inverse: true
       },
       {
@@ -538,7 +556,7 @@ const blindEchart = (data, chart, col) => {
         type: 'category',
         axisLabel: {
           show: false,
-          interval: 499
+          interval: 1000
         },
         data: data.map(x => x[0]),
         inverse: true
@@ -553,11 +571,8 @@ const blindEchart = (data, chart, col) => {
         min: range[0],
         max: range[1],
         name: 'Prediction',
-        nameLocation: 'middle',
+        nameLocation: 'end',
         minorSplitLine: { show: true },
-        nameTextStyle: {
-          padding: 20
-        },
         data: labels
       }
     ],
@@ -566,12 +581,13 @@ const blindEchart = (data, chart, col) => {
         position: 'top',
         type: type,
         axisLabel: { show: false },
-        axisLine: { show: true },
+        axisLine: { show: false },
+        axisTick: { show: false },
         minorSplitLine: { show: true },
         min: range[0],
         max: range[1],
         name: `${range[0]}                                    ${range[1]}`,
-        nameLocation: 'middle',
+        nameLocation: 'center',
         nameTextStyle: {
           fontSize: 9,
           color: color,
@@ -595,13 +611,13 @@ const blindEchart = (data, chart, col) => {
       },
       {
         gridIndex: 2,
-        type: 'value',
+        type: type,
         position: 'top',
         min: 0,
         max: range[1],
         name: `Status\n\n0                                    ${range[1]}`,
-        nameLocation: 'middle',
-        axisLine: { show: true },
+        nameLocation: 'center',
+        axisLine: { show: false },
         axisTick: { show: false },
         axisLabel: { show: false },
         minorSplitLine: { show: true },
@@ -619,10 +635,7 @@ const blindEchart = (data, chart, col) => {
         min: range[0],
         max: range[1],
         name: 'Actual',
-        nameLocation: 'middle',
-        nameTextStyle: {
-          padding: 45
-        },
+        nameLocation: 'end',
         data: labels
       }
     ],
@@ -639,7 +652,7 @@ const blindEchart = (data, chart, col) => {
       }
     ],
     legend: {
-      data: [col, 'prediction'],
+      data: [col, 'prediction', 'propper aproach to predicted value'],
       left: 'center',
       bottom: 10
     }

@@ -205,7 +205,8 @@ def closest(data, v):
 @app.route('/table/<id_well>/', methods=['GET'])
 def well_table(id_well):
 
-    df = get_data_from_dataiku("database_coordinate")
+    # df = get_data_from_dataiku("database_coordinate")
+    df = pd.read_csv('./tmp/volve_coordinate.csv')
 
     list_coord = list()
 
@@ -214,6 +215,8 @@ def well_table(id_well):
         dict_coord['lat'] = df['LATITUDE'][i]
         dict_coord['lon'] = df['LONGITUDE'][i]
         dict_coord['label'] = df['WELL'][i]
+        dict_coord['dLon'] = df['TRAJECTORY_X'][i]
+        dict_coord['dLat'] = df['TRAJECTORY_Y'][i]
         dict_coord['dist'] = None
         list_coord.append(dict_coord)
 

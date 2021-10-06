@@ -14,12 +14,13 @@ const callTrajectoryWell = (wellName) => {
     lateralEchart(dataLateral, lateralChart, wellName);
     profileEchart(dataProfile, profileChart, wellName);
 
-    bottomDepth = dataLateral[dataLateral.length - 1].map((x) => {return x * 0.3048/111});
+    bottomDepth = dataLateral[dataLateral.length - 1].map((x) => {return x * 0.0003048/111.319});
+    console.log(bottomDepth)
   });
   
 }
 
-callTrajectoryWell('15/9-F-12')
+callTrajectoryWell('15/9-F-1')
 
 const lateralEchart = (data, chart, wellname) => {
   chart.hideLoading()
@@ -68,8 +69,9 @@ const lateralEchart = (data, chart, wellname) => {
       }
     ],
     legend: {
-      left: 'center',
-      bottom: 0
+      right: 0,
+      bottom: 0,
+      textStyle: {fontSize: 8}
     },
     tooltip: {
       position: 'top',
