@@ -302,17 +302,17 @@ def result_page():
 @app.route('/hc', methods=['GET'])
 def hc_page():
     global num_data_global
-    script, div, cdn_js = eval_hc(num_data=num_data_global)
+    script, div, cdn_js = eval_hc(num_data=8000)
     return render_template("evalLog/hc.html",
-                           script=script,
-                           div=div,
-                           cdn_js=cdn_js)
+                            script=script,
+                            div=div,
+                            cdn_js=cdn_js)
 
 
 @app.route('/facies', methods=['GET'])
 def facies_page():
     global num_data_global
-    script, div, cdn_js = eval_facies(num_data=num_data_global)
+    script, div, cdn_js = eval_facies(num_data=8000)
     return render_template("evalLog/facies.html",
                            script=script,
                            div=div,
@@ -321,47 +321,28 @@ def facies_page():
 
 @app.route('/perm', methods=['GET'])
 def perm_page():
-    global num_data_global
-    script, div, cdn_js = eval_perm(num_data=num_data_global)
-    return render_template("evalLog/perm.html",
-                           script=script,
-                           div=div,
-                           cdn_js=cdn_js)
+    # global num_data_global
+    # script, div, cdn_js = eval_perm(num_data=num_data_global)
+    return render_template("evalLog/perm.html")
 
 
 @app.route('/sw', methods=['GET'])
 def sw_page():
-    global num_data_global
-    script, div, cdn_js = eval_sw(num_data=num_data_global)
-    return render_template("evalLog/sw.html",
-                           script=script,
-                           div=div,
-                           cdn_js=cdn_js)
+    # global num_data_global
+    # script, div, cdn_js = eval_sw(num_data=num_data_global)
+    return render_template("evalLog/sw.html")
 
 
 @app.route('/phie', methods=['GET'])
 def phie_page():
-    global num_data_global
-    script, div, cdn_js = eval_phie(num_data=num_data_global)
-    return render_template("evalLog/phie.html",
-                           script=script,
-                           div=div,
-                           cdn_js=cdn_js)
+    
+    return render_template("evalLog/phie.html")
 
 
 @app.route('/vsh', methods=['GET'])
 def vsh_page():
-    global num_data_global
-    num_data = request.args.get('num')
-    if num_data == None:
-        num_data_global = 1500
-    else:
-        num_data_global = int(num_data)
-    script, div, cdn_js = eval_vsh(num_data=num_data_global)
-    return render_template("evalLog/vsh.html",
-                           script=script,
-                           div=div,
-                           cdn_js=cdn_js)
+    
+    return render_template("evalLog/vsh.html")
 
 
 @app.route('/well-job')

@@ -1,5 +1,7 @@
 {%extends "layout.html"%} {%block content%}
 
+
+
 <div class="analyze-page">
   <div class="sidebar-analyze-container">
     <div class="analyze-button-container">
@@ -30,12 +32,12 @@
 
         <div class="analyze-button-pack">
 
-          <a href="{{ url_for('vsh_page')}}"><button class="btn btn-warning m-3 active">VSH</button></a>
-          <a href="{{ url_for('phie_page')}}"><button class="btn btn-warning m-3">PHIE</button></a>
-          <a href="{{ url_for('sw_page')}}"><button class="btn btn-warning m-3">SW</button></a>
-          <a href="{{ url_for('perm_page')}}"><button class="btn btn-warning m-3">PERM</button></a>
-          <a href="{{ url_for('facies_page')}}"><button class="btn btn-warning m-3">FACIES</button></a>
-          <a href="{{ url_for('hc_page')}}"><button class="btn btn-warning m-3">HC</button></a>
+          <a id="vsh_btn"><button class="btn btn-warning m-3">VSH</button></a>
+          <a id="phie_btn"><button class="btn btn-warning m-3">PHIE</button></a>
+          <a id="sw_btn"><button class="btn btn-warning m-3">SW</button></a>
+          <a id="perm_btn"><button class="btn btn-warning m-3">PERM</button></a>
+          <a id="facies_btn"><button class="btn btn-warning m-3">FACIES</button></a>
+          <a id="hc_btn"><button class="btn btn-warning m-3">HC</button></a>
         </div>
 
         <div class="info-analyze-dropdown">
@@ -50,20 +52,22 @@
         </div>
 
         <div class="info-analyze-pack">
-          <p> <span>Blind Well Test </span> is a well log plot that represent comparison between actual and predicted
-              data in every mnemonic curve with evaluation metrics |error| on regression model, and boolean (True or
-              False) on classification model.</p>
-            <p><span>Confusion Matrix</span> is an N x N matrix used for evaluating the performance of a classification
-              model, where N is the number of target classes. The matrix compares the actual target values with those
-              predicted by the machine learning model.</p>
-            <p><span>Predicted-actual data distribution </span> is a scatter plot used for evaluating the performance of a
-              regression model, ideal evaluation result where the distribotion of data collected on the
-              straight lines with m=1. </p>
+            <p> <span>Blind Well Test </span> is a well log plot that represent comparison between actual and predicted
+                data in every mnemonic curve with evaluation metrics |error| on regression model, and boolean (True or
+                False) on classification model.</p>
+              <p><span>Confusion Matrix</span> is an N x N matrix used for evaluating the performance of a classification
+                model, where N is the number of target classes. The matrix compares the actual target values with those
+                predicted by the machine learning model.</p>
+              <p><span>Predicted-actual data distribution </span> is a scatter plot used for evaluating the performance of a
+                regression model, ideal evaluation result where the distribotion of data collected on the
+                straight lines with m=1. </p>
         </div>
       </div>
 
+      <!-- <div id="eval-chart" style="height:100%; width:100%"></div> -->
+
       <div class="button-bottom-container">
-        <a href="javascript:history.back()" class="back-button">Back</a>
+        <a href="{{ url_for('analyze_page')}}" class="back-button">Back</a>
         <a href="{{ url_for('viewForm')}}" class="analyze-button">
           <h6>Run Model</h6>
           <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,15 +80,32 @@
       </div>
       <div class="analyze-content">
       </div>
+      
     </div>
   </div>
 
+  <!-- <div class="container">
+    <div class="row"> -->
   <div class="analyze-graph">
-    <div class="analyze-graph-content" id="eval-chart" style="height:100%;width: 100%;"></div>
+        <div class="analyze-graph-content" id="eval-chart" style="height:100%; width:100%"></div>
   </div>
+        
+        
+    
 
+      
 
-  <script>
+    
+<!-- 
+    </div>
+  </div> -->
+    
+ 
+  
+
+</div>
+
+<script>
     const showLoading = function () {
       // console.log("sweet active")
       return new swal({
@@ -141,20 +162,91 @@
     });
   </script>
 
-</div>
+<!-- <script>
+$(document).ready(function() {
+    console.log("halo")
+    evalLog("VSH")
+    console.log("VSH")
+    $('#vsh_btn').click(function() {
+        evalLog("VSH")
+        console.log("VSH")
+    });
+
+    $('#phie_btn').click(function() {
+        evalLog("PHIE")
+        console.log("PHIE")
+    });
+
+    $('#sw_btn').click(function() {
+        evalLog("SW")
+        console.log("SW")
+    });
+
+    $('#perm_btn').click(function() {
+        evalLog("PERM")
+        console.log("PERM")
+    });
+
+    $('#facies_btn').click(function() {
+        evalLog("FACIES")
+        console.log("FACIES")
+    });
+
+    $('#hc_btn').click(function() {
+        evalLog("HC")
+        console.log("HC")
+    });
+
+
+});
+</script> -->
 
 <script>
-  window.onload = function() {
-      console.log("halo")
-      console.log("halo2")
-      evaluationLog("VSH")
-      console.log("halo3")
-      console.log("halo4")
+window.onload = function() {
+    console.log("halo")
+    console.log("halo2")
+    evaluationLog("VSH")
+    console.log("halo3")
+    console.log("halo4")
 
-  }
+    $('#vsh_btn').click(function() {
+        evaluationLog("VSH")
+        console.log("VSH")
+    });
+
+    $('#phie_btn').click(function() {
+        evaluationLog("PHIE")
+        console.log("PHIE")
+    });
+
+    $('#sw_btn').click(function() {
+        evaluationLog("SW")
+        console.log("SW")
+    });
+
+    $('#perm_btn').click(function() {
+        evaluationLog("PERM")
+        console.log("PERM")
+    });
+
+    $('#facies_btn').click(function() {
+        evaluationLog("FACIES")
+        console.log("FACIES")
+    });
+
+    $('#hc_btn').click(function() {
+        evaluationLog("HC")
+        console.log("HC")
+    });
+
+}
 </script>
 
+
+
 <script type="text/javascript" src="/static/echart/evaluationLog.js"></script>
+<script type="text/javascript" src="/static/echart/trajectory.js"></script>
+<script type="text/javascript" src="/static/echart/plotLog.js"></script>
 
 
 
