@@ -82,7 +82,7 @@
   </div>
 
 
-    <div id="eval-chart" style="height:100%; width:100%"></div>
+    <div id="eval-chart" ></div>
  
   
 
@@ -114,7 +114,7 @@
   <script>
     var menu_btn_analyze = document.querySelector("#menu-btn");
     var sidebar_analyze = document.querySelector(".sidebar-analyze-container");
-    var container_analyze = document.querySelector(".analyze-graph");
+    var container_analyze = document.querySelector("#eval-chart");
     menu_btn_analyze.addEventListener("click", () => {
       sidebar_analyze.classList.toggle("active-sidebar");
       menu_btn_analyze.classList.toggle("active-sidebar-button")

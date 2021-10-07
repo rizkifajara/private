@@ -104,6 +104,10 @@
       min-height: 75vh;
     }
 
+    .form-group > p {
+      margin-top: 1vh;
+      font-size: 1.5vh;
+    }
     .footer {
       background-color: #e5e5e5;
       width: 100%;
@@ -149,6 +153,11 @@
 
     .table-form>tbody>tr>td {
 
+      text-align: center;
+    }
+
+    .table-form>tbody>tr>td >p {
+margin-top: 1vh;
       text-align: center;
     }
 
@@ -602,18 +611,16 @@
     }
 
     .map-analyze-container.active {
-
-
       width: 100%;
-
     }
+
+
 
     #menu-btn {
       position: absolute;
       top: -9vh;
       margin-left: 2vh;
       background-color: #e5e5e5;
-
     }
 
     #menu-btn.active-sidebar-button {
@@ -686,8 +693,7 @@
 
 
 
-    .analyze-graph {
-
+    .analyze-graph, #eval-chart {
       width: 75vw;
       height: 100%;
 
@@ -698,12 +704,19 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 5vh;
+    }
+    #eval-chart {
+     right: 10vh;
+      padding: 5vh;
     }
 
-    .analyze-graph.active {
+    .analyze-graph.active,  #eval-chart.active {
 
       width: 100%;
     }
+
+
 
     .arrow-analyze-button,
     .arrow-analyze-info {
@@ -826,6 +839,8 @@
     .graph-yow {
       display: none;
     }
+
+    
   
   </style>
   <script>

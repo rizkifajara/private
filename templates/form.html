@@ -10,9 +10,12 @@
               novalidate>
               <div class="form-group">
                 <label for="exampleInputEmail1">Field Name</label>
-                <input name="field_name" type="text" class="form-control" id="exampleInputEmail1"
-                  aria-describedby="emailHelp" placeholder="Enter Field Name" required />
+                  <select class="form-control" id="exampleInputEmail1" required>
+                    <option>VOLVE</option>
+                  </select>
               </div>
+
+              
               <div class="form-group">
                 <label for="exampleInputEmail1">Well Name</label>
                 <input name="well_name" type="text" class="form-control" id="exampleInputEmail1"
@@ -42,6 +45,7 @@
                   required />
                 <div class="show-file-details">
                 </div>
+                <p>Only CSV file less than 5 MB</p>
 
                 <div class="invalid-feedback">
                   Please provide a valid File
@@ -73,9 +77,11 @@
                 {% for data in user_data %}
 
                 <tr>
-                  <td scope="row">{{loop.index}}</td>
-                  <td>VOLVE</td>
-                  <td>{{data['coordinate ']['WELL']}}</td>
+                  <td scope="row"><p>{{loop.index}}</p></td>
+                  <td><p>VOLVE</p>
+                   </td>
+                  <td> <p>{{data['coordinate ']['WELL']}}</p>
+                    </td>
                   <td>
                     <button data-toggle="modal" data-target="#exampleModal{{data['_id']}}"
                       style="background-color: white; border: none">
@@ -469,6 +475,7 @@
     </div>
   </div>
   <script>
+
     $(document).ready(function () {
       $("#btn_result").click(function () {
         $.ajax({
@@ -483,6 +490,8 @@
       });
     });
   </script>
+
+
   <!-- 
 <script>
   $(document).ready(function () {
