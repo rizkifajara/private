@@ -54,68 +54,68 @@ function plotLog(WellName) {
         {
           top: 80,
           left: 100,
-          width: 50,
+          width: 35,
           height: '70%'
         },
         {
           top: 80,
-          left: 180,
-          width: 50,
+          left: 150,
+          width: 35,
           height: '70%'
         },
         {
           top: 80,
-          left: 260,
-          width: 50,
+          left: 200,
+          width: 35,
           height: '70%'
         },
         {
           top: 80,
-          left: 260,
-          width: 50,
+          left: 200,
+          width: 35,
           height: '70%'
         },
         {
           top: 80,
-          left: 340,
-          width: 50,
+          left: 250,
+          width: 35,
           height: '70%'
         },
         {
           top: 80,
-          left: 420,
-          width: 50,
+          left: 300,
+          width: 35,
+          height: '70%'
+        },
+        {
+          top: 80,
+          left: 350,
+          width: 35,
+          height: '70%'
+        },
+        {
+          top: 80,
+          left: 400,
+          width: 35,
+          height: '70%'
+        },
+        {
+          top: 80,
+          left: 450,
+          width: 35,
           height: '70%'
         },
         {
           top: 80,
           left: 500,
-          width: 50,
-          height: '70%'
-        },
-        {
-          top: 80,
-          left: 580,
-          width: 50,
-          height: '70%'
-        },
-        {
-          top: 80,
-          left: 660,
-          width: 50,
-          height: '70%'
-        },
-        {
-          top: 80,
-          left: 740,
-          width: 50,
+          width: 35,
           height: '70%'
         }
       ],
       yAxis: [
         {
           axisLabel: {
-            fontSize: 9,
+            fontSize: 7,
             interval: 500,
             formatter: (value) => { return `${parseFloat(value).toFixed(0)} m` },
           },
@@ -230,10 +230,10 @@ function plotLog(WellName) {
           axisLine: { show: true },
           min: 0,
           max: 150,
-          name: '0                150',
+          name: '0             150',
           nameLocation: 'middle',
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'green',
             padding: -10
           }
@@ -247,10 +247,10 @@ function plotLog(WellName) {
           minorSplitLine: { show: true },
           min: 0.2,
           max: 2000,
-          name: '0.2            2000',
+          name: '0.2         2000',
           nameLocation: 'middle',
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'black',
             padding: -10
           }
@@ -263,12 +263,12 @@ function plotLog(WellName) {
           axisLine: { show: true },
           min: 1.95,
           max: 2.95,
-          name: '1.95            2.95',
+          name: '1.95         2.95',
           nameLocation: 'middle',
           axisLine: { show: false },
           axisTick: { show: false },
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'red',
             padding: -10
           }
@@ -282,10 +282,10 @@ function plotLog(WellName) {
           splitLine: { show: false },
           min: -0.15,
           max: 0.45,
-          name: '0.45          -0.15',
+          name: '0.45       -0.15',
           nameLocation: 'middle',
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'blue',
             padding: 5
           },
@@ -299,10 +299,10 @@ function plotLog(WellName) {
           axisLine: { show: true },
           min: 0,
           max: 1,
-          name: '0                 1',
+          name: '0              1',
           nameLocation: 'middle',
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'lime',
             padding: -10
           }
@@ -315,10 +315,10 @@ function plotLog(WellName) {
           axisLine: { show: true },
           min: 0,
           max: 0.5,
-          name: '0.5                 0',
+          name: '0.5              0',
           nameLocation: 'middle',
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'darkblue',
             padding: -10
           },
@@ -332,10 +332,10 @@ function plotLog(WellName) {
           axisLine: { show: true },
           min: 0,
           max: 1,
-          name: '0                 1',
+          name: '0              1',
           nameLocation: 'middle',
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'purple',
             padding: -10
           }
@@ -348,10 +348,10 @@ function plotLog(WellName) {
           axisLine: { show: true },
           min: 0,
           max: 1,
-          name: '0.1            10000',
+          name: '0.1          10000',
           nameLocation: 'middle',
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'black',
             padding: -10
           }
@@ -367,7 +367,7 @@ function plotLog(WellName) {
           name: 'HC',
           nameLocation: 'middle',
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'black',
             padding: -10
           }
@@ -383,7 +383,7 @@ function plotLog(WellName) {
           name: 'Facies',
           nameLocation: 'middle',
           nameTextStyle: {
-            fontSize: 9,
+            fontSize: 7,
             color: 'black',
             padding: -10
           }
@@ -396,8 +396,8 @@ function plotLog(WellName) {
           max: 1,
           type: 'piecewise',
           orient: 'vertical',
-          top: 250,
-          right: 40,
+          top: 295,
+          right: 0,
           textStyle: {fontSize: 8},
           splitNumber: 2,
           pieces: [
@@ -418,8 +418,8 @@ function plotLog(WellName) {
           max: 8,
           type: 'piecewise',
           orient: 'vertical',
-          top: 60,
-          right: 40,
+          top: 'center',
+          right: 0,
           splitNumber: 9, 
           textStyle: {fontSize: 8},
           pieces: [
