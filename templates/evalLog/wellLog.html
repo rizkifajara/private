@@ -17,13 +17,11 @@
 
 <a id="hist_modal"><button class="btn btn-warning m-3">
   <i class="fa fa-bar-chart" aria-hidden="true"></i> Histogram</button></a>
-<a id="trajectory_modal"><button class="btn btn-warning m-3">
-  <i class="fa fa-map-pin" aria-hidden="true"></i> Trajectory</button></a>
 <a id="log_modal"><button class="btn btn-warning m-3 active">
   <i class="fa fa-line-chart" aria-hidden="true"></i> Well Log</button></a>
 
 
-<div id="log-chart" class="col-10" style="height:1000px; width:1000px"></div>
+<div id="log-chart" style="height:400px; width:1000px; overflow-x: scroll;"></div>
   
   <!-- <iframe width="100%" height="450" style="border: none;" src="https://log-plot.herokuapp.com/app"> -->
 
@@ -45,18 +43,6 @@
           $("#DescLog .modal-body").html(data);
         }
       })
-    });
-
-
-    $("#trajectory_modal").click(function () {
-      $.ajax({
-        url: "/trajectory",
-        type: "post",
-        data: {},
-        success: function (data) {
-          $("#DescLog .modal-body").html(data);
-        },
-      });
     });
 
   });
