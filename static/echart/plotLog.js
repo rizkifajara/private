@@ -55,61 +55,61 @@ function plotLog(WellName) {
           top: 80,
           left: 100,
           width: 50,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: 180,
           width: 50,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: 260,
           width: 50,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: 260,
           width: 50,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: 340,
           width: 50,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: 420,
           width: 50,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: 500,
           width: 50,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: 580,
           width: 50,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: 660,
           width: 50,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: 740,
           width: 50,
-          height: '80%'
+          height: '70%'
         }
       ],
       yAxis: [
@@ -396,8 +396,9 @@ function plotLog(WellName) {
           max: 1,
           type: 'piecewise',
           orient: 'vertical',
-          top: 'center',
-          right: '15%',
+          top: 250,
+          right: 40,
+          textStyle: {fontSize: 8},
           splitNumber: 2,
           pieces: [
             {
@@ -417,9 +418,10 @@ function plotLog(WellName) {
           max: 8,
           type: 'piecewise',
           orient: 'vertical',
-          top: 97,
-          right: '15%',
+          top: 60,
+          right: 40,
           splitNumber: 9, 
+          textStyle: {fontSize: 8},
           pieces: [
             {
               min: 0.888889,
@@ -593,8 +595,9 @@ function plotLog(WellName) {
       ],
       legend: {
         data: ['GR', 'RT', 'RHOB', 'NPHI', 'VSH', 'PHIE', 'SW', 'PERM'],
-        left: 150,
-        bottom: 10
+        left: 'center',
+        bottom: 0,
+        textStyle: {fontSize: 8}
       }
     };
 

@@ -42,10 +42,14 @@
                 <form>
                   {%for datum in data%}
                   <tr>
-                    <td scope="row"><p>{{loop.index}}</p></td>
-                    <td><p>VOLVE</p></td>
-                    <td class="well_column" id="well_name_id{{loop.index}}"><p>{{datum['label']}}</p></td>
-                    <td><p>{{"{:,.3f}".format(datum['dist'])}} meter</p></td>
+                    <td scope="row"><p> {{loop.index}}</p>
+                     </td>
+                    <td><p>VOLVE</p>
+                      </td>
+                    <td class="well_column" id="well_name_id{{loop.index}}">
+                      <p>{{datum['label']}}</p></td>
+                    <td><p> {{"{:,.3f}".format(datum['dist'])}} meter</p>
+                     </td>
                     <td>
                       <div class="small-4 medium-4 large-4 columns text-center m-2">
                         <!-- <form> -->
@@ -141,7 +145,11 @@
           <div class="modal-content py-5">
             <!-- charts -->
 
+<<<<<<< HEAD
             <div class="modal-body" chart-container>
+=======
+            <div class="modal-body chart-container">
+>>>>>>> ada6a777eb2688e938e3fadde899332f064d495b
               <div id="chart"></div>
             </div>
             <div class="row">
