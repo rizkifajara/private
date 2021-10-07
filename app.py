@@ -5,10 +5,6 @@ import json
 import os
 from bson.objectid import ObjectId
 
-from py_viz.bkapp.vsh import eval_vsh
-from py_viz.bkapp.phie import eval_phie
-from py_viz.bkapp.sw import eval_sw
-from py_viz.bkapp.perm import eval_perm
 from py_viz.bkapp.facies import eval_facies
 from py_viz.bkapp.hc import eval_hc
 from py_viz.bkapp.histplot import plot_histogram, get_form
@@ -17,7 +13,6 @@ from py_viz.bkapp.trajectory import plot_trajectory
 
 from math import cos, asin, sqrt
 
-from getData import get_data_from_dataiku
 app = Flask(__name__)
 
 well_name_list = []
@@ -69,9 +64,7 @@ def get_well_name():
 @app.route("/send-well-list", methods=["GET", "POST"])
 def send_well_list():
     global well_name_list
-    print(well_name_list)
     well_name_list = request.form.getlist("list_well_name[]")
-    print(well_name_list)
     return "<div id='chart'></div>"
 
 
@@ -197,7 +190,6 @@ def distance(lat1, lon1, lat2, lon2):
 def closest(data, v):
     for dd in data:
         dd['dist'] = distance(v['lat'], v['lon'], dd['lat'], dd['lon'])
-        print(dd)
 
     return min(data, key=lambda p: distance(v['lat'], v['lon'], p['lat'], p['lon']))
 
@@ -224,7 +216,6 @@ def well_table(id_well):
         {"_id": ObjectId(id_well)}, {"data": 0})
     v = {"lat": float(user_data_dict['coordinate ']['LATITUDE']), "lon": float(
         user_data_dict['coordinate ']['LONGITUDE'])}
-    print(v)
 
     nearest = closest(list_coord, v)
 
@@ -241,7 +232,6 @@ def log():
         well_name = str("15/9-F-5")
     else:
         well_name = str(well_name)
-    print(well_name)
     return render_template("evalLog/wellLog.html",
                             NameWell=well_name)
 
@@ -250,6 +240,7 @@ def log():
 def hist():
     global well_name
     well_name = request.form.get("value_well")
+    # print(well_name)
     if well_name == None:
         well_name = "15/9-F-5"
     else:
@@ -271,32 +262,16 @@ def hist():
                            cdn_js=cdn_js,
                            NameWell=well_name)
 
-@app.route('/trajectory', methods=["POST", 'GET'])
-def trajectory_page():
-    global well_name
-    well_name = request.form.get("value_well")
-    if well_name == None:
-        well_name = str("15/9-F-5")
-    else:
-        well_name = str(well_name)
-    print(well_name)
-    script, div, cdn_js = plot_trajectory(nameWell=well_name)
-    return render_template("evalLog/trajectory.html",
-                           script=script,
-                           div=div,
-                           cdn_js=cdn_js)
-
 @app.route('/eval', methods=['GET'])
 def eval_page():
     return render_template("evalLog/eval.html")
 
 @app.route('/result', methods=['GET'])
 def result_page():
-    script, div, cdn_js = plot_result()
+    global well_name
+    well_name = "15/9-F-5"
     return render_template("evalLog/result.html",
-                           script=script,
-                           div=div,
-                           cdn_js=cdn_js)
+                           NameWell=well_name)
 
 
 @app.route('/hc', methods=['GET'])
@@ -317,32 +292,6 @@ def facies_page():
                            script=script,
                            div=div,
                            cdn_js=cdn_js)
-
-
-@app.route('/perm', methods=['GET'])
-def perm_page():
-    # global num_data_global
-    # script, div, cdn_js = eval_perm(num_data=num_data_global)
-    return render_template("evalLog/perm.html")
-
-
-@app.route('/sw', methods=['GET'])
-def sw_page():
-    # global num_data_global
-    # script, div, cdn_js = eval_sw(num_data=num_data_global)
-    return render_template("evalLog/sw.html")
-
-
-@app.route('/phie', methods=['GET'])
-def phie_page():
-    
-    return render_template("evalLog/phie.html")
-
-
-@app.route('/vsh', methods=['GET'])
-def vsh_page():
-    
-    return render_template("evalLog/vsh.html")
 
 
 @app.route('/well-job')

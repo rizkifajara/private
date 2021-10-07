@@ -1,37 +1,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
-/>
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-  crossorigin="anonymous"
-/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.2.1/dist/echarts.min.js"
-    integrity="sha256-EJb5T/UXVVwHY/BJ33bAFqyyzsAqdl4ZCElh3UYvaLk=" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  integrity="sha256-EJb5T/UXVVwHY/BJ33bAFqyyzsAqdl4ZCElh3UYvaLk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
 <a id="hist_modal"><button class="btn btn-warning m-3">
-  <i class="fa fa-bar-chart" aria-hidden="true"></i> Histogram</button></a>
+    <i class="fa fa-bar-chart" aria-hidden="true"></i> Histogram</button></a>
 <a id="log_modal"><button class="btn btn-warning m-3 active">
-  <i class="fa fa-line-chart" aria-hidden="true"></i> Well Log</button></a>
+    <i class="fa fa-line-chart" aria-hidden="true"></i> Well Log</button></a>
 
-  <div class="log-chart-container">
-    <div id="log-chart"></div>
-  </div>
+<style>
+  .log-chart-container {
+    width: 100%;
+    height: 70vh;
+    overflow-x: scroll;
+  }
+</style>
 
-
-  <div class="log-chart-container">
-
-    <div id="log-chart"></div>
-  </div>
-  
-  <!-- <iframe width="100%" height="450" style="border: none;" src="https://log-plot.herokuapp.com/app"> -->
-
+<div class="log-chart-container">
+  <div id="log-chart" style="width: 1000px; height: 400px"></div>
 </div>
 
 <script type="text/javascript" src="/static/echart/plotLog.js"></script>

@@ -42,7 +42,7 @@ def eval_facies(num_data):
     d1 = source.data['index'].min()
     d2 = source.data['index'].max()
     wdt = 150
-    hgh = 500
+    hgh = 450
     tools = "crosshair, pan,reset,wheel_zoom"
 
     # track: facies

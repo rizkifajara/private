@@ -603,7 +603,6 @@ function plotLog(WellName) {
 
 
     // option.xAxis[0].min = 0;
-    // option.xAxis[0].max = 1;
     chart.setOption(option);
 
   }
