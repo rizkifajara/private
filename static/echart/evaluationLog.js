@@ -141,19 +141,19 @@ const blindEchart = (data, chart, col) => {
           top: 80,
           left: '20%',
           width: 100,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: '20%',
           width: 100,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: '35%',
           width: 100,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 'center',
@@ -284,19 +284,19 @@ const blindEchart = (data, chart, col) => {
           top: 80,
           left: '21%',
           width: 100,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: '25%',
           width: 100,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: '35%',
           width: 100,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 'center',
@@ -468,19 +468,19 @@ const blindEchart = (data, chart, col) => {
           top: 80,
           left: '17%',
           width: 500,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: '21%',
           width: 500,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 80,
           left: '30%',
           width: 500,
-          height: '80%'
+          height: '70%'
         },
         {
           top: 'center',
