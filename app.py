@@ -266,7 +266,7 @@ def hist():
 def eval_page():
     return render_template("evalLog/eval.html")
 
-@app.route('/result', methods=['GET'])
+@app.route('/result', methods=['POST','GET'])
 def result_page():
     global well_name
     well_name = "15/9-F-5"

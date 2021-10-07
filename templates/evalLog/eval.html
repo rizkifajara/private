@@ -29,16 +29,15 @@
           </svg>
 
         </div>
-
+        
         <div class="analyze-button-pack">
-
           <a id="vsh_btn"><button class="btn btn-warning m-3">VSH</button></a>
           <a id="phie_btn"><button class="btn btn-warning m-3">PHIE</button></a>
           <a id="sw_btn"><button class="btn btn-warning m-3">SW</button></a>
           <a id="perm_btn"><button class="btn btn-warning m-3">PERM</button></a>
-          <a id="facies_btn"><button class="btn btn-warning m-3">FACIES</button></a>
-          <a id="hc_btn"><button class="btn btn-warning m-3">HC</button></a>
         </div>
+        <a href="{{ url_for('facies_page')}}"><button class="btn btn-light btn-lg btn-block" style="margin: 10px 0; border-radius: 0;">
+          Classification Model</button></a>
 
         <div class="info-analyze-dropdown">
           <p>Info</p>
@@ -55,9 +54,6 @@
             <p> <span>Blind Well Test </span> is a well log plot that represent comparison between actual and predicted
                 data in every mnemonic curve with evaluation metrics |error| on regression model, and boolean (True or
                 False) on classification model.</p>
-              <p><span>Confusion Matrix</span> is an N x N matrix used for evaluating the performance of a classification
-                model, where N is the number of target classes. The matrix compares the actual target values with those
-                predicted by the machine learning model.</p>
               <p><span>Predicted-actual data distribution </span> is a scatter plot used for evaluating the performance of a
                 regression model, ideal evaluation result where the distribotion of data collected on the
                 straight lines with m=1. </p>
@@ -220,8 +216,6 @@ window.onload = function() {
     });
 
     $('#hc_btn').click(function() {
-        evaluationLog("HC")
-        console.log("HC")
     });
 
 }

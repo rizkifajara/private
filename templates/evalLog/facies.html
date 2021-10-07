@@ -31,14 +31,11 @@
         </div>
 
         <div class="analyze-button-pack">
-
-          <a id="VSH" href="{{ url_for('vsh_page')}}"><button class="btn btn-warning m-3 ">VSH</button></a>
-          <a id="PHIE" href="{{ url_for('phie_page')}}"><button class="btn btn-warning m-3">PHIE</button></a>
-          <a id="SW" href="{{ url_for('sw_page')}}"><button class="btn btn-warning m-3 ">SW</button></a>
-          <a id="PERM" href="{{ url_for('perm_page')}}"><button class="btn btn-warning m-3 ">PERM</button></a>
-          <a href="{{ url_for('facies_page')}}"><button class="btn btn-warning m-3  active">FACIES</button></a>
-          <a href="{{ url_for('hc_page')}}"><button class="btn btn-warning m-3">HC</button></a>
+          <a href="{{ url_for('facies_page')}} "><button class="btn btn-warning m-3">FACIES</button></a>
+          <a href="{{ url_for('hc_page')}} "><button class="btn btn-warning m-3">HC</button></a>
         </div>
+        <a href="{{ url_for('eval_page')}}"><button class="btn btn-light btn-lg btn-block" style="margin: 10px 0; border-radius: 0;">
+          Regression Model</button></a>
 
         <div class="info-analyze-dropdown">
           <p>Info</p>
@@ -58,14 +55,11 @@
           <p><span>Confusion Matrix</span> is an N x N matrix used for evaluating the performance of a classification
             model, where N is the number of target classes. The matrix compares the actual target values with those
             predicted by the machine learning model.</p>
-          <p><span>Predicted-actual data distribution </span> is a scatter plot used for evaluating the performance of a
-            regression model, ideal evaluation result where the distribotion of data collected on the
-            straight lines with m=1. </p>
         </div>
       </div>
 
       <div class="button-bottom-container">
-        <!-- <a href="javascript:history.back()" class="back-button">Back</a> -->
+        <a href="javascript:history.back()" class="back-button">Back</a>
         <a href="{{ url_for('viewForm')}}" class="analyze-button">
           <h6>Run Model</h6>
           <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
