@@ -26,7 +26,7 @@ const param = {
 }
 
 const callBlindLog = (col) => {
-  $.getJSON('./evaluation.json', (response) => {
+  $.getJSON('static/echart/evaluation.json', (response) => {
     dataLog = response[col];
     // maxData = largestInColumn(dataLog)
     range = param[col]['range']
