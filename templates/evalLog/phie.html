@@ -1,6 +1,4 @@
 {%extends "layout.html"%} {%block content%}
-<script type="text/javascript" src="{{cdn_js | safe}}"></script>
-
 
 <div class="analyze-page">
   <div class="sidebar-analyze-container">
@@ -32,8 +30,8 @@
 
         <div class="analyze-button-pack">
 
-          <a href="{{ url_for('vsh_page')}}"><button class="btn btn-warning m-3 ">VSH</button></a>
-          <a href="{{ url_for('phie_page')}} "><button class="btn btn-warning m-3 active">PHIE</button></a>
+          <a href="{{ url_for('vsh_page')}}"><button class="btn btn-warning m-3 active">VSH</button></a>
+          <a href="{{ url_for('phie_page')}}"><button class="btn btn-warning m-3">PHIE</button></a>
           <a href="{{ url_for('sw_page')}}"><button class="btn btn-warning m-3">SW</button></a>
           <a href="{{ url_for('perm_page')}}"><button class="btn btn-warning m-3">PERM</button></a>
           <a href="{{ url_for('facies_page')}}"><button class="btn btn-warning m-3">FACIES</button></a>
@@ -52,36 +50,15 @@
         </div>
 
         <div class="info-analyze-pack">
-          <p><span>Confusion Matrix</span> is Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            In in nisl eu
-            fames sem.
-            Vitae rhoncus maecenas elit a arcu ut. Volutpat diam nunc interdum tellus. Diam sed sit
-            porttitor
-            pretium eget nulla habitasse. Sagittis aenean quisque at mattis sagittis ut enim, vitae.
-            Phasellus eu,
-            nulla tortor, bibendum volutpat. Placerat dictumst malesuada non proin dui sit phasellus
-            eu. Aliquam
-            gravida aenean lacus leo arcu ut netus et.</p>
-          <p> <span>Blind Well Test </span> is Lorem ipsum dolor sit amet, consectetur adipiscing
-            elit. Leo at
-            volutpat eget
-            pellentesque. Lectus iaculis adipiscing cras rutrum vitae dictumst sed. Nec in volutpat
-            nunc scelerisque
-            eget turpis sit iaculis. Diam dapibus sed duis pellentesque. Vel nunc ante porttitor
-            pulvinar. Nibh
-            quisque orci velit nibh eget massa placerat. Etiam gravida commodo cursus etiam
-            tincidunt risus id
-            varius pretium. Diam consequat id quis velit, eu. Lobortis volutpat amet est adipiscing.
-            Sed ullamcorper
-            posuere convallis risus.</p>
-          <p><span>Predicted-actual data distribution </span> is Lorem ipsum dolor sit amet,
-            consectetur adipiscing
-            elit. Leo at
-            volutpat eget pellentesque. Lectus iaculis adipiscing cras rutrum vitae dictumst sed.
-            Nec in volutpat
-            nunc scelerisque eget turpis sit iaculis. Diam dapibus sed duis pellentesque. Vel nunc
-            ante porttitor
-            pulvinar. Nibh quisque orci velit nibh eget massa placerat. </p>
+          <p> <span>Blind Well Test </span> is a well log plot that represent comparison between actual and predicted
+              data in every mnemonic curve with evaluation metrics |error| on regression model, and boolean (True or
+              False) on classification model.</p>
+            <p><span>Confusion Matrix</span> is an N x N matrix used for evaluating the performance of a classification
+              model, where N is the number of target classes. The matrix compares the actual target values with those
+              predicted by the machine learning model.</p>
+            <p><span>Predicted-actual data distribution </span> is a scatter plot used for evaluating the performance of a
+              regression model, ideal evaluation result where the distribotion of data collected on the
+              straight lines with m=1. </p>
         </div>
       </div>
 
@@ -103,11 +80,32 @@
   </div>
 
   <div class="analyze-graph">
-    <div class="analyze-graph-content">
-      {{script | safe}} {{div | safe}}</div>
+    <div class="analyze-graph-content" id="eval-chart"></div>
   </div>
 
 
+  <script>
+    const showLoading = function () {
+      // console.log("sweet active")
+      return new swal({
+        title: 'Processing',
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        timer: 3000,
+        didOpen: () => {
+          Swal.showLoading();
+        }
+      }).then(
+      )
+    };
+
+
+    document.querySelector(".analyze-button")
+      .addEventListener('click', (event) => {
+        // console.log("sweet active")
+        showLoading();
+      });
+  </script>
 
   <script>
     var menu_btn_analyze = document.querySelector("#menu-btn");
@@ -119,6 +117,7 @@
       container_analyze.classList.toggle("active")
     });
   </script>
+
   <script>
     var dropdown_button_analyze = document.querySelector(".analyze-dropdown");
     var container_button_analyze = document.querySelector(".analyze-button-pack");
@@ -143,6 +142,21 @@
   </script>
 
 </div>
+
+<script>
+  window.onload = function() {
+      console.log("halo")
+      console.log("halo2")
+      evaluationLog("PHIE")
+      console.log("halo3")
+      console.log("halo4")
+
+  }
+</script>
+
+<script type="text/javascript" src="/static/echart/evaluationLog.js"></script>
+<script type="text/javascript" src="/static/echart/trajectory.js"></script>
+<script type="text/javascript" src="/static/echart/plotLog.js"></script>
 
 
 {%endblock%}
