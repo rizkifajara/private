@@ -85,7 +85,7 @@
   </div>
 
   <div class="analyze-graph">
-    <div class="analyze-graph-content" id="eval-chart"></div>
+    <div class="analyze-graph-content" id="eval-chart" style="height:100%; width:100%"></div>
   </div>
       <!-- <div id="eval-chart" ></div> -->
 </div>
@@ -216,26 +216,7 @@ window.onload = function() {
 
     $('#facies_btn').click(function() {
         
-        var log_name = "HC";
-        console.log(log_name);
-        $.ajax({
-            url: "{{url_for('hc_page')}}",
-            type: "post",
-            data: {
-                log_name: log_name,
-            },
-            success: function (script, div, cdn_js) {
-
-                var s = document.createElement("script");
-                s.type = "text/javascript";
-                s.src = cdn_js;
-                // Use any selector
-                $("head").append(s);
-                $("#eval-chart").html(script, div);
-            },
-        });
-      
-        console.log("FACIES")
+        
     });
 
     $('#hc_btn').click(function() {

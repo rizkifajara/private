@@ -1,4 +1,6 @@
 {%extends "layout.html"%} {%block content%}
+<script type="text/javascript" src="{{cdn_js | safe}}"></script>
+
 
 <div class="analyze-page">
   <div class="sidebar-analyze-container">
@@ -30,11 +32,11 @@
 
         <div class="analyze-button-pack">
 
-          <a href="{{ url_for('vsh_page')}}"><button class="btn btn-warning m-3 active">VSH</button></a>
+          <a href="{{ url_for('vsh_page')}}"><button class="btn btn-warning m-3 ">VSH</button></a>
           <a href="{{ url_for('phie_page')}}"><button class="btn btn-warning m-3">PHIE</button></a>
-          <a href="{{ url_for('sw_page')}}"><button class="btn btn-warning m-3">SW</button></a>
-          <a href="{{ url_for('perm_page')}}"><button class="btn btn-warning m-3">PERM</button></a>
-          <a href="{{ url_for('facies_page')}}"><button class="btn btn-warning m-3">FACIES</button></a>
+          <a href="{{ url_for('sw_page')}}"><button class="btn btn-warning m-3 ">SW</button></a>
+          <a href="{{ url_for('perm_page')}}"><button class="btn btn-warning m-3 ">PERM</button></a>
+          <a href="{{ url_for('facies_page')}}"><button class="btn btn-warning m-3  active">FACIES</button></a>
           <a href="{{ url_for('hc_page')}}"><button class="btn btn-warning m-3">HC</button></a>
         </div>
 
@@ -51,19 +53,19 @@
 
         <div class="info-analyze-pack">
           <p> <span>Blind Well Test </span> is a well log plot that represent comparison between actual and predicted
-              data in every mnemonic curve with evaluation metrics |error| on regression model, and boolean (True or
-              False) on classification model.</p>
-            <p><span>Confusion Matrix</span> is an N x N matrix used for evaluating the performance of a classification
-              model, where N is the number of target classes. The matrix compares the actual target values with those
-              predicted by the machine learning model.</p>
-            <p><span>Predicted-actual data distribution </span> is a scatter plot used for evaluating the performance of a
-              regression model, ideal evaluation result where the distribotion of data collected on the
-              straight lines with m=1. </p>
+            data in every mnemonic curve with evaluation metrics |error| on regression model, and boolean (True or
+            False) on classification model.</p>
+          <p><span>Confusion Matrix</span> is an N x N matrix used for evaluating the performance of a classification
+            model, where N is the number of target classes. The matrix compares the actual target values with those
+            predicted by the machine learning model.</p>
+          <p><span>Predicted-actual data distribution </span> is a scatter plot used for evaluating the performance of a
+            regression model, ideal evaluation result where the distribotion of data collected on the
+            straight lines with m=1. </p>
         </div>
       </div>
 
       <div class="button-bottom-container">
-        <a href="{{ url_for('analyze_page')}}" class="back-button">Back</a>
+        <!-- <a href="{{ url_for('analyze_page')}}" class="back-button">Back</a> -->
         <a href="{{ url_for('viewForm')}}" class="analyze-button">
           <h6>Run Model</h6>
           <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -80,32 +82,11 @@
   </div>
 
   <div class="analyze-graph">
-    <div class="analyze-graph-content" id="eval-chart" style="height:100%;width: 100%;"></div>
+    <div class="analyze-graph-content">
+      {{script | safe}} {{div | safe}}</div>
   </div>
 
 
-  <script>
-    const showLoading = function () {
-      // console.log("sweet active")
-      return new swal({
-        title: 'Processing',
-        allowEscapeKey: false,
-        allowOutsideClick: false,
-        timer: 3000,
-        didOpen: () => {
-          Swal.showLoading();
-        }
-      }).then(
-      )
-    };
-
-
-    document.querySelector(".analyze-button")
-      .addEventListener('click', (event) => {
-        // console.log("sweet active")
-        showLoading();
-      });
-  </script>
 
   <script>
     var menu_btn_analyze = document.querySelector("#menu-btn");
@@ -142,21 +123,6 @@
   </script>
 
 </div>
-
-<script>
-  window.onload = function() {
-      console.log("halo")
-      console.log("halo2")
-      evaluationLog("SW")
-      console.log("halo3")
-      console.log("halo4")
-
-  }
-</script>
-
-<script type="text/javascript" src="/static/echart/evaluationLog.js"></script>
-<script type="text/javascript" src="/static/echart/trajectory.js"></script>
-<script type="text/javascript" src="/static/echart/plotLog.js"></script>
 
 
 {%endblock%}
