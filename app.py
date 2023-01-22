@@ -18,9 +18,9 @@ app = Flask(__name__)
 well_name_list = []
 mongoClient = os.environ.get('MONGO_URL')
 client = pymongo.MongoClient(mongoClient)
-database_name = 'hackuna_matata123'
+database_name = os.environ.get('DB_NAME')
 hackuna_db = client[database_name]
-collection_name = 'user'
+collection_name = os.environ.get('COLLECTION_NAME')
 collection = hackuna_db[collection_name]
 
 num_data_global = 1500
