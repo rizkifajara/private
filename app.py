@@ -16,7 +16,7 @@ from math import cos, asin, sqrt
 app = Flask(__name__)
 
 well_name_list = []
-mongoClient = "mongodb://johndoe:johndoe@cluster0-shard-00-00.jyb2o.mongodb.net:27017,cluster0-shard-00-01.jyb2o.mongodb.net:27017,cluster0-shard-00-02.jyb2o.mongodb.net:27017/myFirstDatabase?ssl=true&replicaSet=atlas-94tnc1-shard-0&authSource=admin&retryWrites=true&w=majority"
+mongoClient = os.environ.get('MONGO_URL')
 client = pymongo.MongoClient(mongoClient)
 database_name = 'hackuna_matata123'
 hackuna_db = client[database_name]
